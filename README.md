@@ -1,3 +1,11 @@
+# Build Status
+
+[![Build status](https://ci.appveyor.com/api/projects/status/cn2a569gurjt40tr?svg=true)](https://ci.appveyor.com/project/OlegBirykov/fe-diploma)
+
+# GitHub Pages
+
+https://olegbirykov.github.io/fe-diploma/
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
