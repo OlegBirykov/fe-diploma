@@ -2,12 +2,10 @@ import { useState } from 'react';
 import AppContext from './AppContext';
 
 function AppProvider(props) {
-  const [data, setData] = useState([]);
-  const [waiting, setWaiting] = useState(false);
-  const [error, setError] = useState('');
+  const [popup, setPopup] = useState({ visible: false });
   
   return (
-    <AppContext.Provider value={{ data, waiting, error, setData, setWaiting, setError }}>
+    <AppContext.Provider value={{ popup, setPopup }}>
       {props.children}  
     </AppContext.Provider>
   )

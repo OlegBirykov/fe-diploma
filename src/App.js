@@ -1,14 +1,17 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import AppProvider from './AppProvider';
-import HomePage from './components/HomePage';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Tickets from './components/Tickets';
-import Passengers from './components/Passengers';
-import Payment from './components/Payment';
-import Confirmation from './components/Confirmation';
-import Completion from './components/Completion';
+
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
+import Popup from './components/Popup/Popup';
+
+import HomePage from './components/pages/HomePage/HomePage';
+import Tickets from './components/pages/Tickets/Tickets';
+import Passengers from './components/pages/Passengers/Passengers';
+import Payment from './components/pages/Payment/Payment';
+import Confirmation from './components/pages/Confirmation/Confirmation';
+import Completion from './components/pages/Completion/Completion';
 
 function App() {    
   return (
@@ -24,6 +27,7 @@ function App() {
           <Route path={process.env.PUBLIC_URL} component={HomePage} />
         </Switch> 
         <Footer />
+        <Popup />
       </Router>
     </AppProvider>
   );
