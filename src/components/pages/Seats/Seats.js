@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 
-function Tickets() {  
+function Seats() {  
   return (
-    <main className="Tickets"> 
+    <main className="Seats"> 
       <Link to={process.env.PUBLIC_URL + '/run/passengers'} className=""> 
         Далее
       </Link>
@@ -10,4 +10,4 @@ function Tickets() {
   )
 }
 
-export default Tickets;
+export default Seats;

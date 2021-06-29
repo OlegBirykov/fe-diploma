@@ -1,6 +1,7 @@
 import { createContext } from 'react';
 
 const AppContext = createContext({
+  bookingStage: null,
   popup: {
     visible: false,
     buttonText: 'Ok',

@@ -7,7 +7,7 @@ import Footer from './components/Footer/Footer';
 import Popup from './components/Popup/Popup';
 
 import HomePage from './components/pages/HomePage/HomePage';
-import Tickets from './components/pages/Tickets/Tickets';
+import Seats from './components/pages/Seats/Seats';
 import Passengers from './components/pages/Passengers/Passengers';
 import Payment from './components/pages/Payment/Payment';
 import Confirmation from './components/pages/Confirmation/Confirmation';
@@ -19,7 +19,7 @@ function App() {
       <Router>
         <Header />
         <Switch>
-          <Route path={process.env.PUBLIC_URL + '/run/tickets'} component={Tickets} />
+          <Route path={process.env.PUBLIC_URL + '/run/seats'} component={Seats} />
           <Route path={process.env.PUBLIC_URL + '/run/passengers'} component={Passengers} />
           <Route path={process.env.PUBLIC_URL + '/run/payment'} component={Payment} />
           <Route path={process.env.PUBLIC_URL + '/run/confirmation'} component={Confirmation} />
