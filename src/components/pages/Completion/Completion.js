@@ -1,17 +1,17 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import AppContext from '../../../AppContext';
 
 function Completion() {  
   const { setBookingStage } = useContext(AppContext);
 
-  const next = () => {
-    setBookingStage(null);
-  }
+  useEffect(() => {
+    setBookingStage('completion');
+  }, [setBookingStage]);
 
   return (
     <main className="Completion"> 
-      <Link to={process.env.PUBLIC_URL} className="" onClick={next}> 
+      <Link to={process.env.PUBLIC_URL} className=""> 
         Вернуться на главную
       </Link>
     </main>
