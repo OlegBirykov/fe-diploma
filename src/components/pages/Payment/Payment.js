@@ -10,7 +10,7 @@ function Payment() {
   }, [setBookingStage]);
 
   return (
-    <main className="Payment"> 
+    <main className="payment"> 
       <Link to={process.env.PUBLIC_URL + '/run/confirmation'} className=""> 
         Купить билеты
       </Link>

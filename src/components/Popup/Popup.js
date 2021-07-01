@@ -6,7 +6,7 @@ function Popup() {
   const { visible/*, buttonText, content, error */} = popup;
   
   return visible && (
-    <div className="Popup"> 
+    <div className="popup"> 
       Всплывающее окно
     </div>
   )

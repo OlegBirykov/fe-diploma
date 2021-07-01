@@ -10,7 +10,7 @@ function Confirmation() {
   }, [setBookingStage]);
 
   return (
-    <main className="Confirmation"> 
+    <main className="confirmation"> 
       <Link to={process.env.PUBLIC_URL + '/run/completion'} className=""> 
         Подтвердить
       </Link>

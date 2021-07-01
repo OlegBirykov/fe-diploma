@@ -9,7 +9,7 @@ function HomePage() {
   }, [setBookingStage]);
 
   return (
-    <main className="HomePage"> 
+    <main className="home-page"> 
       Это главная страница
     </main>
   )

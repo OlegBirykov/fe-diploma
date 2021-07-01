@@ -1,14 +1,14 @@
-.Header {
+.header {
   height: 985px;
   background-image: url("./Header.png");
 }
 
-.Header_run {
+.header_run {
   height: 595px;
   background-image: url("./Header_run.png");
 }
 
-.Header_completion {
+.header_completion {
   height: 835px;
   background-image: url("./Header_completion.png");
 }

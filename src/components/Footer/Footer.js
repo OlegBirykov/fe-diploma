@@ -1,6 +1,6 @@
 function Footer() {  
   return (
-    <footer className="Footer"> 
+    <footer className="footer"> 
       Это подвал
     </footer>
   )

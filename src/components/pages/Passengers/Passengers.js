@@ -10,7 +10,7 @@ function Passengers() {
   }, [setBookingStage]);
 
   return (
-    <main className="Passengers"> 
+    <main className="passengers"> 
       <Link to={process.env.PUBLIC_URL + '/run/payment'} className=""> 
         Далее
       </Link>

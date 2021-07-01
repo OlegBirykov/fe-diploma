@@ -10,7 +10,7 @@ function Completion() {
   }, [setBookingStage]);
 
   return (
-    <main className="Completion"> 
+    <main className="completion"> 
       <Link to={process.env.PUBLIC_URL} className=""> 
         Вернуться на главную
       </Link>
