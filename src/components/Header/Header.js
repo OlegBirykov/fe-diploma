@@ -13,19 +13,21 @@ function Header() {
     case 'passengers':
     case 'payment':
     case 'confirmation':
-      classModificator = 'header_run';
+      classModificator = '_run';
       break;
     case 'completion':
-      classModificator = 'header_completion';
+      classModificator = '_completion';
       break;
     default:
   }
  
   return (
-    <header className={'header' + (bookingStage ? ` ${classModificator}` : '')}>
-      <p className="header__logo">
-        Logo
-      </p>
+    <header className={'header' + (bookingStage ? ` header${classModificator}` : '')}>
+      <div className={'header__top' + (bookingStage ? ` header__top${classModificator}` : '')}>
+        <p className="header__logo">
+          Лого
+        </p>
+      </div>
       <Menu />
       <Link to={process.env.PUBLIC_URL + '/run/seats'} className=""> 
         Найти билеты

@@ -1,6 +1,7 @@
 .header {
   height: 985px;
   background-image: url("./Header.png");
+  background-size: cover;
 }
 
 .header_run {
@@ -11,4 +12,24 @@
 .header_completion {
   height: 835px;
   background-image: url("./Header_completion.png");
+}
+
+.header__top {
+  padding: 15px 0 7px 258px;
+  background-color:rgba(0, 0, 0, 0.6);
+}
+
+.header__top_run {
+  background-color:rgba(41, 41, 41, 0.6);
+}
+
+.header__top_completion {
+  background-color:rgba(41, 41, 41, 0.6);
+}
+
+.header__logo {
+  color: #e5e5e5;
+  font-size: 36px;
+  line-height: 42px;
+  font-weight: 900;
 }

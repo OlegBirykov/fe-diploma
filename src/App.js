@@ -12,6 +12,7 @@ import Passengers from './components/pages/Passengers/Passengers';
 import Payment from './components/pages/Payment/Payment';
 import Confirmation from './components/pages/Confirmation/Confirmation';
 import Completion from './components/pages/Completion/Completion';
+import NoPage from './components/pages/NoPage/NoPage';
 
 function App() {    
   return (
@@ -24,6 +25,10 @@ function App() {
           <Route path={process.env.PUBLIC_URL + '/run/payment'} component={Payment} />
           <Route path={process.env.PUBLIC_URL + '/run/confirmation'} component={Confirmation} />
           <Route path={process.env.PUBLIC_URL + '/run/completion'} component={Completion} />
+          <Route path={process.env.PUBLIC_URL + '/about'} component={NoPage} />
+          <Route path={process.env.PUBLIC_URL + '/help'} component={NoPage} />
+          <Route path={process.env.PUBLIC_URL + '/feedbacks'} component={NoPage} />
+          <Route path={process.env.PUBLIC_URL + '/contacts'} component={NoPage} />
           <Route path={process.env.PUBLIC_URL} component={HomePage} />
         </Switch> 
         <Footer />

@@ -1,0 +1,24 @@
+.menu {
+  padding-left: 216px;
+  background-color: #292929;
+}
+
+.menu__item {
+  display: inline-block;
+  padding: 26px 42px 32px 42px;  
+  color: white;
+  font-size: 30px;
+  font-weight: 300;
+}
+
+.menu__item:hover {
+  color: #ffa800;
+}
+
+.menu__item_active {
+  background-color: #ffa800;
+}
+
+.menu__item_active:hover {
+  color: white;
+}
