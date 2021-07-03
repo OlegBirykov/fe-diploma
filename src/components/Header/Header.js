@@ -1,8 +1,8 @@
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
 import './Header.css';
 import AppContext from '../../AppContext';
 import Menu from './Menu/Menu';
+import TicketSearchForm from './TicketSearchForm/TicketSearchForm';
 
 function Header() {
   const { bookingStage } = useContext(AppContext);
@@ -20,18 +20,32 @@ function Header() {
       break;
     default:
   }
+
+  const headerClassName = 'header' + (classModificator ? ` header${classModificator}` : '');
+  const headerTopClassName = 'header__top' + (classModificator ? ` header__top${classModificator}` : '');
  
   return (
-    <header className={'header' + (bookingStage ? ` header${classModificator}` : '')}>
-      <div className={'header__top' + (bookingStage ? ` header__top${classModificator}` : '')}>
+    <header className={headerClassName}>
+      <div className={headerTopClassName}>
         <p className="header__logo">
           Лого
         </p>
       </div>
       <Menu />
-      <Link to={process.env.PUBLIC_URL + '/run/seats'} className=""> 
-        Найти билеты
-      </Link>
+      {classModificator !== '_completion' && (
+        <div className="header__body">
+          {!classModificator && (
+            <p className="header__slogan">
+              Вся жизнь -
+              <br/> 
+              <span className="header__slogan_bold">
+                путешествие!
+              </span>
+            </p>
+          )}
+          <TicketSearchForm classModificator={classModificator} />
+        </div>
+      )}
     </header>
   )
 }

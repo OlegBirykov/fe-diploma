@@ -1,0 +1,33 @@
+.ticket-search-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  width: 730px;
+  margin: 0 232px 0 0;
+  background-color: rgba(41, 41, 41, 0.8);
+}
+
+.ticket-search-form_run {
+  width: 1490px;
+  margin: 111px auto 0 auto;
+  background-color: rgba(41, 41, 41, 0.69);
+}
+
+.ticket-search-form__label {
+  color: white;
+  font-size: 30px;
+  font-weight: 300;
+  line-height: 35px;
+}
+
+.ticket-search-form__input {
+  display: block;
+  width: 323px;
+  background-color: white;
+}
+
+.ticket-search-form__button {
+  display: block;
+  width: 323px;
+  background-color: #ffa800;
+}

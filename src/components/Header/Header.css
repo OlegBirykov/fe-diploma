@@ -1,21 +1,20 @@
 .header {
-  height: 985px;
   background-image: url("./Header.png");
   background-size: cover;
 }
 
 .header_run {
-  height: 595px;
+  /*height: 595px;*/
   background-image: url("./Header_run.png");
 }
 
 .header_completion {
-  height: 835px;
+  padding-bottom: 677px;
   background-image: url("./Header_completion.png");
 }
 
 .header__top {
-  padding: 15px 0 7px 258px;
+  padding: 14px 0 8px 258px;
   background-color:rgba(0, 0, 0, 0.6);
 }
 
@@ -33,3 +32,22 @@
   line-height: 42px;
   font-weight: 900;
 }
+
+.header__body {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.header__slogan {
+  margin: 415px 0 244px 348px;
+  color: white;
+  font-size: 72px;
+  font-weight: 200;
+  line-height: 84px;
+}
+
+.header__slogan_bold {
+  font-weight: 700;
+}
+
