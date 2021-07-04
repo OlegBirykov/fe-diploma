@@ -32,9 +32,9 @@ function Header() {
         </p>
       </div>
       <Menu />
-      {classModificator !== '_completion' && (
+      {classModificator !== '_completion' &&
         <div className="header__body">
-          {!classModificator && (
+          {!classModificator && 
             <p className="header__slogan">
               Вся жизнь -
               <br/> 
@@ -42,10 +42,10 @@ function Header() {
                 путешествие!
               </span>
             </p>
-          )}
+          }
           <TicketSearchForm classModificator={classModificator} />
         </div>
-      )}
+      }
     </header>
   )
 }

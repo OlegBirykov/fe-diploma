@@ -1,16 +1,15 @@
 .header {
-  background-image: url("./Header.png");
+  background-image: url("./header.png");
   background-size: cover;
 }
 
 .header_run {
-  /*height: 595px;*/
-  background-image: url("./Header_run.png");
+  background-image: url("./header_run.png");
 }
 
 .header_completion {
   padding-bottom: 677px;
-  background-image: url("./Header_completion.png");
+  background-image: url("./header_completion.png");
 }
 
 .header__top {
