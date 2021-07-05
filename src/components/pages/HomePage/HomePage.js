@@ -1,6 +1,9 @@
 import { useContext, useEffect } from 'react';
 import './HomePage.css';
 import AppContext from '../../../AppContext';
+import About from './About/About';
+import Description from './Description/Description';
+import Feedbacks from './Feedbacks/Feedbacks';
 
 function HomePage() { 
   const { setBookingStage } = useContext(AppContext);
@@ -11,7 +14,9 @@ function HomePage() {
 
   return (
     <main className="home-page"> 
-      Это главная страница
+      <About />
+      <Description />
+      <Feedbacks />
     </main>
   )
 }
