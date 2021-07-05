@@ -1,5 +1,6 @@
 import { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import './Payment.css';
 import AppContext from '../../../AppContext';
 
 function Payment() {  
@@ -11,7 +12,7 @@ function Payment() {
 
   return (
     <main className="payment"> 
-      <Link to={process.env.PUBLIC_URL + '/run/confirmation'} className=""> 
+      <Link to={process.env.PUBLIC_URL + '/run/confirmation'} className="payment__xxx"> 
         Купить билеты
       </Link>
     </main>

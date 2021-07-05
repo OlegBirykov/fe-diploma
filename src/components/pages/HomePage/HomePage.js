@@ -1,4 +1,5 @@
 import { useContext, useEffect } from 'react';
+import './HomePage.css';
 import AppContext from '../../../AppContext';
 
 function HomePage() { 

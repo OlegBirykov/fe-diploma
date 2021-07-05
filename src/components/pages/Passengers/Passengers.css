@@ -1,0 +1,21 @@
+.passengers {
+  height: 1000px;
+  padding-top: 450px;
+}
+  
+.passengers__xxx {
+  display: block;
+  width: 323px;
+  margin: 0 auto;
+  padding: 16px 0;
+  border-radius: 5px;
+  text-align: center;
+    
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: bold;
+    
+  text-transform: uppercase;
+  color: #292929;
+  background-color: #ffa800;
+}
