@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import './Description.css';
 
@@ -24,7 +25,7 @@ function Description() {
             <div className={`description__icon description__icon_${index + 1}`}>
             </div>
             <p className="description__text">
-              {item.map((line, index) => <span key={index}>{line}<br/></span>)}
+              {item.map((line, index) => <React.Fragment key={index}>{line}<br/></React.Fragment>)}
             </p>
           </div>
         )}
