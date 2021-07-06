@@ -3,9 +3,9 @@ import './Description.css';
 
 function Description() {
   const description = [
-    'Удобный заказ на сайте',
-    'Нет необходимости ехать в офис',
-    'Огромный выбор направлений', 
+    ['Удобный заказ', 'на сайте'],
+    ['Нет необходимости', 'ехать в офис'],
+    ['Огромный выбор', 'направлений'], 
   ];
 
   return (
@@ -20,11 +20,11 @@ function Description() {
       </div>
       <div className="description__items">
         {description.map((item, index) => 
-          <div className="description__item">
-            <div className={`description__image description__image_${index + 1}`}>
+          <div key={index} className="description__item">
+            <div className={`description__icon description__icon_${index + 1}`}>
             </div>
             <p className="description__text">
-              {item}
+              {item.map((line, index) => <span key={index}>{line}<br/></span>)}
             </p>
           </div>
         )}
