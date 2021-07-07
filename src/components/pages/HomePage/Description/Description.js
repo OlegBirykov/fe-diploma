@@ -12,9 +12,9 @@ function Description() {
   return (
     <div className="description"> 
       <div className="description__top">
-        <f2 className="description__title">
+        <h2 className="description__title">
           Как это работает
-        </f2>
+        </h2>
         <Link to={process.env.PUBLIC_URL} className="description__link">
           Узнать больше
         </Link>
