@@ -1,0 +1,82 @@
+.feedbacks {
+  padding: 152px 0 115px 0;
+}
+
+.feedbacks__title {
+  padding: 0 261px 0 252px;
+  font-size: 36px;
+  line-height: 42px;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: #292929;
+}
+
+.feedbacks__items {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 80px;
+  padding: 0 261px 0 252px;
+}
+
+.feedbacks__item {
+  display: flex;
+  width: 48.3%;
+}
+
+.feedbacks__avatar {
+  border-radius: 50%;
+}
+
+.feedbacks__content {
+  margin-left: 35px;
+  padding-top: 27px;
+}
+
+.feedbacks__name {
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: 500;
+}
+
+.feedbacks__text {
+  position: relative;
+  margin-top: 20px;
+  font-size: 18px;
+  line-height: 21px;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.feedbacks__quote {
+  position: absolute;
+  font-size: 36px;
+  line-height: 42px;
+  font-weight: 500;
+}
+
+.feedbacks__quote_begin {
+  top: -10px;
+  left: -20px;
+}
+
+.feedbacks__quote_end {
+  bottom: -5px;
+}
+
+.feedbacks__points {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 134px;
+  padding: 0 896px 0 884px;
+}
+
+.feedbacks__point {
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  background-color: #e5e5e5;
+}
+
+.feedbacks__point_active {
+  background-color: #c4c4c4; 
+}
