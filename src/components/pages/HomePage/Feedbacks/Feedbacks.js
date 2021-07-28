@@ -28,9 +28,9 @@ function Feedbacks() {
           <div className="feedbacks__item" key={index}>
             <img className="feedbacks__avatar" src={item.avatar} alt="avatar" />
             <div className="feedbacks__content">
-              <p className="feedbacks__name">
+              <h3 className="feedbacks__name">
                 {item.name}
-              </p>
+              </h3>
               <p className="feedbacks__text">
                 <span className="feedbacks__quote feedbacks__quote_begin">
                   &#x201C;
