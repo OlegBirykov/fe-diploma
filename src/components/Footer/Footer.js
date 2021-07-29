@@ -1,30 +1,32 @@
-// import { useState } from 'react';
+import { useState } from 'react';
 import './Footer.css';
+import Contacts from './Contacts/Contacts';
+import SubscriptionForm from './SubscriptionForm/SubscriptionForm';
+import SocialMedia from './SocialMedia/SocialMedia';
 
-function Footer() {  
+function Footer() { 
+  const [collapsed, setCollapsed] = useState(false);
+
+  const collapseFooter = () => {
+    setCollapsed(!collapsed);
+  }
+  
   return (
     <footer className="footer"> 
-      <div className="footer__full"> 
-        <div className="footer__contacts">
-          <h3>
-            Свяжитесь с нами
-          </h3> 
+      {!collapsed && 
+        <div className="footer__full"> 
+          <Contacts />
+          <SubscriptionForm />
+          <SocialMedia />
         </div>
-        <div className="footer__form">
-          <h3>
-            Подписка
-          </h3>
-        </div>
-        <div className="footer__subscribe">
-          <h3>
-            Подписывайтесь на нас
-          </h3>
-        </div>
-      </div>
+      }
       <div className="footer__reduced">
         <p className="footer__logo"> 
           Лого
         </p>
+        <button className="footer__button-collapse" type="button" onClick={collapseFooter}>
+          &#x221F;
+        </button>
         <p className="footer__copyright">
           2018 Web
         </p>
