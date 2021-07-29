@@ -10,21 +10,25 @@ function Footer() {
   const collapseFooter = () => {
     setCollapsed(!collapsed);
   }
+
+  const buttonClassName = 'footer__button-collapse' + (collapsed ? ' footer__button-collapse_collapsed' : '');
   
   return (
     <footer className="footer"> 
       {!collapsed && 
         <div className="footer__full"> 
           <Contacts />
-          <SubscriptionForm />
-          <SocialMedia />
+          <div className="footer__subscription">
+            <SubscriptionForm />
+            <SocialMedia />
+          </div>
         </div>
       }
       <div className="footer__reduced">
         <p className="footer__logo"> 
           Лого
         </p>
-        <button className="footer__button-collapse" type="button" onClick={collapseFooter}>
+        <button className={buttonClassName} type="button" onClick={collapseFooter}>
           &#x221F;
         </button>
         <p className="footer__copyright">
