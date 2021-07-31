@@ -1,3 +1,20 @@
 .contacts {
   width: 350px;
 }
+
+.contacts__list {
+  list-style-type: none;
+}
+
+.contacts__list-item {
+  display: flex;
+  align-items: center;
+}
+
+.contacts__icon {
+  fill: #e5e5e5;
+}
+
+.contacts__icon:active {
+  fill: #ffca62;
+}
