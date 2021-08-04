@@ -1,0 +1,10 @@
+.social-media {
+  margin-top: 44px;
+}
+
+.social-media__title {
+  color: white;
+  font-size: 30px;
+  line-height: 35px;
+  font-weight: 500;
+}
