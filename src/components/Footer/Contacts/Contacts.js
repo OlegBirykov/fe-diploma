@@ -46,7 +46,7 @@ function Contacts() {
         </li>
         <li className="contacts__list-item contacts__list-item_geolocation">
           <div className="contacts__link-container">
-            <a className="contacts__link" href="."> 
+            <a className="contacts__link" href="https://yandex.ru/maps/-/CCUiROx52C"> 
               <svg className="contacts__icon" width="21" height="30">
                 <use xlinkHref={icons + '#location'} />
               </svg>
