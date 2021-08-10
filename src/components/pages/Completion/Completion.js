@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Completion.css';
-import AppContext from '../../../AppContext';
+import AppContext from 'AppContext';
 
 function Completion() {  
   const { setBookingStage } = useContext(AppContext);

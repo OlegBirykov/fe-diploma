@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Payment.css';
-import AppContext from '../../../AppContext';
+import AppContext from 'AppContext';
 
 function Payment() {  
   const { setBookingStage } = useContext(AppContext);

@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import './Header.css';
-import AppContext from '../../AppContext';
+import AppContext from 'AppContext';
 import Menu from './Menu/Menu';
 import TicketSearchForm from './TicketSearchForm/TicketSearchForm';
 

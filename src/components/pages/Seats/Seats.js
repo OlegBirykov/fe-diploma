@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Seats.css';
-import AppContext from '../../../AppContext';
+import AppContext from 'AppContext';
 
 function Seats() {
   const { setBookingStage } = useContext(AppContext);
