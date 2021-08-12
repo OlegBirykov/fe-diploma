@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import './SubscriptionForm.css';
+import AppContext from 'AppContext';
 
 function SubscriptionForm() { 
   const [email, setEmail] = useState('');
+  const { loading, setLoading } = useContext(AppContext);
   
   const emailChange = (evt) => {
     setEmail(evt.target.value);
@@ -11,6 +13,7 @@ function SubscriptionForm() {
   const sendEmail = (evt) => {
     evt.preventDefault();
     setEmail('');
+    setLoading({ state: !loading.state, text: 'Ожидание ответа сервера' });
   }
 
   return (
