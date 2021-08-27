@@ -7,11 +7,12 @@ function AppProvider(props) {
   const [popup, setPopup] = useState({ visible: false });
 
   return (
-    <AppContext.Provider value={{ 
-      bookingStage, setBookingStage,
-      loading, setLoading,
-      popup, setPopup,
-    }}>
+    <AppContext.Provider 
+      value={{ 
+        bookingStage, setBookingStage,
+        loading, setLoading,
+        popup, setPopup,
+      }}>
       {props.children}  
     </AppContext.Provider>
   )

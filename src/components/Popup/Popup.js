@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import './Popup.css';
 import AppContext from 'AppContext';
 
 function Popup() { 
@@ -6,8 +7,10 @@ function Popup() {
   const { visible/*, buttonText, content, error */} = popup;
   
   return visible && (
-    <div className="popup"> 
-      Всплывающее окно
+    <div className="popup">
+      <div className="popup__window">
+        Всплывающее окно
+      </div>
     </div>
   )
 }

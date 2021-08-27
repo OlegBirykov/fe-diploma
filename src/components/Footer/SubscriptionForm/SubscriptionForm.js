@@ -1,10 +1,15 @@
 import { useState, useContext } from 'react';
 import './SubscriptionForm.css';
 import AppContext from 'AppContext';
+import { infoBox } from 'api/gui';
 
 function SubscriptionForm() { 
   const [email, setEmail] = useState('');
-  const { loading, setLoading } = useContext(AppContext);
+  const { loading, setLoading, setPopup } = useContext(AppContext);
+
+  const showBox = (popup) => {
+    setPopup(popup);
+  }
   
   const emailChange = (evt) => {
     setEmail(evt.target.value);
@@ -12,6 +17,10 @@ function SubscriptionForm() {
 
   const sendEmail = (evt) => {
     evt.preventDefault();
+    setEmail(email.trim());
+    if (!email) {
+      infoBox(showBox, 'Заполните поле адреса электронной почты');
+    }
     setEmail('');
     setLoading({ state: !loading.state, text: 'Ожидание ответа сервера' });
   }

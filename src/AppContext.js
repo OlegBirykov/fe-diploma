@@ -8,7 +8,7 @@ const AppContext = createContext({
   },
   popup: {
     visible: false,
-    buttonText: 'Ok',
+    buttonText: 'OK',
     content: [''],
     error: false
   }
