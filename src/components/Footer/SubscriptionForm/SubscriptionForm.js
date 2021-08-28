@@ -5,11 +5,7 @@ import { infoBox } from 'api/gui';
 
 function SubscriptionForm() { 
   const [email, setEmail] = useState('');
-  const { loading, setLoading, setPopup } = useContext(AppContext);
-
-  const showBox = (popup) => {
-    setPopup(popup);
-  }
+  const { setLoading, setPopup } = useContext(AppContext);
   
   const emailChange = (evt) => {
     setEmail(evt.target.value);
@@ -19,10 +15,11 @@ function SubscriptionForm() {
     evt.preventDefault();
     setEmail(email.trim());
     if (!email) {
-      infoBox(showBox, 'Заполните поле адреса электронной почты');
+      infoBox(setPopup, 'Заполните поле адреса электронной почты');
+      return;
     }
     setEmail('');
-    setLoading({ state: !loading.state, text: 'Ожидание ответа сервера' });
+    setLoading({ state: true, text: 'Ожидание ответа сервера' });
   }
 
   return (

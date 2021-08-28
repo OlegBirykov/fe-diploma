@@ -10,6 +10,10 @@
   align-items: center;
 }
 
-.popup__window {
-  background-color: white;
+.popup__window_error {
+  background-color: #ffffff;
+}
+
+.popup__window_info {
+  background-color: #fbfbfb;
 }

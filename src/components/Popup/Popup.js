@@ -3,14 +3,34 @@ import './Popup.css';
 import AppContext from 'AppContext';
 
 function Popup() { 
-  const { popup } = useContext(AppContext);
-  const { visible/*, buttonText, content, error */} = popup;
+  const { popup, setPopup, loading } = useContext(AppContext);
+  const { visible, buttonText, content, error } = popup;
+
+  const closePopup = () => setPopup({ ...popup, visible: false});
   
-  return visible && (
+  return (visible || loading.state) && (
     <div className="popup">
-      <div className="popup__window">
-        Всплывающее окно
-      </div>
+      {visible && 
+        <div className={"popup__window " + (error ? "popup__window_error" : "popup__window_info")}>
+          <div className="popup__top">
+            <p className="popup__exclamation">
+              !
+            </p>
+          </div>
+          <div className="popup__content">
+            {content.map((item, i) =>
+              <p className="popup__paragraph" key={i}>
+                {item}
+              </p>
+            )}
+          </div>
+          <div className="popup__bottom">
+            <button className="popup__button" type="button" onClick={closePopup}>
+              {buttonText}
+            </button>
+          </div>
+        </div>
+      }
     </div>
   )
 }
