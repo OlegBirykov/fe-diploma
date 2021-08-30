@@ -1,25 +1,32 @@
 import { useContext } from 'react';
 import './Popup.css';
+import iconError from './icon-error.svg';
+import iconInfo from './icon-info.svg';
 import AppContext from 'AppContext';
 
 function Popup() { 
   const { popup, setPopup, loading } = useContext(AppContext);
   const { visible, buttonText, content, error } = popup;
 
-  const closePopup = () => setPopup({ ...popup, visible: false});
+  const classModificator = error ? 'error' : 'info';
+
+  const closePopup = () => setPopup({ visible: false });
   
   return (visible || loading.state) && (
     <div className="popup">
       {visible && 
-        <div className={"popup__window " + (error ? "popup__window_error" : "popup__window_info")}>
-          <div className="popup__top">
-            <p className="popup__exclamation">
-              !
-            </p>
+        <div className={`popup__window popup__window_${classModificator}`}>
+          <div className={`popup__top popup__top_${classModificator}`}>
+            <img 
+              className="popup__icon" 
+              src={error ? iconError : iconInfo} 
+              width="32" 
+              alt="icon" 
+            />
           </div>
-          <div className="popup__content">
+          <div className={`popup__content popup__content_${classModificator}`}>
             {content.map((item, i) =>
-              <p className="popup__paragraph" key={i}>
+              <p className={`popup__paragraph popup__paragraph_${classModificator}`} key={i}>
                 {item}
               </p>
             )}

@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import './SubscriptionForm.css';
 import AppContext from 'AppContext';
-import { infoBox } from 'api/gui';
+import { errorBox } from 'api/gui';
 
 function SubscriptionForm() { 
   const [email, setEmail] = useState('');
@@ -15,7 +15,9 @@ function SubscriptionForm() {
     evt.preventDefault();
     setEmail(email.trim());
     if (!email) {
-      infoBox(setPopup, 'Заполните поле адреса электронной почты');
+      errorBox(setPopup, [
+        'Заполните поле адреса электронной почты',
+      ]);
       return;
     }
     setEmail('');
