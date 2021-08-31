@@ -2,6 +2,7 @@ import { useState, useContext } from 'react';
 import './SubscriptionForm.css';
 import AppContext from 'AppContext';
 import { errorBox } from 'api/gui';
+import { verifyEmail } from 'api/utils';
 
 function SubscriptionForm() { 
   const [email, setEmail] = useState('');
@@ -13,12 +14,23 @@ function SubscriptionForm() {
 
   const sendEmail = (evt) => {
     evt.preventDefault();
-    setEmail(email.trim());
-    if (!email) {
+    const mail = email.trim();
+    if (!mail) {
       errorBox(setPopup, [
-        'Заполните поле адреса электронной почты',
+        'Поле обязательно для заполнения',
+        'Введите адрес электронной почты в поле рядом с кнопкой "Отправить"',
       ]);
+      setEmail('');
       return;
+    }
+    if (!verifyEmail(mail)) {
+      errorBox(setPopup, [
+        'Ошибка ввода адреса электронной почты',
+        'Адрес должен иметь вид xxx@xxx.xx',
+        'Пример: qwerty111@mail.ru',
+      ]);
+      setEmail(mail);
+      return;      
     }
     setEmail('');
     setLoading({ state: true, text: 'Ожидание ответа сервера' });
