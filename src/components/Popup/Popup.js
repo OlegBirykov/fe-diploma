@@ -5,14 +5,14 @@ import iconInfo from './icon-info.svg';
 import AppContext from 'AppContext';
 
 function Popup() { 
-  const { popup, setPopup, loading } = useContext(AppContext);
+  const { popup, setPopup, animation } = useContext(AppContext);
   const { visible, buttonText, content, error } = popup;
 
   const classModificator = error ? 'error' : 'info';
 
   const closePopup = () => setPopup({ visible: false });
   
-  return (visible || loading.state) && (
+  return (visible || animation.loading) && (
     <div className="popup">
       {visible && 
         <div className={`popup__window popup__window_${classModificator}`}>

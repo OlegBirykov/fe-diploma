@@ -3,14 +3,14 @@ import AppContext from './AppContext';
 
 function AppProvider(props) {
   const [bookingStage, setBookingStage] = useState(null);
-  const [loading, setLoading] = useState({ state: false, text: 'Идёт поиск' });
+  const [animation, setAnimation] = useState({ loading: false });
   const [popup, setPopup] = useState({ visible: false });
 
   return (
     <AppContext.Provider 
       value={{ 
         bookingStage, setBookingStage,
-        loading, setLoading,
+        animation, setAnimation,
         popup, setPopup,
       }}>
       {props.children}  

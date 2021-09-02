@@ -11,9 +11,9 @@ import Confirmation from './Confirmation/Confirmation';
 import Completion from './Completion/Completion';
 
 function Main() {
-  const { loading } = useContext(AppContext);
+  const { animation } = useContext(AppContext);
 
-  return loading.state ?
+  return animation.loading ?
     <LoadingAnimation /> :
     <Switch>
       <Route path={process.env.PUBLIC_URL + '/run/seats'} component={Seats} />

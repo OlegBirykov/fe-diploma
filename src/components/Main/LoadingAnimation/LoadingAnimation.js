@@ -4,12 +4,12 @@ import AppContext from 'AppContext';
 import loadingAnimation from './loading-animation.gif';
 
 function LoadingAnimation() {
-  const { loading } = useContext(AppContext);
+  const { animation } = useContext(AppContext);
  
   return (
     <div className="loading-animation">
       <img className="loading-animation__image" src={loadingAnimation} height="780" alt="loading-animation" />
-      <p className="loading-animation__text">{loading.text}</p>
+      <p className="loading-animation__text">{animation.text}</p>
     </div>
   )
 }

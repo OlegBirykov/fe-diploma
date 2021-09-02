@@ -1,5 +1,5 @@
-export function infoBox(callback, content, buttonText = 'OK') {
-  callback({
+export function infoBox(setPopup, content, buttonText = 'OK') {
+  setPopup({
     visible: true,
     buttonText,
     content: Array.isArray(content) ? content : [content],
@@ -8,8 +8,8 @@ export function infoBox(callback, content, buttonText = 'OK') {
   return;
 }
 
-export function errorBox(callback, content, buttonText = 'OK') {
-  callback({
+export function errorBox(setPopup, content, buttonText = 'OK') {
+  setPopup({
     visible: true,
     buttonText,
     content: Array.isArray(content) ? content : [content],

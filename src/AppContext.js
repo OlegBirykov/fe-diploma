@@ -2,13 +2,13 @@ import { createContext } from 'react';
 
 const AppContext = createContext({
   bookingStage: null,
-  loading: {
-    state: false,
-    text: 'Идёт поиск'
+  animation: {
+    loading: false,
+    text: ''
   },
   popup: {
     visible: false,
-    buttonText: 'OK',
+    buttonText: '',
     content: [''],
     error: false
   }

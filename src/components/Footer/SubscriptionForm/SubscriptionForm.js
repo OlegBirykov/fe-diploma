@@ -1,20 +1,22 @@
 import { useState, useContext } from 'react';
 import './SubscriptionForm.css';
 import AppContext from 'AppContext';
-import { errorBox } from 'api/gui';
+import { infoBox, errorBox } from 'api/gui';
 import { verifyEmail } from 'api/utils';
+import { subscribe } from 'api/http';
 
 function SubscriptionForm() { 
   const [email, setEmail] = useState('');
-  const { setLoading, setPopup } = useContext(AppContext);
+  const { setAnimation, setPopup } = useContext(AppContext);
   
   const emailChange = (evt) => {
     setEmail(evt.target.value);
   }
 
-  const sendEmail = (evt) => {
+  const sendEmail = async (evt) => {
     evt.preventDefault();
     const mail = email.trim();
+
     if (!mail) {
       errorBox(setPopup, [
         'Поле обязательно для заполнения',
@@ -23,6 +25,7 @@ function SubscriptionForm() {
       setEmail('');
       return;
     }
+
     if (!verifyEmail(mail)) {
       errorBox(setPopup, [
         'Ошибка ввода адреса электронной почты',
@@ -32,8 +35,20 @@ function SubscriptionForm() {
       setEmail(mail);
       return;      
     }
+
     setEmail('');
-    setLoading({ state: true, text: 'Ожидание ответа сервера' });
+    const response = await subscribe(setAnimation, mail);
+    if (response.ok) {
+      infoBox(setPopup, [
+        `На вашу почту ${mail} отправлено письмо`,
+        'Для подтверждения подписки откройте его и перейдите по указанной в нём ссылке'
+      ]);
+    } else {
+      errorBox(setPopup, [
+        `Ошибка ${response.status} - ${response.statusText}`,
+        `Проверьте интернет-соединение и повторите попытку`
+      ]);
+    }
   }
 
   return (
