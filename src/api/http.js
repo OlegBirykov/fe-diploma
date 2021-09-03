@@ -1,3 +1,15 @@
+async function fetchData(url, opt) {
+  try {
+    return await fetch(url, opt);
+  } catch(err) {
+    return {
+      ok: false,
+      status: '',
+      statusText: 'No Connect'
+    };
+  }
+}
+
 export async function subscribe (setAnimation, email) {
   setAnimation({ loading: true, text: 'Ожидание ответа сервера' });
 
@@ -10,18 +22,7 @@ export async function subscribe (setAnimation, email) {
     body: JSON.stringify({ email })
   };
 
-  let response;
-
-  try {
-    response = await fetch(url, opt);
-  } catch(err) {
-    response = {
-      ok: false,
-      status: '',
-      statusText: 'No Connect'
-    };
-  }
-  
+  const response = await fetchData(url, opt);
   setAnimation({ loading: false });
   return response;
 }

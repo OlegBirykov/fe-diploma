@@ -1,13 +1,20 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
 import './Description.css';
+import AppContext from 'AppContext';
+import { infoBox } from 'api/gui';
 
 function Description() {
+  const { setPopup } = useContext(AppContext);
+
   const description = [
     ['Удобный заказ', 'на сайте'],
     ['Нет необходимости', 'ехать в офис'],
     ['Огромный выбор', 'направлений'], 
   ];
+
+  const showPopup = () => {
+    infoBox(setPopup, 'Чтобы узнать больше, вы можете связаться с нами по телефону, почте или скайпу, указанным в разделе "Контакты"');  
+  }
 
   return (
     <div className="description"> 
@@ -15,9 +22,9 @@ function Description() {
         <h2 className="description__title">
           Как это работает
         </h2>
-        <Link to={process.env.PUBLIC_URL} className="description__link">
+        <button className="description__button" type="button" onClick={showPopup}>
           Узнать больше
-        </Link>
+        </button>
       </div>
       <div className="description__items">
         {description.map((item, index) => 

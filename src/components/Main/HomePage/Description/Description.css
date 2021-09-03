@@ -23,7 +23,7 @@
   color: white;
 }
 
-.description__link {
+.description__button {
   width: 325px;
   padding: 15px 0 15px 0;
   border: 1px solid white;
@@ -36,13 +36,13 @@
   color: white;
 }
 
-.description__link:hover {
+.description__button:hover {
   color: #2d2b2f;
   background-color: #ffca62;
   border-color: #ffca62;
 }
 
-.description__link:active {
+.description__button:active {
   color: #2d2b2f;
   background-color: white;
   border-color: white;
