@@ -19,7 +19,7 @@ function Feedbacks() {
   );
 
   return (
-    <div className="feedbacks"> 
+    <div className="feedbacks" name="feedbacks">
       <h2 className="feedbacks__title">
         Отзывы
       </h2>

@@ -17,7 +17,7 @@ function Description() {
   }
 
   return (
-    <div className="description"> 
+    <div className="description" name="description"> 
       <div className="description__top">
         <h2 className="description__title">
           Как это работает

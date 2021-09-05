@@ -14,8 +14,17 @@ function HomePage() {
 
   return (
     <main className="home-page"> 
+      <a className="home-page__anchor" href="." name="about">
+        anchor
+      </a>
       <About />
+      <a className="home-page__anchor" href="." name="description">
+        anchor
+      </a>
       <Description />
+      <a className="home-page__anchor" href="." name="feedbacks">
+        anchor
+      </a>
       <Feedbacks />
     </main>
   )

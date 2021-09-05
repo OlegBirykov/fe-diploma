@@ -3,6 +3,13 @@
   background-color: #2d2b2f;
 }
 
+.footer__anchor {
+  display: block;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
 .footer__full {
   display: flex;
   padding: 50px 0 52px 343px;

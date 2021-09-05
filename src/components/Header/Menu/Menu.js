@@ -1,21 +1,20 @@
-import { Link } from 'react-router-dom';
 import './Menu.css';
 
 function Menu() {
   return (
     <nav className="menu">
-      <Link to={process.env.PUBLIC_URL} className="menu__item">
+      <a className="menu__item" href={process.env.PUBLIC_URL + '#about'}>
         О нас
-      </Link>
-      <Link to={process.env.PUBLIC_URL} className="menu__item"> 
+      </a>
+      <a className="menu__item" href={process.env.PUBLIC_URL + '#description'}> 
         Как это работает
-      </Link>
-      <Link to={process.env.PUBLIC_URL} className="menu__item">
+      </a>
+      <a className="menu__item" href={process.env.PUBLIC_URL + '#feedbacks'}>
         Отзывы
-      </Link>
-      <Link to={process.env.PUBLIC_URL} className="menu__item">
+      </a>
+      <a className="menu__item" href="#footer">
         Контакты
-      </Link>
+      </a>
     </nav>    
   )
 }

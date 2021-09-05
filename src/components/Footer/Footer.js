@@ -15,6 +15,9 @@ function Footer() {
   
   return (
     <footer className="footer"> 
+      <a className="footer__anchor" href="." name="footer">
+        anchor
+      </a>
       {!collapsed && 
         <div className="footer__full"> 
           <Contacts />
