@@ -1,0 +1,26 @@
+.location-input__input {
+  display: block;
+  width: 100%;
+  padding: 19px 70px 20px 21px;
+  border-radius: 3px;
+
+  font-size: 18px;
+  line-height: 21px;
+  color: #292929;
+  background-color: white;
+}
+
+.location-input__input::placeholder {
+  color: #e5e5e5;
+}
+
+.location-input__button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 18px;
+}
+
+.location-input__button-icon {
+  display: block;
+}
