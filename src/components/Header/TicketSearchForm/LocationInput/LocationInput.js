@@ -1,15 +1,26 @@
-import { useState, Fragment } from 'react';
+import { useState, useContext, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import './LocationInput.css';
+import AppContext from 'AppContext';
+import { cities } from 'api/http';
 import buttonIcon from './location.svg';
 
 function LocationInput(props) {
   const { name, value, placeholder, setValue } = props;
 
-  const [list] = useState([{ name: 'qqq', _id: 1 }, { name: '111', _id: 2 }]);
+  const [citiesList] = useState([{ name: 'qqq', _id: 1 }, { name: '111', _id: 2 }]);
   const [isShowList, setIsShowList] = useState(false);
+  const { setAnimation } = useContext(AppContext);
+
+  const getCities = async (cityName) => {
+    const response = await cities(setAnimation, cityName);    
+    console.log(await response.json());
+  }
 
   const locationClick = () => {
+    if (!isShowList && value) {
+      getCities(value);
+    }
     setIsShowList(!isShowList);
   }
 
@@ -33,7 +44,7 @@ function LocationInput(props) {
       }
       {isShowList &&
         <ul className="location-input__list">
-          {list.map((item) =>
+          {citiesList.map((item) =>
             <li className="location-input__list-item" key={item._id}>
               {item.name}
             </li> 
