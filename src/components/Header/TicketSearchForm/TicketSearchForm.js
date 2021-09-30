@@ -74,7 +74,7 @@ function TicketSearchForm(props) {
       <button className={buttonClassName} type="submit">
         Найти билеты
       </button>
-      {redirect && <Redirect to={process.env.PUBLIC_URL + '/run/seats'} />}
+      {redirect && <Redirect to={process.env.PUBLIC_URL + '/run/trains'} />}
     </form>    
   )
 }

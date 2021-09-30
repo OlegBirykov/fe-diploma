@@ -9,6 +9,7 @@ function Header() {
   let classModificator = '';
 
   switch (bookingStage) {
+    case 'trains':
     case 'seats':
     case 'passengers':
     case 'payment':
