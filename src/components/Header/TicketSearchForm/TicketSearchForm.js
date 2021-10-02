@@ -42,6 +42,12 @@ function TicketSearchForm(props) {
     setRedirect(false);
   }; 
 
+  const invertDirection = () => {
+    const from = formState.to;
+    const to = formState.from;
+    setFormState({ ...formState, from, to });
+  }
+
   const searchTickets = (evt) => {
     evt.preventDefault();
     setFormState(initialFormState);
@@ -56,7 +62,7 @@ function TicketSearchForm(props) {
           <LocationInput name='from' value={formState.from} placeholder='Откуда' setValue={fromChange} />
         </div>
       </label>
-      <button className="ticket-search-form__button-invert" type="button">
+      <button className="ticket-search-form__button-invert" type="button" onClick={invertDirection}>
         <img className="ticket-search-form__image-invert" src={buttonInvert} width="100%" alt="button-invert" />
       </button>
       <div className="ticket-search-form__input-container">

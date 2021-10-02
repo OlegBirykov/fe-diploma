@@ -2,26 +2,65 @@ import { useState, useContext, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import './LocationInput.css';
 import AppContext from 'AppContext';
+import { infoBox } from 'api/gui';
 import { cities } from 'api/http';
 import buttonIcon from './location.svg';
 
 function LocationInput(props) {
   const { name, value, placeholder, setValue } = props;
 
-  const [citiesList] = useState([{ name: 'qqq', _id: 1 }, { name: '111', _id: 2 }]);
-  const [isShowList, setIsShowList] = useState(false);
-  const { setAnimation } = useContext(AppContext);
+  const [timerId, setTimerId] = useState(null);
+  const [citiesList, setCitiesList] = useState([]);
+  const [showList, setShowList] = useState(false);
+  const { animation, setAnimation, setPopup } = useContext(AppContext);
 
   const getCities = async (cityName) => {
-    const response = await cities(setAnimation, cityName);    
-    console.log(await response.json());
+    const response = await cities(setAnimation, cityName); 
+    try {
+      const list = await response.json();
+      setCitiesList(list);
+      setShowList(!!list.length);
+    } catch(e) {
+      setShowList(false);
+    }  
   }
 
-  const locationClick = () => {
-    if (!isShowList && value) {
-      getCities(value);
+  const timeout = 1000;
+
+  const timer = (text) => {
+    getCities(text);
+  }
+
+  const clickLocation = () => {
+    infoBox(setPopup, [
+      'Извините, сервис поиска на карте находится в процессе разработки',
+      'Введите название станции текстом'
+    ]);
+  }
+
+  const changeText = (evt) => {
+    if (animation.loading) {
+      return;
     }
-    setIsShowList(!isShowList);
+
+    clearTimeout(timerId);
+    const text = evt.target.value.trimLeft();
+    setValue(text);
+
+    if (text.length) {
+      setTimerId(setTimeout(() => timer(text), timeout));
+    } else {
+      setShowList(false);
+    }
+  }
+
+  const removeFocus = () => {
+    setTimeout(() => setShowList(false), 500);
+  }
+
+  const selectCity = (city) => {
+    setValue(city);
+    setShowList(false);
   }
 
   return (
@@ -32,20 +71,16 @@ function LocationInput(props) {
         name={name}
         value={value}
         placeholder={placeholder}
-        onChange={(evt) => setValue(evt.target.value)}
+        onChange={changeText}
+        onBlur={removeFocus}
       />
-      <button className="location-input__button" type="button" onClick={locationClick}>
+      <button className="location-input__button" type="button" onClick={clickLocation}>
         <img className="location-input__button-icon" src={buttonIcon} width="100%" alt="button-location" />
       </button>
-      {isShowList &&
-        <p className="location-input__hint">
-          qqq
-        </p>
-      }
-      {isShowList &&
+      {showList && 
         <ul className="location-input__list">
           {citiesList.map((item) =>
-            <li className="location-input__list-item" key={item._id}>
+            <li className="location-input__list-item" key={item._id} onClick={() => selectCity(item.name)}>
               {item.name}
             </li> 
           )}
