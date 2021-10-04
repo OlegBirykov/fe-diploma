@@ -71,11 +71,11 @@ function TicketSearchForm(props) {
       <label className={labelClassName}>
         Дата
         <div className="ticket-search-form__input-container">
-          <DateInput name='left-date' value={formState.leftDate} placeholder={classModificator ? '' : 'ДД/ММ/ГГ'} setValue={leftDateChange} />
+          <DateInput name='left-date' value={formState.leftDate} placeholder='ДД ММ ГГГГ' setValue={leftDateChange} />
         </div>    
       </label>
       <div className="ticket-search-form__input-container">
-        <DateInput name='return-date' value={formState.returnDate} placeholder={classModificator ? '' : 'ДД/ММ/ГГ'} setValue={returnDateChange} />
+        <DateInput name='return-date' value={formState.returnDate} placeholder='ДД ММ ГГГГ' setValue={returnDateChange} />
       </div> 
       <button className={buttonClassName} type="submit">
         Найти билеты

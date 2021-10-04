@@ -6,6 +6,17 @@ import buttonIcon from './date.svg';
 function DateInput(props) {
   const { name, value, placeholder, setValue } = props;
 
+  const changeText = (evt) => {
+    const digitsArray = evt.target.value.replace(/[^\d]/g, '').split('', 8);
+    if (digitsArray.length > 4) {
+      digitsArray.splice(4, 0, '.');
+    }
+    if (digitsArray.length > 2) {
+      digitsArray.splice(2, 0, '.');
+    }
+    setValue(digitsArray.join(''));
+  }
+
   return (
     <Fragment>
       <input 
@@ -14,7 +25,7 @@ function DateInput(props) {
         name={name}
         value={value}
         placeholder={placeholder}
-        onChange={(evt) => setValue(evt.target.value)}
+        onChange={changeText}
       />
       <button className="date-input__button" type="button">
         <img className="date-input__button-icon" src={buttonIcon} width="100%" alt="button-date" />
