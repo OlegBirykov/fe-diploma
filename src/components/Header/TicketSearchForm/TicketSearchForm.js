@@ -1,9 +1,12 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import './TicketSearchForm.css';
+import AppContext from 'AppContext';
 import LocationInput from './LocationInput/LocationInput';
 import DateInput from './DateInput/DateInput';
+import { errorBox } from 'api/gui';
+import { readDate } from 'api/utils';
 import buttonInvert from './button-invert.svg';
 
 function TicketSearchForm(props) {
@@ -21,6 +24,7 @@ function TicketSearchForm(props) {
 
   const [formState, setFormState] = useState(initialFormState);
   const [redirect, setRedirect] = useState(false);
+  const { setPopup } = useContext(AppContext);
 
   const fromChange = (value) => {
     setFormState({ ...formState, from: value });
@@ -50,6 +54,13 @@ function TicketSearchForm(props) {
 
   const searchTickets = (evt) => {
     evt.preventDefault();
+    const date = readDate(formState.leftDate, formState.returnDate);
+    console.log(date);
+    if (!date.status) {
+      errorBox(setPopup, date.errorText);
+      return;
+    }
+
     setFormState(initialFormState);
     setRedirect(true);
   };
