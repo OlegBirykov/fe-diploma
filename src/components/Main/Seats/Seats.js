@@ -2,6 +2,7 @@ import { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Seats.css';
 import AppContext from 'AppContext';
+import ProgressIndicator from '../ProgressIndicator/ProgressIndicator';
 
 function Seats() {
   const { setBookingStage } = useContext(AppContext);
@@ -12,6 +13,7 @@ function Seats() {
   
   return (
     <main className="seats"> 
+      <ProgressIndicator stepNumber={1} /> 
       <Link to={process.env.PUBLIC_URL + '/run/passengers'} className="seats__xxx"> 
         Далее
       </Link>
