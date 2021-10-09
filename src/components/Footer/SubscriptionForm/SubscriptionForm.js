@@ -8,6 +8,7 @@ import { subscribe } from 'api/http';
 function SubscriptionForm() { 
   const [email, setEmail] = useState('');
   const { setAnimation, setPopup } = useContext(AppContext);
+
   
   const emailChange = (evt) => {
     setEmail(evt.target.value);

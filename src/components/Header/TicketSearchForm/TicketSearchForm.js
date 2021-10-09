@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Redirect } from 'react-router-dom';
 import './TicketSearchForm.css';
 import AppContext from 'AppContext';
 import LocationInput from './LocationInput/LocationInput';
@@ -23,27 +23,23 @@ function TicketSearchForm(props) {
   };
 
   const [formState, setFormState] = useState(initialFormState);
-  const [redirect, setRedirect] = useState(false);
   const { setPopup } = useContext(AppContext);
+  const history = useHistory();
 
   const fromChange = (value) => {
     setFormState({ ...formState, from: value });
-    setRedirect(false);
   }; 
 
   const toChange = (value) => {
     setFormState({ ...formState, to: value });
-    setRedirect(false);
   };
 
   const leftDateChange = (value) => {
     setFormState({ ...formState, leftDate: value });
-    setRedirect(false);
   };
 
   const returnDateChange = (value) => {
     setFormState({ ...formState, returnDate: value });
-    setRedirect(false);
   }; 
 
   const invertDirection = () => {
@@ -62,7 +58,7 @@ function TicketSearchForm(props) {
     }
 
     setFormState(initialFormState);
-    setRedirect(true);
+    history.push(process.env.PUBLIC_URL + '/run/trains');
   };
 
   return (
@@ -91,7 +87,6 @@ function TicketSearchForm(props) {
       <button className={buttonClassName} type="submit">
         Найти билеты
       </button>
-      {redirect && <Redirect to={process.env.PUBLIC_URL + '/run/trains'} />}
     </form>    
   )
 }
