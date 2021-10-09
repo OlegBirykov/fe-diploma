@@ -11,7 +11,8 @@ const AppContext = createContext({
     buttonText: '',
     content: [''],
     error: false
-  }
+  },
+  direction: {}
 });
 
 export default AppContext;

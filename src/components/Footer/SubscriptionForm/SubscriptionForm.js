@@ -47,7 +47,7 @@ function SubscriptionForm() {
     } else {
       errorBox(setPopup, [
         `Ошибка ${response.status} - ${response.statusText}`,
-        `Проверьте интернет-соединение и повторите попытку`
+        'Проверьте интернет-соединение и повторите попытку'
       ]);
     }
   }

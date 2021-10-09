@@ -36,24 +36,3 @@ export async function subscribe (setAnimation, email) {
   setAnimation({ loading: false });
   return response;
 }
-
-/*
-setLoading(true);
-try {
-  const response = await fetch(url, opts);
-
-  if (!response.ok) {
-    throw new Error(response.statusText);
-  }
-
-  const data = await response.json();
-  setError(null);
-  setData(data);
-
-} catch (error) {
-  setError(error);
-
-} finally {
-  setLoading(false);
-}
-*/

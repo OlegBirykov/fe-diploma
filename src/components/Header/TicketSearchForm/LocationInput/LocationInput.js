@@ -2,7 +2,7 @@ import { useState, useContext, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import './LocationInput.css';
 import AppContext from 'AppContext';
-import { infoBox } from 'api/gui';
+import { infoBox, errorBox } from 'api/gui';
 import { cities } from 'api/http';
 import buttonIcon from './location.svg';
 
@@ -16,6 +16,12 @@ function LocationInput(props) {
 
   const getCities = async (cityName) => {
     const response = await cities(setAnimation, cityName); 
+    if (!response.ok) {
+      errorBox(setPopup, [
+        `Ошибка ${response.status} - ${response.statusText}`,
+        'Проверьте интернет-соединение и повторите попытку'
+      ]);
+    }
     try {
       const list = await response.json();
       setCitiesList(list);

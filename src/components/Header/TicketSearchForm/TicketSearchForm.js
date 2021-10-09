@@ -7,6 +7,7 @@ import LocationInput from './LocationInput/LocationInput';
 import DateInput from './DateInput/DateInput';
 import { errorBox } from 'api/gui';
 import { readDate } from 'api/utils';
+import { cities } from 'api/http';
 import buttonInvert from './button-invert.svg';
 
 function TicketSearchForm(props) {
@@ -18,12 +19,12 @@ function TicketSearchForm(props) {
   const initialFormState = {
     from: '',
     to: '',
-    leftDate: '',
-    returnDate: ''
+    dateStart: '',
+    dateEnd: ''
   };
 
   const [formState, setFormState] = useState(initialFormState);
-  const { setPopup } = useContext(AppContext);
+  const { setPopup, setAnimation, direction, setDirection } = useContext(AppContext);
   const history = useHistory();
 
   const fromChange = (value) => {
@@ -35,11 +36,11 @@ function TicketSearchForm(props) {
   };
 
   const leftDateChange = (value) => {
-    setFormState({ ...formState, leftDate: value });
+    setFormState({ ...formState, dateStart: value });
   };
 
   const returnDateChange = (value) => {
-    setFormState({ ...formState, returnDate: value });
+    setFormState({ ...formState, dateEnd: value });
   }; 
 
   const invertDirection = () => {
@@ -48,16 +49,89 @@ function TicketSearchForm(props) {
     setFormState({ ...formState, from, to });
   }
 
-  const searchTickets = (evt) => {
+  const getCityId = async (cityName, field) => {
+    const name = cityName.trim();
+    const response = await cities(setAnimation, name); 
+    if (!response.ok) {
+      errorBox(setPopup, [
+        `Ошибка ${response.status} - ${response.statusText}`,
+        'Проверьте интернет-соединение и повторите попытку'
+      ]);
+      return null; 
+    }
+
+    let list;
+    try {
+      list = await response.json();
+    } catch(e) {
+      return null;
+    }  
+
+    if (!list.length) {
+      errorBox(setPopup, [
+        'Ошибка ввода направления',
+        `Значение в поле "${field}" отстутствует в списке станций`
+      ]);
+      return null;        
+    }
+
+    const city = list.find((item) => item.name === name);
+    if (!city) {
+      errorBox(setPopup, [
+        'Ошибка ввода направления',
+        `Значение в поле "${field}" отстутствует в списке станций`
+      ]);
+      return null;        
+    }
+
+    return city._id;
+  }
+
+  const searchTickets = async (evt) => {
     evt.preventDefault();
-    const date = readDate(formState.leftDate, formState.returnDate);
-    console.log(date);
+    const date = readDate(formState.dateStart, formState.dateEnd);
     if (!date.status) {
       errorBox(setPopup, date.errorText);
       return;
     }
+    const dateStart = date.date1;
+    const dateEnd = date.date2;
+
+    if (!formState.from) {
+      errorBox(setPopup, [
+        'Ошибка ввода направления',
+        'Поле "Откуда" обязательно для заполнения'
+      ]);
+      return;
+    }
+
+    if (!formState.to) {
+      errorBox(setPopup, [
+        'Ошибка ввода направления',
+        'Поле "Куда" обязательно для заполнения'
+      ]);
+      return;
+    }
+   
+    const fromCityId = await getCityId(formState.from, 'Откуда');
+    if (fromCityId === null) {
+      return;
+    }
+    const toCityId = await getCityId(formState.to, 'Куда');
+    if (toCityId === null) {
+      return;
+    }
+
+    if (fromCityId === toCityId) {
+      errorBox(setPopup, [
+        'Ошибка ввода направления',
+        'Значения полей "Откуда" и "Куда" не должны быть одинаковыми'
+      ]);
+      return;   
+    }
 
     setFormState(initialFormState);
+    setDirection({ ...direction, fromCityId, toCityId, dateStart, dateEnd });
     history.push(process.env.PUBLIC_URL + '/run/trains');
   };
 
@@ -78,11 +152,11 @@ function TicketSearchForm(props) {
       <label className={labelClassName}>
         Дата
         <div className="ticket-search-form__input-container">
-          <DateInput name='left-date' value={formState.leftDate} placeholder='ДД ММ ГГГГ' setValue={leftDateChange} />
+          <DateInput name='left-date' value={formState.dateStart} placeholder='ДД ММ ГГГГ' setValue={leftDateChange} />
         </div>    
       </label>
       <div className="ticket-search-form__input-container">
-        <DateInput name='return-date' value={formState.returnDate} placeholder='ДД ММ ГГГГ' setValue={returnDateChange} />
+        <DateInput name='return-date' value={formState.dateEnd} placeholder='ДД ММ ГГГГ' setValue={returnDateChange} />
       </div> 
       <button className={buttonClassName} type="submit">
         Найти билеты

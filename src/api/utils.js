@@ -10,16 +10,16 @@ export function readDate(date1, date2) {
 
   if (!date1) {
     result.errorText = [
-      'Поле обязательно для заполнения',
-      'Введите дату поездки'
+      'Ошибка ввода даты поездки',
+      'Поле обязательно для заполнения'
     ];
     return result;
   }
 
   if (!date2) {
     result.errorText = [
-      'Поле обязательно для заполнения',
-      'Введите дату возвращения'
+      'Ошибка ввода даты возвращения',
+      'Поле обязательно для заполнения'
     ];
     return result;
   }
@@ -42,19 +42,21 @@ export function readDate(date1, date2) {
     return result;
   }
 
-  const today = moment(
-    moment().format(format),
-    format
-  );
+  const minLimit = 1;
+  const maxLimit = 90;
+
+  const todayString = moment().format(format);
+  const today = moment(todayString, format);
+  const minDay = moment(todayString, format).add(minLimit, 'days');
+  const maxDay = moment(todayString, format).add(maxLimit, 'days');
+
   const moment1 = moment(date1, format);
   const moment2 = moment(date2, format);
 
   const diff1 = moment1.diff(today, 'days');
   const diff2 = moment2.diff(today, 'days'); 
-  const minLimit = 1;
-  const maxLimit = 90;
 
-  const outOfRangeText = `Дата должна находиться в диапазоне от ${today.add('days', minLimit).format(format)} до ${today.add('days', maxLimit).format(format)}`; 
+  const outOfRangeText = `Дата должна находиться в диапазоне от ${minDay.format(format)} до ${maxDay.format(format)}`;
 
   if (diff1 < minLimit || diff1 > maxLimit) {
     result.errorText = [
