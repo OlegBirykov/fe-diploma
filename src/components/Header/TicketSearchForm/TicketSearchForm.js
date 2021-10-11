@@ -5,7 +5,7 @@ import './TicketSearchForm.css';
 import AppContext from 'AppContext';
 import LocationInput from './LocationInput/LocationInput';
 import DateInput from './DateInput/DateInput';
-import { errorBox } from 'api/gui';
+import { errorBox, httpErrorBox } from 'api/gui';
 import { readDate } from 'api/utils';
 import { cities } from 'api/http';
 import buttonInvert from './button-invert.svg';
@@ -53,10 +53,7 @@ function TicketSearchForm(props) {
     const name = cityName.trim();
     const response = await cities(setAnimation, name); 
     if (!response.ok) {
-      errorBox(setPopup, [
-        `Ошибка ${response.status} - ${response.statusText}`,
-        'Проверьте интернет-соединение и повторите попытку'
-      ]);
+      httpErrorBox(setPopup, response);
       return null; 
     }
 

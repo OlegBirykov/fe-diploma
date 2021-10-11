@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import './SubscriptionForm.css';
 import AppContext from 'AppContext';
-import { infoBox, errorBox } from 'api/gui';
+import { infoBox, errorBox, httpErrorBox } from 'api/gui';
 import { verifyEmail } from 'api/utils';
 import { subscribe } from 'api/http';
 
@@ -45,10 +45,7 @@ function SubscriptionForm() {
         'Для подтверждения подписки откройте его и перейдите по указанной в нём ссылке'
       ]);
     } else {
-      errorBox(setPopup, [
-        `Ошибка ${response.status} - ${response.statusText}`,
-        'Проверьте интернет-соединение и повторите попытку'
-      ]);
+      httpErrorBox(setPopup, response);
     }
   }
 

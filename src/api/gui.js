@@ -17,3 +17,10 @@ export function errorBox(setPopup, content, buttonText = 'OK') {
   });
   return;
 }
+
+export function httpErrorBox (setPopup, response) {
+  errorBox(setPopup, [
+    `Ошибка ${response.status} - ${response.statusText}`,
+    'Проверьте интернет-соединение и повторите попытку'
+  ]);
+}
