@@ -20,6 +20,17 @@ export async function cities (setAnimation, name) {
   return response;
 }
 
+export async function routes (setAnimation, params) {
+  setAnimation({ loading: true, text: 'Идёт поиск' });
+
+  const url = new URL(`${process.env.REACT_APP_TRAIN_BOOKING_SERVER}/routes`);
+  Object.entries(params).forEach((item) => url.searchParams.append(item[0], item[1]));
+  const response = await fetchData(url);
+
+  setAnimation({ loading: false }); 
+  return response;
+}
+
 export async function subscribe (setAnimation, email) {
   setAnimation({ loading: true, text: 'Ожидание ответа сервера' });
 

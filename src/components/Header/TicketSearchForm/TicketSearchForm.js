@@ -5,9 +5,9 @@ import './TicketSearchForm.css';
 import AppContext from 'AppContext';
 import LocationInput from './LocationInput/LocationInput';
 import DateInput from './DateInput/DateInput';
-import { errorBox, httpErrorBox } from 'api/gui';
+import { infoBox, errorBox, httpErrorBox } from 'api/gui';
 import { readDate } from 'api/utils';
-import { cities } from 'api/http';
+import { cities, routes } from 'api/http';
 import buttonInvert from './button-invert.svg';
 
 function TicketSearchForm(props) {
@@ -125,6 +125,30 @@ function TicketSearchForm(props) {
         'Значения полей "Откуда" и "Куда" не должны быть одинаковыми'
       ]);
       return;   
+    }
+
+    const response = await routes(setAnimation, {
+      from_city_id: fromCityId,
+      to_city_id: toCityId,
+      date_start: dateStart,
+      date_end: dateEnd
+    }); 
+    if (!response.ok) {
+      httpErrorBox(setPopup, response);
+      return; 
+    }  
+    
+    let routesList;
+    try {
+      routesList = await response.json();
+    } catch(e) {
+      routesList = { total_count: 0 };
+    }
+    console.log(routesList);
+
+    if (!routesList.total_count) {
+      infoBox(setPopup, 'К сожалению, поезда в указанные даты не найдены'); 
+      return;     
     }
 
     setFormState(initialFormState);
