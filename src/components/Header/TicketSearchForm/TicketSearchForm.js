@@ -130,8 +130,9 @@ function TicketSearchForm(props) {
     const response = await routes(setAnimation, {
       from_city_id: fromCityId,
       to_city_id: toCityId,
-      date_start: dateStart,
-      date_end: dateEnd
+      date_start: '2021-04-10',
+      date_end: '2021-04-12',
+      limit: 30
     }); 
     if (!response.ok) {
       httpErrorBox(setPopup, response);
@@ -144,12 +145,15 @@ function TicketSearchForm(props) {
     } catch(e) {
       routesList = { total_count: 0 };
     }
-    console.log(routesList);
 
     if (!routesList.total_count) {
-      infoBox(setPopup, 'К сожалению, поезда в указанные даты не найдены'); 
+      infoBox(setPopup, 'К сожалению, требуемые поезда не найдены. Возможно, стоит изменить дату'); 
       return;     
     }
+
+    routesList.items.forEach(item => {
+      console.log(item);
+    });;
 
     setFormState(initialFormState);
     setDirection({ ...direction, fromCityId, toCityId, dateStart, dateEnd });
