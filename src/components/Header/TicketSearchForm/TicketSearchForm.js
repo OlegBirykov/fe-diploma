@@ -5,9 +5,9 @@ import './TicketSearchForm.css';
 import AppContext from 'AppContext';
 import LocationInput from './LocationInput/LocationInput';
 import DateInput from './DateInput/DateInput';
-import { infoBox, errorBox, httpErrorBox } from 'api/gui';
+import { errorBox, httpErrorBox } from 'api/gui';
 import { readDate } from 'api/utils';
-import { cities, routes } from 'api/http';
+import { cities, loadTrainsInfo } from 'api/http';
 import buttonInvert from './button-invert.svg';
 
 function TicketSearchForm(props) {
@@ -24,7 +24,7 @@ function TicketSearchForm(props) {
   };
 
   const [formState, setFormState] = useState(initialFormState);
-  const { setPopup, setAnimation, direction, setDirection } = useContext(AppContext);
+  const { setPopup, setAnimation } = useContext(AppContext);
   const history = useHistory();
 
   const fromChange = (value) => {
@@ -127,36 +127,10 @@ function TicketSearchForm(props) {
       return;   
     }
 
-    const response = await routes(setAnimation, {
-      from_city_id: fromCityId,
-      to_city_id: toCityId,
-      date_start: '2021-04-10',
-      date_end: '2021-04-12',
-      limit: 30
-    }); 
-    if (!response.ok) {
-      httpErrorBox(setPopup, response);
-      return; 
-    }  
-    
-    let routesList;
-    try {
-      routesList = await response.json();
-    } catch(e) {
-      routesList = { total_count: 0 };
-    }
-
-    if (!routesList.total_count) {
-      infoBox(setPopup, 'К сожалению, требуемые поезда не найдены. Возможно, стоит изменить дату'); 
-      return;     
-    }
-
-    routesList.items.forEach(item => {
-      console.log(item);
-    });;
-
     setFormState(initialFormState);
-    setDirection({ ...direction, fromCityId, toCityId, dateStart, dateEnd });
+    await loadTrainsInfo(setAnimation, {
+      fromCityId, toCityId, dateStart, dateEnd 
+    });
     history.push(process.env.PUBLIC_URL + '/run/trains');
   };
 

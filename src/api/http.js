@@ -47,3 +47,9 @@ export async function subscribe (setAnimation, email) {
   setAnimation({ loading: false });
   return response;
 }
+
+export async function loadTrainsInfo (setAnimation, /*setPopup, setTrainsInfo, */params) {
+  const response = await routes (setAnimation, params);
+  return response;
+}
+
