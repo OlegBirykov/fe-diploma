@@ -24,7 +24,7 @@ function TicketSearchForm(props) {
   };
 
   const [formState, setFormState] = useState(initialFormState);
-  const { setPopup, setAnimation } = useContext(AppContext);
+  const { setPopup, setAnimation, setTrainsInfo } = useContext(AppContext);
   const history = useHistory();
 
   const fromChange = (value) => {
@@ -127,10 +127,17 @@ function TicketSearchForm(props) {
       return;   
     }
 
-    setFormState(initialFormState);
-    await loadTrainsInfo(setAnimation, {
-      fromCityId, toCityId, dateStart, dateEnd 
+    const result = await loadTrainsInfo(setAnimation, setPopup, setTrainsInfo, {
+      fromCityId, 
+      toCityId, 
+      dateStart, 
+      dateEnd 
     });
+    if (!result) {
+      return;
+    }
+
+    setFormState(initialFormState);
     history.push(process.env.PUBLIC_URL + '/run/trains');
   };
 

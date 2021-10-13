@@ -24,3 +24,10 @@ export function httpErrorBox (setPopup, response) {
     'Проверьте интернет-соединение и повторите попытку'
   ]);
 }
+
+export function incorrectDataErrorBox (setPopup) {
+  errorBox(setPopup, [
+    'Ошибка загрузки данных',
+    'Проверьте интернет-соединение и повторите попытку'
+  ]); 
+}

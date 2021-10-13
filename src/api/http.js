@@ -1,3 +1,5 @@
+import { httpErrorBox, incorrectDataErrorBox } from './gui';
+
 async function fetchData(url, opt) {
   try {
     return await fetch(url, opt);
@@ -48,8 +50,50 @@ export async function subscribe (setAnimation, email) {
   return response;
 }
 
-export async function loadTrainsInfo (setAnimation, /*setPopup, setTrainsInfo, */params) {
-  const response = await routes (setAnimation, params);
-  return response;
+export async function loadTrainsInfo (setAnimation, setPopup, setTrainsInfo, params) {
+  let response;
+  let trainsInfoStart;
+  let trainsInfoEnd;
+
+  const paramsStart = {
+    from_city_id: params.fromCityId,
+    to_city_id: params.toCityId
+  };
+
+  response = await routes (setAnimation, paramsStart);
+  if (!response.ok) {
+    httpErrorBox(setPopup, response);
+    return false; 
+  } 
+  
+  try {
+    trainsInfoStart = await response.json();
+  } catch(e) {
+    incorrectDataErrorBox(setPopup);
+    return false;
+  }
+
+  const paramsEnd = {
+    from_city_id: params.toCityId,
+    to_city_id: params.fromCityId
+  }
+
+  response = await routes (setAnimation, paramsEnd);
+  if (!response.ok) {
+    httpErrorBox(setPopup, response);
+    return false; 
+  } 
+
+  try {
+    trainsInfoEnd = await response.json();
+  } catch(e) {
+    incorrectDataErrorBox(setPopup);
+    return false;
+  }
+
+  console.log(trainsInfoStart);
+  console.log(trainsInfoEnd);
+
+  return true;
 }
 
