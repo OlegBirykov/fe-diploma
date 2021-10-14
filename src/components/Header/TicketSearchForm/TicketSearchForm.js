@@ -131,7 +131,10 @@ function TicketSearchForm(props) {
       fromCityId, 
       toCityId, 
       dateStart, 
-      dateEnd 
+      dateEnd,
+      limit: 5,
+      offset: 0,
+      sort: date
     });
     if (!result) {
       return;

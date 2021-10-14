@@ -22,14 +22,16 @@ export async function cities (setAnimation, name) {
   return response;
 }
 
-export async function routes (setAnimation, params) {
-  setAnimation({ loading: true, text: 'Идёт поиск' });
-
+async function routes (params) {
   const url = new URL(`${process.env.REACT_APP_TRAIN_BOOKING_SERVER}/routes`);
   Object.entries(params).forEach((item) => url.searchParams.append(item[0], item[1]));
   const response = await fetchData(url);
+  return response;
+}
 
-  setAnimation({ loading: false }); 
+async function last () {
+  const url = `${process.env.REACT_APP_TRAIN_BOOKING_SERVER}/routes/last`;
+  const response = await fetchData(url);
   return response;
 }
 
@@ -51,35 +53,55 @@ export async function subscribe (setAnimation, email) {
 }
 
 export async function loadTrainsInfo (setAnimation, setPopup, setTrainsInfo, params) {
+  setAnimation({ loading: true, text: 'Идёт поиск' });
+
   let response;
   let trainsInfoStart;
   let trainsInfoEnd;
+  let lastRoutes;
+
+  const {
+    fromCityId,
+    toCityId,
+    limit,
+    offset,
+    sort
+  } = params;
 
   const paramsStart = {
-    from_city_id: params.fromCityId,
-    to_city_id: params.toCityId
+    from_city_id: fromCityId,
+    to_city_id: toCityId,
+    limit,
+    offset,
+    sort
   };
 
-  response = await routes (setAnimation, paramsStart);
+  response = await routes (paramsStart);
   if (!response.ok) {
-    httpErrorBox(setPopup, response);
+    setAnimation({ loading: false }); 
+    httpErrorBox(setPopup, response);   
     return false; 
   } 
   
   try {
     trainsInfoStart = await response.json();
   } catch(e) {
+    setAnimation({ loading: false }); 
     incorrectDataErrorBox(setPopup);
     return false;
   }
 
   const paramsEnd = {
-    from_city_id: params.toCityId,
-    to_city_id: params.fromCityId
-  }
+    from_city_id: toCityId,
+    to_city_id: fromCityId,
+    limit,
+    offset,
+    sort
+  };
 
-  response = await routes (setAnimation, paramsEnd);
+  response = await routes (paramsEnd);
   if (!response.ok) {
+    setAnimation({ loading: false }); 
     httpErrorBox(setPopup, response);
     return false; 
   } 
@@ -87,13 +109,31 @@ export async function loadTrainsInfo (setAnimation, setPopup, setTrainsInfo, par
   try {
     trainsInfoEnd = await response.json();
   } catch(e) {
+    setAnimation({ loading: false }); 
+    incorrectDataErrorBox(setPopup);
+    return false;
+  }
+
+  response = await last ();
+  if (!response.ok) {
+    setAnimation({ loading: false }); 
+    httpErrorBox(setPopup, response);
+    return false; 
+  } 
+
+  try {
+    lastRoutes = await response.json();
+  } catch(e) {
+    setAnimation({ loading: false }); 
     incorrectDataErrorBox(setPopup);
     return false;
   }
 
   console.log(trainsInfoStart);
   console.log(trainsInfoEnd);
+  console.log(lastRoutes);
 
+  setAnimation({ loading: false }); 
   return true;
 }
 
