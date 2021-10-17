@@ -56,8 +56,8 @@ export async function loadTrainsInfo (setAnimation, setPopup, setTrainsInfo, par
   setAnimation({ loading: true, text: 'Идёт поиск' });
 
   let response;
-  let trainsInfoStart;
-  let trainsInfoEnd;
+  let forwardTrainsInfo;
+  let backwardTrainsInfo;
   let lastRoutes;
 
   const {
@@ -65,10 +65,10 @@ export async function loadTrainsInfo (setAnimation, setPopup, setTrainsInfo, par
     toCityId,
     limit,
     offset,
-    sort
+    sort,
   } = params;
 
-  const paramsStart = {
+  const forwardTrainsParams = {
     from_city_id: fromCityId,
     to_city_id: toCityId,
     limit,
@@ -76,7 +76,7 @@ export async function loadTrainsInfo (setAnimation, setPopup, setTrainsInfo, par
     sort
   };
 
-  response = await routes (paramsStart);
+  response = await routes (forwardTrainsParams);
   if (!response.ok) {
     setAnimation({ loading: false }); 
     httpErrorBox(setPopup, response);   
@@ -84,14 +84,14 @@ export async function loadTrainsInfo (setAnimation, setPopup, setTrainsInfo, par
   } 
   
   try {
-    trainsInfoStart = await response.json();
+    forwardTrainsInfo = await response.json();
   } catch(e) {
     setAnimation({ loading: false }); 
     incorrectDataErrorBox(setPopup);
     return false;
   }
 
-  const paramsEnd = {
+  const backwardTrainsParams = {
     from_city_id: toCityId,
     to_city_id: fromCityId,
     limit,
@@ -99,7 +99,7 @@ export async function loadTrainsInfo (setAnimation, setPopup, setTrainsInfo, par
     sort
   };
 
-  response = await routes (paramsEnd);
+  response = await routes (backwardTrainsParams);
   if (!response.ok) {
     setAnimation({ loading: false }); 
     httpErrorBox(setPopup, response);
@@ -107,7 +107,7 @@ export async function loadTrainsInfo (setAnimation, setPopup, setTrainsInfo, par
   } 
 
   try {
-    trainsInfoEnd = await response.json();
+    backwardTrainsInfo = await response.json();
   } catch(e) {
     setAnimation({ loading: false }); 
     incorrectDataErrorBox(setPopup);
@@ -129,9 +129,12 @@ export async function loadTrainsInfo (setAnimation, setPopup, setTrainsInfo, par
     return false;
   }
 
-  console.log(trainsInfoStart);
-  console.log(trainsInfoEnd);
-  console.log(lastRoutes);
+  setTrainsInfo({
+    ...params,
+    forwardTrainsInfo,
+    backwardTrainsInfo,
+    lastRoutes
+  });
 
   setAnimation({ loading: false }); 
   return true;
