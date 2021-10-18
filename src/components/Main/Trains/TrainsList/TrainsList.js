@@ -1,6 +1,8 @@
 import { useContext } from 'react';
 import './TrainsList.css';
 import AppContext from 'AppContext';
+import SortingSelection from './SortingSelection/SortingSelection';
+import LimitSelection from './LimitSelection/LimitSelection';
 
 function TrainsList() {
 
@@ -12,9 +14,15 @@ function TrainsList() {
   return (
     <div className="trains-list"> 
       <div className="trains-list__menu">
-        <p>
+        <p className="trains-list__menu-item-count">
           Найдено поездов {trainsInfo.direction === 'forward' ? foundForward : foundBackward}
         </p>
+        <div className="trains-list__menu-item-sort">
+          <SortingSelection />
+        </div>
+        <div className="trains-list__menu-item-limit">
+          <LimitSelection />
+        </div>
       </div>
     </div>    
   )

@@ -1,7 +1,5 @@
-.trains-left {
-  width: 30%;
-}
-
-.trains-main {
+.trains__main {
   display: flex;
+  justify-content: space-between;
+  padding: 95px 256px 193px 0;
 }

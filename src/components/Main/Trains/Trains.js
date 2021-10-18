@@ -18,12 +18,12 @@ function Trains() {
   return (
     <main className="trains"> 
       <ProgressIndicator stepNumber={1} />
-      <div className="trains-main">
-        <section className="trains-left">
+      <div className="trains__main">
+        <section className="trains__left">
           <TrainsParams />
           <LastRouters />
         </section>
-        <section className="trains-main">
+        <section className="trains__right">
           <TrainsList />
         </section>
       </div>
