@@ -1,0 +1,13 @@
+.option-icons {
+  display: flex;
+  align-items: center;
+}
+
+.option-icons__container:not(:first-child) {
+  margin-left: 16px; 
+}
+
+.option-icons__icon {
+  display: block;
+  fill: #e5e5e5;
+}
