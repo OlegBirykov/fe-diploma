@@ -137,6 +137,7 @@ function TicketSearchForm(props) {
       sort: 'date',
       direction: 'forward'
     });
+    
     if (!result) {
       return;
     }

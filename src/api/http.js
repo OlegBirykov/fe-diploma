@@ -129,14 +129,16 @@ export async function loadTrainsInfo (setAnimation, setPopup, setTrainsInfo, par
     return false;
   }
 
-  setTrainsInfo({
-    ...params,
+  const trainsInfo = {
+    params,
     forwardTrainsInfo,
     backwardTrainsInfo,
     lastRoutes
-  });
+  };
+
+  setTrainsInfo(trainsInfo);
+  localStorage.setItem('trainsInfo', JSON.stringify(trainsInfo));
 
   setAnimation({ loading: false }); 
   return true;
 }
-

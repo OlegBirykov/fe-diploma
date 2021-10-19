@@ -15,7 +15,7 @@ function TrainsList() {
     <div className="trains-list"> 
       <div className="trains-list__menu">
         <p className="trains-list__menu-item-count">
-          Найдено поездов {trainsInfo.direction === 'forward' ? foundForward : foundBackward}
+          Найдено поездов {trainsInfo.params.direction === 'forward' ? foundForward : foundBackward}
         </p>
         <div className="trains-list__menu-item-sort">
           <SortingSelection />

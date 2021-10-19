@@ -3,6 +3,7 @@ import './Popup.css';
 import iconError from './icon-error.svg';
 import iconInfo from './icon-info.svg';
 import AppContext from 'AppContext';
+import shortid from 'shortid';
 
 function Popup() { 
   const { popup, setPopup, animation } = useContext(AppContext);
@@ -26,7 +27,7 @@ function Popup() {
           </div>
           <div className={`popup__content popup__content_${classModificator}`}>
             {content.map((item, i) =>
-              <p className={`popup__paragraph popup__paragraph_${classModificator}`} key={i}>
+              <p className={`popup__paragraph popup__paragraph_${classModificator}`} key={shortid.generate()}>
                 {item}
               </p>
             )}

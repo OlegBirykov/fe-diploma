@@ -5,7 +5,14 @@ function AppProvider(props) {
   const [bookingStage, setBookingStage] = useState(null);
   const [animation, setAnimation] = useState({ loading: false });
   const [popup, setPopup] = useState({ visible: false });
-  const [trainsInfo, setTrainsInfo] = useState({});
+
+  let storageTrainsInfo;
+  try {
+    storageTrainsInfo = JSON.parse(localStorage.getItem('trainsInfo'));
+  } catch {
+    storageTrainsInfo = {};
+  }
+  const [trainsInfo, setTrainsInfo] = useState(storageTrainsInfo);
 
   return (
     <AppContext.Provider 

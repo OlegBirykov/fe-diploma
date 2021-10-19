@@ -4,7 +4,7 @@ import './Trains.css';
 import AppContext from 'AppContext';
 import ProgressIndicator from '../ProgressIndicator/ProgressIndicator';
 import TrainsParams from './TrainsParams/TrainsParams';
-import LastRouters from './LastRouters/LastRouters';
+import LastRoutes from './LastRoutes/LastRoutes';
 import TrainsList from './TrainsList/TrainsList';
 
 function Trains() {
@@ -21,7 +21,7 @@ function Trains() {
       <div className="trains__main">
         <section className="trains__left">
           <TrainsParams />
-          <LastRouters />
+          <LastRoutes />
         </section>
         <section className="trains__right">
           <TrainsList />
