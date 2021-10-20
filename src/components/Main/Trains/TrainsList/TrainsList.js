@@ -3,6 +3,8 @@ import './TrainsList.css';
 import AppContext from 'AppContext';
 import SortingSelection from './SortingSelection/SortingSelection';
 import LimitSelection from './LimitSelection/LimitSelection';
+import TrainsListItem from './TrainsListItem/TrainsListItem';
+import shortid from 'shortid';
 
 function TrainsList() {
 
@@ -10,6 +12,10 @@ function TrainsList() {
 
   const foundForward = `туда: ${trainsInfo.forwardTrainsInfo.total_count}`;
   const foundBackward = `обратно: ${trainsInfo.backwardTrainsInfo.total_count}`;
+
+  const trainsArray = trainsInfo.params.direction === 'forward' 
+    ? trainsInfo.forwardTrainsInfo.items 
+    : trainsInfo.backwardTrainsInfo.items;
 
   return (
     <div className="trains-list"> 
@@ -23,6 +29,11 @@ function TrainsList() {
         <div className="trains-list__menu-item-limit">
           <LimitSelection />
         </div>
+      </div>
+      <div className="trains-list__list">
+        {trainsArray.length &&
+          trainsArray.map((item) => <TrainsListItem trainInfo={item} key={shortid.generate()} />)
+        }
       </div>
     </div>    
   )
