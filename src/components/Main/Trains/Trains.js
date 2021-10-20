@@ -1,5 +1,4 @@
 import { useContext, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import './Trains.css';
 import AppContext from 'AppContext';
 import ProgressIndicator from '../ProgressIndicator/ProgressIndicator';
@@ -27,9 +26,6 @@ function Trains() {
           <TrainsList />
         </section>
       </div>
-      <Link to={process.env.PUBLIC_URL + '/run/seats'}> 
-        Далее
-      </Link>
     </main>
   )
 }
