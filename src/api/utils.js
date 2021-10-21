@@ -87,3 +87,7 @@ export function readDate(date1, date2) {
   result.status = true;
   return result;
 }
+
+export function secToHourMin(sec) {
+  return moment(sec * 1000).format('DD-MM-YY HH:mm');
+}

@@ -3,10 +3,13 @@ import PropTypes from 'prop-types';
 import './TrainsListItem.css';
 //import OptionIcons from '../../OptionIcons/OptionIcons';
 import icons from '../../OptionIcons/icons.svg';
+import { secToHourMin } from 'api/utils';
 
 function TrainsListItem(props) {
   const { trainInfo } = props;
   const { 
+    from,
+    to,
     train
   } = trainInfo.departure;
 
@@ -24,20 +27,52 @@ function TrainsListItem(props) {
             <use xlinkHref={icons + '#train-face'} />
           </svg>
         </div>
-        <p>
+        <p className="trains-list-item__train-number">
+          {train._id}
         </p>
-        <div>
-          <p>
+        <div className="trains-list-item__train-properties">
+          <p className="trains-list-item__train-property">
+            {from.city.name} &#x2192;
           </p>
-          <p>
+          <p className="trains-list-item__train-property">
+            {to.city.name}
           </p>
-          <p>
-            {train.name}
+          <p className="trains-list-item__train-property">
+            {train.name  && `\u00ab${train.name}\u00bb`}
           </p>
         </div>
       </div>
       <div className="trains-list-item__middle">
-        середина
+        <div className="trains-list-item__middle-from">
+          <p>
+            {secToHourMin(from.datetime)}
+          </p>
+          <p>
+            ччччччччччччч
+          </p>
+          <p>
+            rtrjrjtrt
+          </p>
+        </div>
+        <div className="trains-list-item__middle-way">
+          <p>
+            xx : xx
+          </p>
+          <p>
+            &#x279e;
+          </p>
+        </div>
+        <div className="trains-list-item__middle-to">
+          <p>
+            {secToHourMin(to.datetime)}
+          </p>
+          <p>
+            ччччччччччччч
+          </p>
+          <p>
+            rtrjrjtrt
+          </p>
+        </div>
       </div>
       <div className="trains-list-item__right">
         <button type="button" onClick={goToNextPage}>

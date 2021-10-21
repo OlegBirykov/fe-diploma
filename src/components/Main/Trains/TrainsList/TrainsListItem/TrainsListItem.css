@@ -13,16 +13,8 @@
 .trains-list-item__left {
   flex-basis: 150px;
   flex-grow: 1;
+  padding: 32px 0;
   background-color: #e4e0e9;
-}
-
-.trains-list-item__middle {
-  flex-basis: 480px;
-}
-
-.trains-list-item__right {
-  flex-basis: 283px;
-  border-left: 1px dashed #e5e5e5;
 }
 
 .trains-list-item__icon-container {
@@ -30,6 +22,7 @@
 
   width: 86px;
   height: 86px;
+  margin-left: 42px;
   border: 1px solid white;
   border-radius: 50%;
 }
@@ -38,4 +31,51 @@
   display: block;
   margin: auto;
   fill: white;
+}
+
+.trains-list-item__train-number {
+  width: 86px;
+  margin: 17px 0 0 42px;
+  text-align: center;
+
+  color: #3e3c41;
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: 500;
+}
+
+.trains-list-item__train-properties {
+  margin: 15px 0 0 25px;
+}
+
+.trains-list-item__train-property {
+  color: #292929;
+  font-size: 16px;
+  line-height: 19px;
+  font-weight: normal;
+  text-transform: capitalize;
+}
+
+.trains-list-item__middle {
+  display: flex;
+  flex-basis: 480px;
+  padding: 54px 39px 0 39px;
+}
+
+.trains-list-item__middle-from {
+  width: 115px;
+}
+
+.trains-list-item__middle-way {
+  width: 125px;
+  text-align: center;
+}
+
+.trains-list-item__middle-to {
+  width: 115px;
+}
+
+.trains-list-item__right {
+  flex-basis: 283px;
+  border-left: 1px dashed #e5e5e5;
 }
