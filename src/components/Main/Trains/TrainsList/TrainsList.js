@@ -10,18 +10,15 @@ function TrainsList() {
 
   const { trainsInfo } = useContext(AppContext);
 
-  const foundForward = `туда: ${trainsInfo.forwardTrainsInfo.total_count}`;
-  const foundBackward = `обратно: ${trainsInfo.backwardTrainsInfo.total_count}`;
-
-  const trainsArray = trainsInfo.params.direction === 'forward' 
-    ? trainsInfo.forwardTrainsInfo.items 
-    : trainsInfo.backwardTrainsInfo.items;
+  const isForward = trainsInfo.params.direction === 'forward';
+  const trainsArray = isForward ? trainsInfo.forwardTrainsInfo.items : trainsInfo.backwardTrainsInfo.items;
+  const trainsCount = isForward ? `туда: ${trainsInfo.forwardTrainsInfo.total_count}` : `обратно: ${trainsInfo.backwardTrainsInfo.total_count}`
 
   return (
     <div className="trains-list"> 
       <div className="trains-list__menu">
         <p className="trains-list__menu-item-count">
-          Найдено поездов {trainsInfo.params.direction === 'forward' ? foundForward : foundBackward}
+          Найдено поездов {trainsCount}
         </p>
         <div className="trains-list__menu-item-sort">
           <SortingSelection />
@@ -32,7 +29,7 @@ function TrainsList() {
       </div>
       <div className="trains-list__list">
         {trainsArray.length &&
-          trainsArray.map((item) => <TrainsListItem trainInfo={item} key={shortid.generate()} />)
+          trainsArray.map((item) => <TrainsListItem trainInfo={item} isForward={isForward} key={shortid.generate()} />)
         }
       </div>
     </div>    

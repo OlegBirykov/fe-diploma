@@ -71,8 +71,40 @@
   text-align: center;
 }
 
-.trains-list-item__middle-to {
-  width: 115px;
+.trains-list-item__time {
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: 700;
+}
+
+.trains-list-item__city {
+  color: #292929;
+  font-size: 18px;
+  line-height: 21px;
+  font-weight: 400;
+  text-transform: capitalize;
+}
+
+.trains-list-item__station {
+  color: #928f94;
+  font-size: 16px;
+  line-height: 18px;
+  font-weight: 400;
+}
+
+.trains-list-item__duration {
+  margin-top: 3px;
+
+  color: #c4c4c4;
+  font-size: 18px;
+  line-height: 21px;
+  font-weight: normal;
+}
+
+.trains-list-item__arrow {
+  color: rgba(255, 168, 0, 0.79);
+  font-size: 24px;
+  font-weight: 700;
 }
 
 .trains-list-item__right {

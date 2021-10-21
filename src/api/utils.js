@@ -89,5 +89,14 @@ export function readDate(date1, date2) {
 }
 
 export function secToHourMin(sec) {
-  return moment(sec * 1000).format('DD-MM-YY HH:mm');
+  return moment(sec * 1000).format('DD.MM.YYYY HH:mm');
+}
+
+export function durationToHourMin(duration) {
+  const sec = +duration;
+  let min = Math.trunc(sec / 60) % 60;
+  min = ((min < 10) ? '0' : '') + min;
+  const hour = Math.trunc(sec / 3600);
+
+  return `${hour} : ${min}`;
 }

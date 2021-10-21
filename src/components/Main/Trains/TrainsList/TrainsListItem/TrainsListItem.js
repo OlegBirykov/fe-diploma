@@ -3,14 +3,15 @@ import PropTypes from 'prop-types';
 import './TrainsListItem.css';
 //import OptionIcons from '../../OptionIcons/OptionIcons';
 import icons from '../../OptionIcons/icons.svg';
-import { secToHourMin } from 'api/utils';
+import { secToHourMin, durationToHourMin } from 'api/utils';
 
 function TrainsListItem(props) {
-  const { trainInfo } = props;
+  const { trainInfo, isForward } = props;
   const { 
     from,
     to,
-    train
+    train,
+    duration
   } = trainInfo.departure;
 
   const history = useHistory();
@@ -44,33 +45,33 @@ function TrainsListItem(props) {
       </div>
       <div className="trains-list-item__middle">
         <div className="trains-list-item__middle-from">
-          <p>
-            {secToHourMin(from.datetime)}
+          <p className="trains-list-item__time">
+            {secToHourMin(isForward ? from.datetime : to.datetime)}
           </p>
-          <p>
-            ччччччччччччч
+          <p className="trains-list-item__city">
+            {isForward ? from.city.name : to.city.name}
           </p>
-          <p>
-            rtrjrjtrt
+          <p className="trains-list-item__station">
+            {isForward ? from.railway_station_name : to.railway_station_name}
           </p>
         </div>
         <div className="trains-list-item__middle-way">
-          <p>
-            xx : xx
+          <p className="trains-list-item__duration">
+            {durationToHourMin(duration)}
           </p>
-          <p>
-            &#x279e;
+          <p className="trains-list-item__arrow">
+            {isForward ? '\u279e' : '\u279d'}
           </p>
         </div>
         <div className="trains-list-item__middle-to">
-          <p>
-            {secToHourMin(to.datetime)}
+          <p className="trains-list-item__time">
+            {secToHourMin(isForward ? to.datetime : from.datetime)}
           </p>
-          <p>
-            ччччччччччччч
+          <p className="trains-list-item__city">
+            {isForward ? to.city.name : from.city.name}
           </p>
-          <p>
-            rtrjrjtrt
+          <p className="trains-list-item__station">
+            {isForward ? to.railway_station_name : from.railway_station_name}
           </p>
         </div>
       </div>
@@ -84,7 +85,8 @@ function TrainsListItem(props) {
 }
 
 TrainsListItem.propTypes = {
-  trainInfo: PropTypes.object.isRequired
+  trainInfo: PropTypes.object.isRequired,
+  isForward: PropTypes.bool.isRequired
 };
 
 export default TrainsListItem;
