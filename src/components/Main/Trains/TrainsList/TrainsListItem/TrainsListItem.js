@@ -1,9 +1,11 @@
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './TrainsListItem.css';
-//import OptionIcons from '../../OptionIcons/OptionIcons';
+import TrainClassSeatsInfo from './TrainClassSeatsInfo/TrainClassSeatsInfo';
+import OptionIcons from '../../OptionIcons/OptionIcons';
 import icons from '../../OptionIcons/icons.svg';
 import { secToHourMin, durationToHourMin } from 'api/utils';
+
 
 function TrainsListItem(props) {
   const { trainInfo, isForward } = props;
@@ -11,7 +13,15 @@ function TrainsListItem(props) {
     from,
     to,
     train,
-    duration
+    duration,
+    have_first_class,
+ //   have_second_class,
+ //   have_third_class,
+ //   have_fourth_class,
+    available_seats_info,
+    price_info,
+    have_wifi,
+    is_express
   } = trainInfo.departure;
 
   const history = useHistory();
@@ -76,6 +86,18 @@ function TrainsListItem(props) {
         </div>
       </div>
       <div className="trains-list-item__right">
+        {have_first_class &&
+          <div className="trains-list-item__train-class-seats-info">
+            <TrainClassSeatsInfo 
+              classNumber={1} 
+              seatsCount={available_seats_info.first}
+              priceInfo={price_info.first}
+            />
+          </div>
+        }
+        <div>
+          <OptionIcons haveWifi={have_wifi} isExpress={is_express} includeFood={true} />
+        </div>
         <button type="button" onClick={goToNextPage}>
           Выбрать места
         </button>
