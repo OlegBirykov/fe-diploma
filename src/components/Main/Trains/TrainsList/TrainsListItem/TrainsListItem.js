@@ -8,16 +8,16 @@ import { secToHourMin, durationToHourMin } from 'api/utils';
 
 
 function TrainsListItem(props) {
-  const { trainInfo, isForward } = props;
+  const { trainInfo, isForward, reloadInfo } = props;
   const { 
     from,
     to,
     train,
     duration,
     have_first_class,
- //   have_second_class,
- //   have_third_class,
- //   have_fourth_class,
+    have_second_class,
+    have_third_class,
+    have_fourth_class,
     available_seats_info,
     price_info,
     have_wifi,
@@ -27,7 +27,16 @@ function TrainsListItem(props) {
   const history = useHistory();
 
   const goToNextPage = () => {
-    history.push(process.env.PUBLIC_URL + '/run/seats');
+    if (isForward) {
+      
+
+      reloadInfo({ 
+        direction: 'backward',
+        offset: 0
+      });    
+    } else {
+      history.push(process.env.PUBLIC_URL + '/run/seats');
+    }
   }
 
   return (
@@ -69,8 +78,8 @@ function TrainsListItem(props) {
           <p className="trains-list-item__duration">
             {durationToHourMin(duration)}
           </p>
-          <p className="trains-list-item__arrow">
-            {isForward ? '\u279e' : '\u279d'}
+          <p className={'trains-list-item__arrow' + (isForward ? '' : ' trains-list-item__arrow_mirror')}>
+            &#x279e;
           </p>
         </div>
         <div className="trains-list-item__middle-to">
@@ -86,19 +95,32 @@ function TrainsListItem(props) {
         </div>
       </div>
       <div className="trains-list-item__right">
-        {have_first_class &&
-          <div className="trains-list-item__train-class-seats-info">
-            <TrainClassSeatsInfo 
-              classNumber={1} 
-              seatsCount={available_seats_info.first}
-              priceInfo={price_info.first}
-            />
-          </div>
-        }
-        <div>
-          <OptionIcons haveWifi={have_wifi} isExpress={is_express} includeFood={true} />
+        <div className="trains-list-item__seats-info">
+          {have_fourth_class &&
+            <div className="trains-list-item__train-class-seats-info">
+              <TrainClassSeatsInfo classNumber={4} seatsCount={available_seats_info.fourth} priceInfo={price_info.fourth} />
+            </div>
+          }
+          {have_third_class &&
+            <div className="trains-list-item__train-class-seats-info">
+              <TrainClassSeatsInfo classNumber={3} seatsCount={available_seats_info.third} priceInfo={price_info.third} />
+            </div>
+          }
+          {have_second_class &&
+            <div className="trains-list-item__train-class-seats-info">
+              <TrainClassSeatsInfo classNumber={2} seatsCount={available_seats_info.second} priceInfo={price_info.second} />
+            </div>
+          }
+          {have_first_class &&
+            <div className="trains-list-item__train-class-seats-info">
+              <TrainClassSeatsInfo classNumber={1} seatsCount={available_seats_info.first} priceInfo={price_info.first} />
+            </div>
+          }
         </div>
-        <button type="button" onClick={goToNextPage}>
+        <div className="trains-list-item__option-icons">
+          <OptionIcons haveWifi={have_wifi} isExpress={is_express} haveFood={true} darkColor={true}/>
+        </div>
+        <button className="trains-list-item__button" type="button" onClick={goToNextPage}>
           Выбрать места
         </button>
       </div>      
@@ -108,7 +130,8 @@ function TrainsListItem(props) {
 
 TrainsListItem.propTypes = {
   trainInfo: PropTypes.object.isRequired,
-  isForward: PropTypes.bool.isRequired
+  isForward: PropTypes.bool.isRequired,
+  reloadInfo: PropTypes.func.isRequired
 };
 
 export default TrainsListItem;

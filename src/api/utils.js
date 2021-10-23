@@ -100,3 +100,11 @@ export function durationToHourMin(duration) {
 
   return `${hour} : ${min}`;
 }
+
+export function separateThousands(value) {
+  let result = value + '';
+  if (result.length > 3) {
+    result = result.slice(0, -3) + ' ' + result.slice(-3);
+  } 
+  return result;
+}

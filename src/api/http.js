@@ -137,6 +137,7 @@ export async function loadTrainsInfo (setAnimation, setPopup, setTrainsInfo, par
   };
 
   setTrainsInfo(trainsInfo);
+  console.log(trainsInfo);
   localStorage.setItem('trainsInfo', JSON.stringify(trainsInfo));
 
   setAnimation({ loading: false }); 

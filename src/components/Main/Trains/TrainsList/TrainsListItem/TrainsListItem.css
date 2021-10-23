@@ -107,7 +107,56 @@
   font-weight: 700;
 }
 
+.trains-list-item__arrow_mirror {
+  transform: rotate(180deg);
+}
+
 .trains-list-item__right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+
   flex-basis: 283px;
+  padding: 37px 21px 23px 27px;
   border-left: 1px dashed #e5e5e5;
+}
+
+.trains-list-item__seats-info {
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.trains-list-item__train-class-seats-info:not(:first-child) {
+  margin-top: 24px; 
+}
+
+.trains-list-item__option-icons {
+  margin: auto 7px 0 0;
+}
+
+.trains-list-item__button {
+  display: block;
+  width: 228px;
+  margin-top: 19px;
+  padding: 0.3em 0 0.2em 0;
+  border-radius: 5px;
+
+  color: white;
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: bold;
+
+  background-color: #ffa800;
+}
+
+.trains-list-item__button:hover {
+  filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.trains-list-item__button:active {
+  border: 1px solid #ffa800;
+  color: #ffa800;
+  background-color: transparent;
+  filter: none;
 }

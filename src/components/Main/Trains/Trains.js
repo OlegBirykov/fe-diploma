@@ -5,15 +5,19 @@ import ProgressIndicator from '../ProgressIndicator/ProgressIndicator';
 import TrainsParams from './TrainsParams/TrainsParams';
 import LastRoutes from './LastRoutes/LastRoutes';
 import TrainsList from './TrainsList/TrainsList';
+import { loadTrainsInfo } from 'api/http';
 
 function Trains() {
-  const { setBookingStage, trainsInfo } = useContext(AppContext);
+  const { setBookingStage, setAnimation, setPopup, trainsInfo, setTrainsInfo } = useContext(AppContext);
 
   useEffect(() => {
     setBookingStage('trains');
-    console.log(trainsInfo);
-  });
-  
+  }, [setBookingStage]);
+
+  const reloadInfo = async (params) => {
+    await loadTrainsInfo(setAnimation, setPopup, setTrainsInfo, { ...trainsInfo.params, ...params });
+  }
+
   return (
     <main className="trains"> 
       <ProgressIndicator stepNumber={1} />
@@ -23,7 +27,7 @@ function Trains() {
           <LastRoutes />
         </section>
         <section className="trains__right">
-          <TrainsList />
+          <TrainsList reloadInfo={reloadInfo} />
         </section>
       </div>
     </main>

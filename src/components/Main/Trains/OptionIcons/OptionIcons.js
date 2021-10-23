@@ -3,27 +3,29 @@ import './OptionIcons.css';
 import icons from './icons.svg';
 
 function OptionIcons(props) {
-  const { haveWifi, isExpress, includeFood } = props;
+  const { haveWifi, isExpress, haveFood, darkColor } = props;
+
+  const iconClassName = `option-icons__icon option-icons__icon_${darkColor ? 'dark' : 'light'}`;
   
   return (
     <div className="option-icons">
       {haveWifi && 
         <div className="option-icons__container">
-          <svg className="option-icons__icon" width="20" height="16">
+          <svg className={iconClassName} width="20" height="16">
             <use xlinkHref={icons + '#wifi'} />
           </svg>
         </div>
       }
       {isExpress && 
         <div className="option-icons__container">
-          <svg className="option-icons__icon" width="20" height="20">
+          <svg className={iconClassName} width="20" height="20">
             <use xlinkHref={icons + '#express'} />
           </svg>
         </div>
       }
-      {includeFood &&
+      {haveFood &&
         <div className="option-icons__container">
-          <svg className="option-icons__icon" width="20" height="18">
+          <svg className={iconClassName} width="20" height="18">
             <use xlinkHref={icons + '#food'} />
           </svg>
         </div>
@@ -35,7 +37,8 @@ function OptionIcons(props) {
 OptionIcons.propTypes = {
   haveWifi: PropTypes.bool.isRequired,
   isExpress: PropTypes.bool.isRequired,
-  includeFood: PropTypes.bool.isRequired
+  haveFood: PropTypes.bool.isRequired,
+  darkColor: PropTypes.bool.isRequired
 };
 
 export default OptionIcons;

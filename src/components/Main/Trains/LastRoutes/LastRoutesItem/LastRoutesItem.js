@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import './LastRoutesItem.css';
 import OptionIcons from '../../OptionIcons/OptionIcons';
+import { separateThousands } from 'api/utils';
 
 function LastRoutesItem(props) {
   const { route } = props;
@@ -11,11 +12,6 @@ function LastRoutesItem(props) {
     is_express,
     min_price
   } = route.departure;
-
-  let price = min_price + '';
-  if (price.length > 3) {
-    price = price.slice(0, -3) + ' ' + price.slice(-3);
-  }
 
   return (
     <div className="last-routes-item">
@@ -36,12 +32,12 @@ function LastRoutesItem(props) {
         </p>
       </div>
       <div className="last-routes-item__min-price">
-        <OptionIcons haveWifi={have_wifi} isExpress={is_express} includeFood={false} />
+        <OptionIcons haveWifi={have_wifi} isExpress={is_express} haveFood={true} darkColor={false} />
         <p className="last-routes-item__before-price">
           от
         </p>
         <p className="last-routes-item__price">
-          {price}
+          {separateThousands(min_price)}
         </p>
         <p className="last-routes-item__after-price">
           &#x20bd;

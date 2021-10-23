@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import PropTypes from 'prop-types';
 import './TrainsList.css';
 import AppContext from 'AppContext';
 import SortingSelection from './SortingSelection/SortingSelection';
@@ -6,7 +7,8 @@ import LimitSelection from './LimitSelection/LimitSelection';
 import TrainsListItem from './TrainsListItem/TrainsListItem';
 import shortid from 'shortid';
 
-function TrainsList() {
+function TrainsList(props) {
+  const { reloadInfo } = props; 
 
   const { trainsInfo } = useContext(AppContext);
 
@@ -29,11 +31,17 @@ function TrainsList() {
       </div>
       <div className="trains-list__list">
         {trainsArray.length &&
-          trainsArray.map((item) => <TrainsListItem trainInfo={item} isForward={isForward} key={shortid.generate()} />)
+          trainsArray.map((item) => <TrainsListItem trainInfo={item} isForward={isForward} reloadInfo={reloadInfo} key={shortid.generate()} />)
         }
       </div>
     </div>    
   )
 }
+
+TrainsListItem.propTypes = {
+  trainInfo: PropTypes.object.isRequired,
+  isForward: PropTypes.bool.isRequired,
+  reloadInfo: PropTypes.func.isRequired
+};
 
 export default TrainsList;
