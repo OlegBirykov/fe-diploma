@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import './TrainsList.css';
 import AppContext from 'AppContext';
 import TrainsListItem from './TrainsListItem/TrainsListItem';
+import SelectTrainsPage from './SelectTrainsPage/SelectTrainsPage';
 import shortid from 'shortid';
 
 function TrainsList(props) {
@@ -60,7 +61,10 @@ function TrainsList(props) {
 
   const selectLimit = (index) => {
     setLimitIndex(index);
-    reloadInfo({ limit: limits[index] });
+    reloadInfo({ 
+      limit: limits[index],
+      offset: 0
+    });
   }
 
   return (
@@ -99,6 +103,14 @@ function TrainsList(props) {
         {trainsArray.length &&
           trainsArray.map((item) => <TrainsListItem trainInfo={item} isForward={isForward} reloadInfo={reloadInfo} key={shortid.generate()} />)
         }
+      </div>
+      <div className="trains-list__select-page">
+        <SelectTrainsPage 
+          totalCount={isForward ? trainsInfo.forwardTrainsInfo.total_count : trainsInfo.backwardTrainsInfo.total_count} 
+          limit={trainsInfo.params.limit}
+          offset={trainsInfo.params.offset}
+          reloadInfo={reloadInfo}
+        />
       </div>
     </div>    
   )

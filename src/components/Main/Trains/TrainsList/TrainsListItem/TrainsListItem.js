@@ -28,12 +28,11 @@ function TrainsListItem(props) {
 
   const goToNextPage = () => {
     if (isForward) {
-      
-
       reloadInfo({ 
         direction: 'backward',
         offset: 0
-      });    
+      });  
+        
     } else {
       history.push(process.env.PUBLIC_URL + '/run/seats');
     }
