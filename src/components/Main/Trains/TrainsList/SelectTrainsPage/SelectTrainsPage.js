@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import './SelectTrainsPage.css';
-//import shortid from 'shortid';
 
 function SelectTrainsPage (props) {
   const { totalCount, limit, offset/*, reloadInfo*/ } = props; 
@@ -13,18 +12,6 @@ function SelectTrainsPage (props) {
     setPageNumber(Math.floor(offset / limit));
     setPageCount(Math.ceil(totalCount / limit));
   }, [totalCount, limit, offset]);
-
-//  const isForward = trainsInfo.params.direction === 'forward';
-//  const trainsArray = isForward ? trainsInfo.forwardTrainsInfo.items : trainsInfo.backwardTrainsInfo.items;
-//  const trainsCount = isForward ? `туда: ${trainsInfo.forwardTrainsInfo.total_count}` : `обратно: ${trainsInfo.backwardTrainsInfo.total_count}`
-
-//  const sortModes = [
-//    { mode: 'date', name: 'времени' },
-//    { mode: 'price_', name: 'стоимости' },
-//    { mode: 'duration', name: 'длительности' }
-//  ];
-
-//  const limits = [5, 10, 20];
 
 //  const selectSort = (index) => {
 //    setShowList(false);
@@ -43,7 +30,30 @@ function SelectTrainsPage (props) {
 
   return (
     <div className="select-trains-page"> 
-      Я компонент выбора страницы!!!
+      <button className="select-trains-page__button" type="button">
+        &lt;
+      </button>
+      <button className="select-trains-page__button select-trains-page__button_active" type="button">
+        1
+      </button>
+      <button className="select-trains-page__button" type="button">
+        ...
+      </button>
+      <button className="select-trains-page__button" type="button">
+        4
+      </button>
+      <button className="select-trains-page__button" type="button">
+        5
+      </button>
+      <button className="select-trains-page__button" type="button">
+        ...
+      </button>
+      <button className="select-trains-page__button" type="button">
+        10
+      </button>
+      <button className="select-trains-page__button" type="button">
+        &gt;
+      </button>
     </div>    
   )
 }
