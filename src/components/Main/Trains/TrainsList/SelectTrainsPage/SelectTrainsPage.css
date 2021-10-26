@@ -33,6 +33,6 @@
 }
 
 .select-trains-page__button_active:hover {
-  color: #ffa800;
-  background-color: transparent;
+  color: white;
+  background-color: #ffa800;
 }
