@@ -1,0 +1,19 @@
+.trains-params {
+  background-color: #3e3c41;
+}
+
+.trains-params__dates {
+
+}
+
+.trains-params__options {
+  border-top: 1px solid #e5e5e5;
+}
+
+.trains-params__price {
+  border-top: 1px solid #e5e5e5;
+}
+
+.trains-params__times {
+  border-top: 1px solid #e5e5e5;
+}
