@@ -23,7 +23,7 @@ function Trains() {
       <ProgressIndicator stepNumber={1} />
       <div className="trains__main">
         <section className="trains__left">
-          <TrainsParams />
+          <TrainsParams reloadInfo={reloadInfo}/>
           <LastRoutes />
         </section>
         <section className="trains__right">
