@@ -23,7 +23,7 @@ function DateInput(props) {
   return (
     <Fragment>
       <input 
-        className={'date-input__input' + (isMini ? ' date-input__input_mini' : '')}
+        className={'date-input__input' + (isMini ? ' date-input__input_mini' : '') + (isDisabled ? ' date-input__input_disabled' : '')}
         type="text" 
         name={name}
         value={value}

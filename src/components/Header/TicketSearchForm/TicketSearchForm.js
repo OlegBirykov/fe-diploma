@@ -163,11 +163,11 @@ function TicketSearchForm(props) {
       <label className={labelClassName}>
         Дата
         <div className="ticket-search-form__input-container">
-          <DateInput name='left-date' value={formState.dateStart} placeholder='ДД ММ ГГГГ' setValue={leftDateChange} />
+          <DateInput name='start-date' value={formState.dateStart} placeholder='ДД ММ ГГГГ' setValue={leftDateChange} />
         </div>    
       </label>
       <div className="ticket-search-form__input-container">
-        <DateInput name='return-date' value={formState.dateEnd} placeholder='ДД ММ ГГГГ' setValue={returnDateChange} />
+        <DateInput name='end-date' value={formState.dateEnd} placeholder='ДД ММ ГГГГ' setValue={returnDateChange} />
       </div> 
       <button className={buttonClassName} type="submit">
         Найти билеты

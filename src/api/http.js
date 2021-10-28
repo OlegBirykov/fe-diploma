@@ -63,6 +63,8 @@ export async function loadTrainsInfo (setAnimation, setPopup, setTrainsInfo, par
   const {
     fromCityId,
     toCityId,
+    dateStart,
+    dateEnd,
     limit,
     offset,
     sort,
@@ -71,6 +73,7 @@ export async function loadTrainsInfo (setAnimation, setPopup, setTrainsInfo, par
   const forwardTrainsParams = {
     from_city_id: fromCityId,
     to_city_id: toCityId,
+    date_start: dateStart,
     limit,
     offset,
     sort
@@ -94,6 +97,7 @@ export async function loadTrainsInfo (setAnimation, setPopup, setTrainsInfo, par
   const backwardTrainsParams = {
     from_city_id: toCityId,
     to_city_id: fromCityId,
+    date_end_arrival: dateEnd,
     limit,
     offset,
     sort
