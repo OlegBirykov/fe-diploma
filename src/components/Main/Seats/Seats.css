@@ -1,16 +1,17 @@
-.seats__xxx {
-    display: block;
-    width: 323px;
-    margin: 0 auto;
-    padding: 16px 0;
-    border-radius: 5px;
-    text-align: center;
-  
-    font-size: 24px;
-    line-height: 28px;
-    font-weight: bold;
-  
-    text-transform: uppercase;
-    color: #292929;
-    background-color: #ffa800;
-  }
+.seats {
+  background-color: #e5e5e5;
+}
+
+.seats__main {
+  display: flex;
+  justify-content: space-between;
+  padding: 95px 256px 193px 258px;
+}
+
+.seats__left {
+  width: 360px;
+}
+
+.seats__right {
+  width: 960px;
+}

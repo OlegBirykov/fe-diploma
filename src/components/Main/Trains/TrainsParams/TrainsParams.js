@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './TrainsParams.css';
 import AppContext from 'AppContext';
 import DateInput from 'components/Header/TicketSearchForm/DateInput/DateInput';
-import { dayInFirstPosition, /*dayInLastPosition*/ } from 'api/utils';
+import { dayInFirstPosition, dayInLastPosition } from 'api/utils';
 
 function TrainsParams(props) {
   const { reloadInfo } = props;
@@ -15,17 +15,19 @@ function TrainsParams(props) {
 
   useEffect(() => {
     setDateStart(dayInFirstPosition(trainsInfo.params.dateStart));
-  }, [trainsInfo.params.dateStart]);
-
-  useEffect(() => {
     setDateEnd(dayInFirstPosition(trainsInfo.params.dateEnd));
-  }, [trainsInfo.params.dateEnd]);
+  }, [trainsInfo.params.dateStart, trainsInfo.params.dateEnd]);
 
   const changeDateStart = (date) => {
     setDateStart(date);
     if(!date) {
       reloadInfo({
         dateStart: '',
+        offset: 0
+      });
+    } else if (date.length === 10) {
+      reloadInfo({
+        dateStart: dayInLastPosition(date),
         offset: 0
       });
     }
@@ -38,7 +40,12 @@ function TrainsParams(props) {
         dateEnd: '',
         offset: 0
       });
-    }   
+    } else if (date.length === 10) {
+      reloadInfo({
+        dateEnd: dayInLastPosition(date),
+        offset: 0
+      }); 
+    }  
   }
 
   return (
@@ -49,7 +56,7 @@ function TrainsParams(props) {
         <div className="trains-params__date-container">
           <DateInput 
             name='start-date' 
-            value={dateStart} 
+            value={dateStart}
             placeholder='ДД ММ ГГГГ' 
             setValue={changeDateStart} 
             isMini={true}
