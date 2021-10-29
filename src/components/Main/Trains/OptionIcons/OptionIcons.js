@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import './OptionIcons.css';
-import icons from './icons.svg';
+import icons from 'components/Main/icons.svg';
 
 function OptionIcons(props) {
   const { haveWifi, isExpress, haveFood, darkColor } = props;

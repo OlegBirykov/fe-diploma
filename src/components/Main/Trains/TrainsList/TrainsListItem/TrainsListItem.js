@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './TrainsListItem.css';
 import TrainClassSeatsInfo from './TrainClassSeatsInfo/TrainClassSeatsInfo';
 import OptionIcons from '../../OptionIcons/OptionIcons';
-import icons from '../../OptionIcons/icons.svg';
+import icons from 'components/Main/icons.svg';
 import { secToHourMin, durationToHourMin } from 'api/utils';
 
 

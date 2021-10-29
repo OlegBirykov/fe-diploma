@@ -163,22 +163,22 @@ function TrainsParams(props) {
       </section>
       <section className="trains-params__options">
         <div className="trains-params__option">
-          <OptionCheckBox iconName='' value={haveSecondClass} setValue={changeHaveSecondClass} />
+          <OptionCheckBox iconName='first-class' iconWidth={22} iconHeight={20} name='Купе' value={haveSecondClass} setValue={changeHaveSecondClass} />
         </div>
         <div className="trains-params__option">
-          <OptionCheckBox iconName='' value={haveThirdClass} setValue={changeHaveThirdClass} />
+          <OptionCheckBox iconName='first-class' iconWidth={22} iconHeight={20} name='Плацкарт' value={haveThirdClass} setValue={changeHaveThirdClass} />
         </div>
         <div className="trains-params__option">
-          <OptionCheckBox iconName='' value={haveFourthClass} setValue={changeHaveFourthClass} />
+          <OptionCheckBox iconName='first-class' iconWidth={22} iconHeight={20} name='Сидячий' value={haveFourthClass} setValue={changeHaveFourthClass} />
         </div>
         <div className="trains-params__option">
-          <OptionCheckBox iconName='' value={haveFirstClass} setValue={changeHaveFirstClass} />
+          <OptionCheckBox iconName='first-class' iconWidth={22} iconHeight={20} name='Люкс' value={haveFirstClass} setValue={changeHaveFirstClass} />
         </div>
         <div className="trains-params__option">
-          <OptionCheckBox iconName='' value={haveWifi} setValue={changeHaveWifi} />
+          <OptionCheckBox iconName='wifi' iconWidth={24} iconHeight={19} name='Wi-Fi' value={haveWifi} setValue={changeHaveWifi} />
         </div>
         <div className="trains-params__option">
-          <OptionCheckBox iconName='' value={isExpress} setValue={changeIsExpress} />
+          <OptionCheckBox iconName='express' iconWidth={20} iconHeight={20} name='Экспресс' value={isExpress} setValue={changeIsExpress} />
         </div>
       </section>
       <section className="trains-params__price">

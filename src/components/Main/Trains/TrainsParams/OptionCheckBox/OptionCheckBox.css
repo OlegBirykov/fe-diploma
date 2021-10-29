@@ -1,1 +1,21 @@
+.option-check-box {
+  display: flex;
+}
 
+.option-check-box__icon {
+  fill: #e5e5e5;
+}
+
+.option-check-box__selector {
+  width: 72px;
+  height: 19px;
+  border-radius: 10px;
+}
+
+.option-check-box__selector_on {
+  background-color: #fcdc9d;
+}
+
+.option-check-box__selector_off {
+  background-color: white; 
+}
