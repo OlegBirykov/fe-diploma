@@ -4,6 +4,7 @@ import './TrainsParams.css';
 import AppContext from 'AppContext';
 import DateInput from 'components/Header/TicketSearchForm/DateInput/DateInput';
 import OptionCheckBox from './OptionCheckBox/OptionCheckBox';
+import PriceRangeBar from './PriceRangeBar/PriceRangeBar';
 import { dayInFirstPosition, dayInLastPosition } from 'api/utils';
 
 function TrainsParams(props) {
@@ -18,6 +19,9 @@ function TrainsParams(props) {
   const [haveFourthClass, setHaveFourthClass] = useState(false);
   const [haveWifi, setHaveWifi] = useState(false);
   const [isExpress, setIsExpress] = useState(false);
+
+  const [priceFrom, setPriceFrom] = useState(-Infinity);
+  const [priceTo, setPriceTo] = useState(Infinity);
 
   const { bookingStage, trainsInfo } = useContext(AppContext);
 
@@ -131,6 +135,14 @@ function TrainsParams(props) {
     });    
   }
 
+  const changePriceRange = (minValue, maxValue) => {
+    reloadInfo({
+      priceFrom: minValue,
+      priceTo: maxValue,
+      offset: 0
+    });
+  }
+
   return (
     <div className="trains-params"> 
       <section className="trains-params__dates">
@@ -163,13 +175,13 @@ function TrainsParams(props) {
       </section>
       <section className="trains-params__options">
         <div className="trains-params__option">
-          <OptionCheckBox iconName='first-class' iconWidth={22} iconHeight={20} name='Купе' value={haveSecondClass} setValue={changeHaveSecondClass} />
+          <OptionCheckBox iconName='second-class' iconWidth={17} iconHeight={17} name='Купе' value={haveSecondClass} setValue={changeHaveSecondClass} />
         </div>
         <div className="trains-params__option">
-          <OptionCheckBox iconName='first-class' iconWidth={22} iconHeight={20} name='Плацкарт' value={haveThirdClass} setValue={changeHaveThirdClass} />
+          <OptionCheckBox iconName='third-class' iconWidth={17} iconHeight={17} name='Плацкарт' value={haveThirdClass} setValue={changeHaveThirdClass} />
         </div>
         <div className="trains-params__option">
-          <OptionCheckBox iconName='first-class' iconWidth={22} iconHeight={20} name='Сидячий' value={haveFourthClass} setValue={changeHaveFourthClass} />
+          <OptionCheckBox iconName='fourth-class' iconWidth={14} iconHeight={23} name='Сидячий' value={haveFourthClass} setValue={changeHaveFourthClass} />
         </div>
         <div className="trains-params__option">
           <OptionCheckBox iconName='first-class' iconWidth={22} iconHeight={20} name='Люкс' value={haveFirstClass} setValue={changeHaveFirstClass} />
@@ -182,7 +194,12 @@ function TrainsParams(props) {
         </div>
       </section>
       <section className="trains-params__price">
-        Цена
+        <p className="trains-params__price-title">
+          Стоимость
+        </p>
+        <div className="trains-params__price-range-bar">
+          <PriceRangeBar minValue={priceFrom} maxValue={priceTo} setMinValue={setPriceFrom} setMaxValue={setPriceTo} changeRange={changePriceRange} />
+        </div>
       </section>
       <section className="trains-params__times">
         Туда

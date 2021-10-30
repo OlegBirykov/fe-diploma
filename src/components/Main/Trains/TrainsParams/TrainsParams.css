@@ -25,11 +25,29 @@
 }
 
 .trains-params__options {
+  padding: 29px 34px 26px 0;
   border-top: 1px solid #e5e5e5;
 }
 
+.trains-params__option:not(:first-child) {
+  margin-top: 36px;
+}
+
 .trains-params__price {
+  padding: 37px 34px 63px 32px;
   border-top: 1px solid #e5e5e5;
+}
+
+.trains-params__price-title {
+  color: white;
+  font-size: 30px;
+  line-height: 35px;
+  font-weight: normal;
+}
+
+.trains-params__price-range-bar {
+  margin-top: 32px;
+  padding: 0 12px;
 }
 
 .trains-params__times {

@@ -10,11 +10,12 @@ function OptionCheckBox(props) {
       <svg className="option-check-box__icon" width={iconWidth} height={iconHeight}>
         <use xlinkHref={`${icons}#${iconName}`} />
       </svg>
-      <p>
+      <p className="option-check-box__title">
         {name}
       </p>
-      <div className={'option-check-box__selector ' + (value ? 'option-check-box__selector_on' : 'option-check-box__selector_off')} onClick={setValue}>
-        {value}
+      <div className={'option-check-box__selector ' + (value ? 'option-check-box__selector_on' : 'option-check-box__selector_off')} onClick={() => setValue(!value)}>
+        <div className={'option-check-box__handle ' + (value ? 'option-check-box__handle_on' : 'option-check-box__handle_off')}>
+        </div>
       </div>
     </div>    
   )

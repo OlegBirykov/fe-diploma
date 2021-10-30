@@ -134,12 +134,12 @@ export async function loadTrainsInfo (setAnimation, setPopup, setTrainsInfo, par
     backwardTrainsParams.is_express = true;  
   }
 
-  if (!isNaN(+priceFrom)) {
+  if (isFinite(+priceFrom)) {
     forwardTrainsParams.price_from = priceFrom;
     backwardTrainsParams.price_from = priceFrom;
   }
 
-  if (!isNaN(+priceTo)) {
+  if (isFinite(+priceTo)) {
     forwardTrainsParams.price_to = priceTo;
     backwardTrainsParams.price_to = priceTo;
   }
