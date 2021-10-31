@@ -5,6 +5,7 @@ import AppContext from 'AppContext';
 import DateInput from 'components/Header/TicketSearchForm/DateInput/DateInput';
 import OptionCheckBox from './OptionCheckBox/OptionCheckBox';
 import PriceRangeBar from './PriceRangeBar/PriceRangeBar';
+import TrainsTimeFilter from './TrainsTimeFilter/TrainsTimeFilter';
 import { dayInFirstPosition, dayInLastPosition } from 'api/utils';
 
 function TrainsParams(props) {
@@ -22,6 +23,15 @@ function TrainsParams(props) {
 
   const [priceFrom, setPriceFrom] = useState(-Infinity);
   const [priceTo, setPriceTo] = useState(Infinity);
+
+  const [startDepartureHourFrom, setStartDepartureHourFrom] = useState();
+  const [startDepartureHourTo, setStartDepartureHourTo] = useState();
+  const [startArrivalHourFrom, setStartArrivalHourFrom] = useState();
+  const [startArrivalHourTo, setStartArrivalHourTo] = useState();
+  const [endDepartureHourFrom, setEndDepartureHourFrom] = useState();
+  const [endDepartureHourTo, setEndDepartureHourTo] = useState();
+  const [endArrivalHourFrom, setEndArrivalHourFrom] = useState();
+  const [endArrivalHourTo, setEndArrivalHourTo] = useState();
 
   const { bookingStage, trainsInfo } = useContext(AppContext);
 
@@ -56,6 +66,38 @@ function TrainsParams(props) {
   useEffect(() => {
     setIsExpress(!!trainsInfo.params.isExpress);
   }, [trainsInfo.params.isExpress]);
+
+  useEffect(() => {
+    setStartDepartureHourFrom(trainsInfo.params.startDepartureHourFrom);
+  }, [trainsInfo.params.startDepartureHourFrom]);
+
+  useEffect(() => {
+    setStartDepartureHourTo(trainsInfo.params.startDepartureHourTo);
+  }, [trainsInfo.params.startDepartureHourTo]);
+
+  useEffect(() => {
+    setStartArrivalHourFrom(trainsInfo.params.startArrivalHourFrom);
+  }, [trainsInfo.params.startArrivalHourFrom]);
+
+  useEffect(() => {
+    setStartArrivalHourTo(trainsInfo.params.startArrivalHourTo );
+  }, [trainsInfo.params.startArrivalHourTo]);
+
+  useEffect(() => {
+    setEndDepartureHourFrom(trainsInfo.params.endDepartureHourFrom);
+  }, [trainsInfo.params.endDepartureHourFrom]);
+
+  useEffect(() => {
+    setEndDepartureHourTo(trainsInfo.params.endDepartureHourTo);
+  }, [trainsInfo.params.endDepartureHourTo]);
+
+  useEffect(() => {
+    setEndArrivalHourFrom(trainsInfo.params.endArrivalHourFrom);
+  }, [trainsInfo.params.endArrivalHourFrom]);
+
+  useEffect(() => {
+    setEndArrivalHourTo(trainsInfo.params.endArrivalHourTo);
+  }, [trainsInfo.params.endArrivalHourTo]);
 
   const changeDateStart = (date) => {
     setDateStart(date);
@@ -143,6 +185,54 @@ function TrainsParams(props) {
     });
   }
 
+  const changeStartTimes = (times) => {
+    reloadInfo({
+      startDepartureHourFrom: times.departureHourFrom,
+      startDepartureHourTo: times.departureHourTo,
+      startArrivalHourFrom: times.arrivalHourFrom,
+      startArrivalHourTo: times.arrivalHourTo,
+      offset: 0
+    });  
+  }
+
+  const changeEndTimes = (times) => {
+    reloadInfo({
+      endDepartureHourFrom: times.departureHourFrom,
+      endDepartureHourTo: times.departureHourTo,
+      endArrivalHourFrom: times.arrivalHourFrom,
+      endArrivalHourTo: times.arrivalHourTo,
+      offset: 0
+    });  
+  }
+
+  const startTimes = {
+    departureHourFrom: startDepartureHourFrom,
+    departureHourTo: startDepartureHourTo,
+    arrivalHourFrom: startArrivalHourFrom,
+    arrivalHourTo: startArrivalHourTo
+  };
+
+  const endTimes = {
+    departureHourFrom: endDepartureHourFrom,
+    departureHourTo: endDepartureHourTo,
+    arrivalHourFrom: endArrivalHourFrom,
+    arrivalHourTo: endArrivalHourTo
+  };
+
+  const setStartTimes = {
+    setDepartureHourFrom: setStartDepartureHourFrom,
+    setDepartureHourTo: setStartDepartureHourTo,
+    setArrivalHourFrom: setStartArrivalHourFrom,
+    setArrivalHourTo: setStartArrivalHourTo
+  };
+
+  const setEndTimes = {
+    setDepartureHourFrom: setEndDepartureHourFrom,
+    setDepartureHourTo: setEndDepartureHourTo,
+    setArrivalHourFrom: setEndArrivalHourFrom,
+    setArrivalHourTo: setEndArrivalHourTo
+  };
+
   return (
     <div className="trains-params"> 
       <section className="trains-params__dates">
@@ -202,10 +292,22 @@ function TrainsParams(props) {
         </div>
       </section>
       <section className="trains-params__times">
-        Туда
+        <TrainsTimeFilter 
+          times={startTimes}
+          setTimes={setStartTimes}
+          changeTimes={changeStartTimes}
+          isStart={true}
+          isDisabled={!(bookingStage === 'trains' && trainsInfo.params.direction === 'forward')}
+        />
       </section>
       <section className="trains-params__times">
-        Обратно
+        <TrainsTimeFilter 
+          times={endTimes}
+          setTimes={setEndTimes}
+          changeTimes={changeEndTimes}
+          isStart={false}
+          isDisabled={!(bookingStage === 'trains' && trainsInfo.params.direction === 'backward')}
+        />
       </section>
     </div>    
   )
