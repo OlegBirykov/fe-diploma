@@ -3,14 +3,13 @@ import PropTypes from 'prop-types';
 import './PriceRangeBar.css';
 
 function PriceRangeBar(props) {
-  const { minValue, maxValue, setMinValue, setMaxValue/*, changeRange */} = props;
+  const { minValue, maxValue, setMinValue, setMaxValue, changeRange } = props;
 
-  const [isCaptureLeft, setIsCaptureLeft] = useState(false);
-  const [isCaptureRight, setIsCaptureRight] = useState(false);
+  const [curX, setCurX] = useState(0);
 
-  const minLimit = 0;
+  const minLimit = 500;
   const maxLimit = 5000;
-  const step = 500;
+  const step = 100;
   const minDiff = 1000;
 
   let curMinValue = minValue >= minLimit ? minValue : minLimit;
@@ -20,56 +19,92 @@ function PriceRangeBar(props) {
     curMaxValue = maxLimit;
   }
 
-  const curMinPos = Math.round(curMinValue / maxLimit * 100);
-  const curMaxPos = 100 - Math.round(curMaxValue / maxLimit * 100);
+  const curMinPos = Math.round((curMinValue - minLimit) / (maxLimit - minLimit) * 100);
+  const curMaxPos = 100 - Math.round((curMaxValue - minLimit) / (maxLimit - minLimit) * 100);
 
-  const onMouseDownLeft = (evt) => {
-    setIsCaptureLeft(true);
+  const onPointerDownMin = (evt) => {
+    evt.target.setPointerCapture(evt.pointerId);
+    setCurX(evt.clientX);
   }
 
-  const onMouseDownRight = (evt) => {
-    setIsCaptureRight(true);
+  const onPointerDownMax = (evt) => {
+    evt.target.setPointerCapture(evt.pointerId); 
+    setCurX(evt.clientX); 
   }
 
-  const onMouseMoveLeft = (evt) => {
-    if (!isCaptureLeft) {
+  const onPointerMoveMin = (evt) => {
+    if (evt.buttons !== 1) {
       return;
     }
-    setMinValue(curMinValue + step);
+
+    const deltaX = evt.target.parentElement.parentElement.clientWidth * step / (maxLimit - minLimit);
+
+    if (evt.clientX > curX + deltaX) {
+      setCurX(evt.clientX);
+      if (curMinValue + minDiff < curMaxValue) {
+        curMinValue += step;
+        setMinValue(curMinValue);
+      }
+    }
+
+    if (evt.clientX < curX - deltaX) {
+      setCurX(evt.clientX);
+      if (curMinValue > minLimit) {
+        curMinValue -= step;
+        setMinValue(curMinValue > minLimit ? curMinValue : -Infinity);
+      }
+    }
   }
 
-  const onMouseMoveRight = (evt) => {
-    if (!isCaptureRight) {
+  const onPointerMoveMax = (evt) => {
+    if (evt.buttons !== 1) {
       return;
     }
-    setMaxValue(curMaxValue - step);
+  
+    const deltaX = evt.target.parentElement.parentElement.clientWidth * step / (maxLimit - minLimit);
+
+    if (evt.clientX < curX - deltaX) {
+      setCurX(evt.clientX);
+      if (curMinValue + minDiff < curMaxValue) {
+        curMaxValue -= step;
+        setMaxValue(curMaxValue);
+      }
+    }
+
+    if (evt.clientX > curX + deltaX) {
+      setCurX(evt.clientX);
+      if (curMaxValue < maxLimit) {
+        curMaxValue += step;
+        setMaxValue(curMaxValue < maxLimit ? curMaxValue : Infinity);
+      }
+    }
   }  
 
-  const onMouseUpLeft = (evt) => {
-    setIsCaptureLeft(false);
+  const onPointerUpMin = () => {
+    changeRange(minValue, maxValue);
   }
 
-  const onMouseUpRight = (evt) => {
-    setIsCaptureRight(false);
+  const onPointerUpMax = () => {
+    changeRange(minValue, maxValue);
   }  
 
   return (
     <div className="price-range-bar"> 
       <div className="price-range-bar__range" style={{ left: `${curMinPos}%`, right: `${curMaxPos}%` }}>
-        <div className="price-range-bar__handle price-range-bar__handle-min" onMouseDown={onMouseDownLeft} onMouseMove={onMouseMoveLeft} onMouseUp={onMouseUpLeft}>
+        <div className="price-range-bar__handle price-range-bar__handle-min" onPointerDown={onPointerDownMin} onPointerMove={onPointerMoveMin} onPointerUp={onPointerUpMin}>
           <p className="price-range-bar__handle-title">
             от
           </p>
           <p className="price-range-bar__handle-value">
-            {curMinValue}
+            {curMinValue > minLimit ? curMinValue : 'min'}
           </p>
         </div>
-        <div className="price-range-bar__handle price-range-bar__handle-max" onMouseDown={onMouseDownRight} onMouseMove={onMouseMoveRight} onMouseUp={onMouseUpRight}>
+        <div className="price-range-bar__handle price-range-bar__handle-max" onPointerDown={onPointerDownMax} onPointerMove={onPointerMoveMax} onPointerUp={onPointerUpMax}>
           <p className="price-range-bar__handle-title">
             до
           </p>
           <p className="price-range-bar__handle-value">
-            {curMaxValue !== maxLimit ? curMaxValue : 'max'}
+            {curMaxValue < maxLimit ? curMaxValue : 'max'}
           </p>
         </div>
       </div>
