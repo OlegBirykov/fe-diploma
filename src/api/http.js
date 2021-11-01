@@ -134,12 +134,12 @@ export async function loadTrainsInfo (setAnimation, setPopup, setTrainsInfo, par
     backwardTrainsParams.is_express = true;  
   }
 
-  if (isFinite(+priceFrom)) {
+  if (!isNaN(+priceFrom)) {
     forwardTrainsParams.price_from = priceFrom;
     backwardTrainsParams.price_from = priceFrom;
   }
 
-  if (isFinite(+priceTo)) {
+  if (!isNaN(+priceTo)) {
     forwardTrainsParams.price_to = priceTo;
     backwardTrainsParams.price_to = priceTo;
   }
@@ -229,7 +229,6 @@ export async function loadTrainsInfo (setAnimation, setPopup, setTrainsInfo, par
   };
 
   setTrainsInfo(trainsInfo);
-  console.log(trainsInfo);
   localStorage.setItem('trainsInfo', JSON.stringify(trainsInfo));
 
   setAnimation({ loading: false }); 

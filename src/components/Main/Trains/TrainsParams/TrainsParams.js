@@ -21,8 +21,8 @@ function TrainsParams(props) {
   const [haveWifi, setHaveWifi] = useState(false);
   const [isExpress, setIsExpress] = useState(false);
 
-  const [priceFrom, setPriceFrom] = useState(-Infinity);
-  const [priceTo, setPriceTo] = useState(Infinity);
+  const [priceFrom, setPriceFrom] = useState(0);
+  const [priceTo, setPriceTo] = useState(0);
 
   const [startDepartureHourFrom, setStartDepartureHourFrom] = useState(0);
   const [startDepartureHourTo, setStartDepartureHourTo] = useState(24);

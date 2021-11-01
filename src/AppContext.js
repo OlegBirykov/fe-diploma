@@ -12,7 +12,9 @@ const AppContext = createContext({
     content: [''],
     error: false
   },
-  trainsInfo: {}
+  trainsInfo: {},
+  forwardTrain: null,
+  backwardTrain: null
 });
 
 export default AppContext;

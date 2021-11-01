@@ -51,7 +51,7 @@ function PriceRangeBar(props) {
       setCurX(evt.clientX);
       if (curMinValue > minLimit) {
         curMinValue -= step;
-        setMinValue(curMinValue > minLimit ? curMinValue : -Infinity);
+        setMinValue(curMinValue > minLimit ? curMinValue : minLimit);
       }
     }
   }
@@ -75,7 +75,7 @@ function PriceRangeBar(props) {
       setCurX(evt.clientX);
       if (curMaxValue < maxLimit) {
         curMaxValue += step;
-        setMaxValue(curMaxValue < maxLimit ? curMaxValue : Infinity);
+        setMaxValue(curMaxValue < maxLimit ? curMaxValue : maxLimit);
       }
     }
   }  

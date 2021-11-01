@@ -1,11 +1,12 @@
+import { useContext } from 'react'; 
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './TrainsListItem.css';
+import AppContext from 'AppContext';
 import TrainClassSeatsInfo from './TrainClassSeatsInfo/TrainClassSeatsInfo';
 import OptionIcons from '../../OptionIcons/OptionIcons';
 import icons from 'components/Main/icons.svg';
 import { secToHourMin, durationToHourMin } from 'api/utils';
-
 
 function TrainsListItem(props) {
   const { trainInfo, isForward, reloadInfo } = props;
@@ -22,18 +23,28 @@ function TrainsListItem(props) {
     price_info,
     have_wifi,
     is_express,
-//    _id
   } = trainInfo.departure;
+
+  const { backwardTrain, setForwardTrain, setBackwardTrain } = useContext(AppContext);
 
   const history = useHistory();
 
   const goToNextPage = () => {
+    const trainInfoString = JSON.stringify(trainInfo.departure);
+
     if (isForward) {
+      setForwardTrain(JSON.parse(trainInfoString));
+      localStorage.setItem('forwardTrain', trainInfoString);
+    } else {
+      setBackwardTrain(JSON.parse(trainInfoString));
+      localStorage.setItem('backwardTrain', trainInfoString);
+    }
+
+    if (isForward && !backwardTrain) {
       reloadInfo({ 
         direction: 'backward',
         offset: 0
-      });  
-        
+      });    
     } else {
       history.push(process.env.PUBLIC_URL + '/run/seats');
     }
@@ -130,7 +141,6 @@ function TrainsListItem(props) {
 
 TrainsListItem.propTypes = {
   trainInfo: PropTypes.object.isRequired,
-  setTrainsInfo: PropTypes.func.isRequired,
   isForward: PropTypes.bool.isRequired,
   reloadInfo: PropTypes.func.isRequired
 };

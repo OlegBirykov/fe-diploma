@@ -14,13 +14,31 @@ function AppProvider(props) {
   }
   const [trainsInfo, setTrainsInfo] = useState(storageTrainsInfo);
 
+  let storageForwardTrain;
+  try {
+    storageForwardTrain = JSON.parse(localStorage.getItem('forwardTrain'));
+  } catch {
+    storageForwardTrain = null;
+  }
+  const [forwardTrain, setForwardTrain] = useState(storageForwardTrain);
+
+  let storageBackwardTrain;
+  try {
+    storageBackwardTrain = JSON.parse(localStorage.getItem('backwardTrain'));
+  } catch {
+    storageBackwardTrain = null;
+  }
+  const [backwardTrain, setBackwardTrain] = useState(storageBackwardTrain);
+
   return (
     <AppContext.Provider 
       value={{ 
         bookingStage, setBookingStage,
         animation, setAnimation,
         popup, setPopup,
-        trainsInfo, setTrainsInfo
+        trainsInfo, setTrainsInfo,
+        forwardTrain, setForwardTrain,
+        backwardTrain, setBackwardTrain
       }}>
       {props.children}  
     </AppContext.Provider>

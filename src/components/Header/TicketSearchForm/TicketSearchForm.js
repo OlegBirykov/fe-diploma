@@ -24,7 +24,7 @@ function TicketSearchForm(props) {
   };
 
   const [formState, setFormState] = useState(initialFormState);
-  const { setPopup, setAnimation, setTrainsInfo } = useContext(AppContext);
+  const { setPopup, setAnimation, setTrainsInfo, setForwardTrain, setBackwardTrain } = useContext(AppContext);
   const history = useHistory();
 
   const fromChange = (value) => {
@@ -143,6 +143,10 @@ function TicketSearchForm(props) {
     }
 
     setFormState(initialFormState);
+    setForwardTrain(null);
+    setBackwardTrain(null);
+    localStorage.setItem('forwardTrain', null);
+    localStorage.setItem('backwardTrain', null);
     history.push(process.env.PUBLIC_URL + '/run/trains');
   };
 
