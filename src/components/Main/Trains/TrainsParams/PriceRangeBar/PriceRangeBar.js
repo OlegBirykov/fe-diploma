@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './PriceRangeBar.css';
 
 function PriceRangeBar(props) {
-  const { minValue, maxValue, setMinValue, setMaxValue, changeRange } = props;
+  const { minValue, maxValue, setMinValue, setMaxValue, changeRange, isDisabled } = props;
 
   const [curX, setCurX] = useState(0);
 
@@ -33,7 +33,7 @@ function PriceRangeBar(props) {
   }
 
   const onPointerMoveMin = (evt) => {
-    if (evt.buttons !== 1) {
+    if (evt.buttons !== 1 || isDisabled) {
       return;
     }
 
@@ -57,7 +57,7 @@ function PriceRangeBar(props) {
   }
 
   const onPointerMoveMax = (evt) => {
-    if (evt.buttons !== 1) {
+    if (evt.buttons !== 1 || isDisabled) {
       return;
     }
   
@@ -81,16 +81,22 @@ function PriceRangeBar(props) {
   }  
 
   const onPointerUpMin = () => {
+    if (isDisabled) {
+      return;
+    }
     changeRange(minValue, maxValue);
   }
 
   const onPointerUpMax = () => {
+    if (isDisabled) {
+      return;
+    }
     changeRange(minValue, maxValue);
   }  
 
   return (
     <div className="price-range-bar"> 
-      <div className="price-range-bar__range" style={{ left: `${curMinPos}%`, right: `${curMaxPos}%` }}>
+      <div className={'price-range-bar__range' + (isDisabled ? ' price-range-bar__range_disabled' : '')} style={{ left: `${curMinPos}%`, right: `${curMaxPos}%` }}>
         <div className="price-range-bar__handle price-range-bar__handle-min" onPointerDown={onPointerDownMin} onPointerMove={onPointerMoveMin} onPointerUp={onPointerUpMin}>
           <p className="price-range-bar__handle-title">
             от
@@ -117,7 +123,8 @@ PriceRangeBar.propTypes = {
   maxValue: PropTypes.number.isRequired,
   setMinValue: PropTypes.func.isRequired,
   setMaxValue: PropTypes.func.isRequired,
-  changeRange: PropTypes.func.isRequired
+  changeRange: PropTypes.func.isRequired,
+  isDisabled: PropTypes.bool.isRequired
 };
 
 export default PriceRangeBar;

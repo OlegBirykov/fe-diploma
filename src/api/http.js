@@ -92,7 +92,7 @@ export async function loadTrainsInfo (setAnimation, setPopup, setTrainsInfo, par
     date_start: dateStart,
     limit,
     offset,
-    sort
+    sort,
   };
 
   const backwardTrainsParams = {

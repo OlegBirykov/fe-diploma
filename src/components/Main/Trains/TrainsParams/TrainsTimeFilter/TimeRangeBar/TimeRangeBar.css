@@ -1,63 +1,54 @@
-/*.price-range-bar {
+.time-range-bar {
   position: relative;
 
-  height: 20px;
+  height: 10px;
   border: 1px solid #c4c4c4;
   border-radius: 8px;
 }
 
-.price-range-bar__handle-title {
+.time-range-bar__range {
   position: absolute;
-  top: -1.4em;
-  left: 50%;
-  transform: translateX(-50%); 
-
-  color: white;
-  font-size: 18px;
-  line-height: 21px;
-  font-weight: normal;
-}
-
-.price-range-bar__range {
-  position: absolute;
-  top: 0;
-  bottom: 0;
+  top: -1px;
+  bottom: -1px;
 
   border-radius: 8px;
   background-color: #ffa800;
 }
 
-.price-range-bar__handle {
+.time-range-bar__range_disabled {
+  background-color: #c4c4c4;
+}
+
+.time-range-bar__handle {
   position: absolute;
   top: 50%;
 
-  width: 24px;
-  height: 24px; 
+  width: 18px;
+  height: 18px; 
   border-radius: 50%; 
   background-color: white;
 
   cursor: pointer;
 }
 
-.price-range-bar__handle-min {
+.time-range-bar__handle-min {
   left: 0;
   transform: translate(-50%, -50%);  
 }
 
-.price-range-bar__handle-max {
+.time-range-bar__handle-max {
   right: 0;
   transform: translate(50%, -50%);  
 }
 
-.price-range-bar__handle-value {
+.time-range-bar__handle-value {
   position: absolute;
-  bottom: -1.5em;
+  bottom: -2em;
   left: 50%;
   transform: translateX(-50%);  
 
-  color: white;
-  font-size: 18px;
-  line-height: 21px;
+  color: #e5e5e5;
+  font-size: 16px;
+  line-height: 19px;
   font-weight: normal;  
 }
-*/

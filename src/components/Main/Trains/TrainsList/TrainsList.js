@@ -101,7 +101,13 @@ function TrainsList(props) {
       </div>
       <div className="trains-list__list">
         {!!trainsArray.length &&
-          trainsArray.map((item) => <TrainsListItem trainInfo={item} isForward={isForward} reloadInfo={reloadInfo} key={shortid.generate()} />)
+          trainsArray.map((item) => 
+          <TrainsListItem 
+            trainInfo={item}
+            isForward={isForward} 
+            reloadInfo={reloadInfo} 
+            key={shortid.generate()} 
+          />)
         }
       </div>
       <div className="trains-list__select-page">

@@ -21,7 +21,8 @@ function TrainsListItem(props) {
     available_seats_info,
     price_info,
     have_wifi,
-    is_express
+    is_express,
+//    _id
   } = trainInfo.departure;
 
   const history = useHistory();
@@ -129,6 +130,7 @@ function TrainsListItem(props) {
 
 TrainsListItem.propTypes = {
   trainInfo: PropTypes.object.isRequired,
+  setTrainsInfo: PropTypes.func.isRequired,
   isForward: PropTypes.bool.isRequired,
   reloadInfo: PropTypes.func.isRequired
 };

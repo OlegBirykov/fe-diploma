@@ -24,14 +24,14 @@ function TrainsParams(props) {
   const [priceFrom, setPriceFrom] = useState(-Infinity);
   const [priceTo, setPriceTo] = useState(Infinity);
 
-  const [startDepartureHourFrom, setStartDepartureHourFrom] = useState();
-  const [startDepartureHourTo, setStartDepartureHourTo] = useState();
-  const [startArrivalHourFrom, setStartArrivalHourFrom] = useState();
-  const [startArrivalHourTo, setStartArrivalHourTo] = useState();
-  const [endDepartureHourFrom, setEndDepartureHourFrom] = useState();
-  const [endDepartureHourTo, setEndDepartureHourTo] = useState();
-  const [endArrivalHourFrom, setEndArrivalHourFrom] = useState();
-  const [endArrivalHourTo, setEndArrivalHourTo] = useState();
+  const [startDepartureHourFrom, setStartDepartureHourFrom] = useState(0);
+  const [startDepartureHourTo, setStartDepartureHourTo] = useState(24);
+  const [startArrivalHourFrom, setStartArrivalHourFrom] = useState(0);
+  const [startArrivalHourTo, setStartArrivalHourTo] = useState(24);
+  const [endDepartureHourFrom, setEndDepartureHourFrom] = useState(0);
+  const [endDepartureHourTo, setEndDepartureHourTo] = useState(24);
+  const [endArrivalHourFrom, setEndArrivalHourFrom] = useState(0);
+  const [endArrivalHourTo, setEndArrivalHourTo] = useState(24);
 
   const { bookingStage, trainsInfo } = useContext(AppContext);
 
@@ -68,35 +68,63 @@ function TrainsParams(props) {
   }, [trainsInfo.params.isExpress]);
 
   useEffect(() => {
-    setStartDepartureHourFrom(trainsInfo.params.startDepartureHourFrom);
+    if (trainsInfo.params.priceFrom !== undefined) {
+      setPriceFrom(trainsInfo.params.priceFrom);
+    }
+  }, [trainsInfo.params.priceFrom]);
+
+  useEffect(() => {
+    if (trainsInfo.params.priceTo !== undefined) {
+      setPriceTo(trainsInfo.params.priceTo);
+    }
+  }, [trainsInfo.params.priceTo]);
+
+  useEffect(() => {
+    if (trainsInfo.params.startDepartureHourFrom !== undefined) {
+      setStartDepartureHourFrom(trainsInfo.params.startDepartureHourFrom);
+    }
   }, [trainsInfo.params.startDepartureHourFrom]);
 
   useEffect(() => {
-    setStartDepartureHourTo(trainsInfo.params.startDepartureHourTo);
+    if (trainsInfo.params.startDepartureHourTo !== undefined) {
+      setStartDepartureHourTo(trainsInfo.params.startDepartureHourTo);
+    }
   }, [trainsInfo.params.startDepartureHourTo]);
 
   useEffect(() => {
-    setStartArrivalHourFrom(trainsInfo.params.startArrivalHourFrom);
+    if (trainsInfo.params.startArrivalHourFrom !== undefined) {
+      setStartArrivalHourFrom(trainsInfo.params.startArrivalHourFrom);
+    }
   }, [trainsInfo.params.startArrivalHourFrom]);
 
   useEffect(() => {
-    setStartArrivalHourTo(trainsInfo.params.startArrivalHourTo );
+    if (trainsInfo.params.startArrivalHourTo !== undefined) {
+      setStartArrivalHourTo(trainsInfo.params.startArrivalHourTo );
+    }
   }, [trainsInfo.params.startArrivalHourTo]);
 
   useEffect(() => {
-    setEndDepartureHourFrom(trainsInfo.params.endDepartureHourFrom);
+    if (trainsInfo.params.endDepartureHourFrom !== undefined) {
+      setEndDepartureHourFrom(trainsInfo.params.endDepartureHourFrom);
+    }
   }, [trainsInfo.params.endDepartureHourFrom]);
 
   useEffect(() => {
-    setEndDepartureHourTo(trainsInfo.params.endDepartureHourTo);
+    if (trainsInfo.params.endDepartureHourTo !== undefined) {
+      setEndDepartureHourTo(trainsInfo.params.endDepartureHourTo);
+    }
   }, [trainsInfo.params.endDepartureHourTo]);
 
   useEffect(() => {
-    setEndArrivalHourFrom(trainsInfo.params.endArrivalHourFrom);
+    if (trainsInfo.params.endArrivalHourFrom !== undefined) {
+      setEndArrivalHourFrom(trainsInfo.params.endArrivalHourFrom);
+    }
   }, [trainsInfo.params.endArrivalHourFrom]);
 
   useEffect(() => {
-    setEndArrivalHourTo(trainsInfo.params.endArrivalHourTo);
+    if (trainsInfo.params.endArrivalHourTo !==undefined) {
+      setEndArrivalHourTo(trainsInfo.params.endArrivalHourTo);
+    }
   }, [trainsInfo.params.endArrivalHourTo]);
 
   const changeDateStart = (date) => {
@@ -288,7 +316,14 @@ function TrainsParams(props) {
           Стоимость
         </p>
         <div className="trains-params__price-range-bar">
-          <PriceRangeBar minValue={priceFrom} maxValue={priceTo} setMinValue={setPriceFrom} setMaxValue={setPriceTo} changeRange={changePriceRange} />
+          <PriceRangeBar 
+            minValue={priceFrom} 
+            maxValue={priceTo} 
+            setMinValue={setPriceFrom} 
+            setMaxValue={setPriceTo} 
+            changeRange={changePriceRange} 
+            isDisabled={bookingStage !== 'trains'}
+          />
         </div>
       </section>
       <section className="trains-params__times">

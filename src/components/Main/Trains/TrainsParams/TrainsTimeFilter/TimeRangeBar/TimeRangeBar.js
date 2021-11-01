@@ -1,26 +1,23 @@
-/*import { useState } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
-import './PriceRangeBar.css';
+import './TimeRangeBar.css';
 
-function PriceRangeBar(props) {
-  const { minValue, maxValue, setMinValue, setMaxValue, changeRange } = props;
+function TimeRangeBar(props) {
+  const { minValue, maxValue, setMinValue, setMaxValue, changeRange, isDisabled } = props;
 
   const [curX, setCurX] = useState(0);
 
-  const minLimit = 500;
-  const maxLimit = 5000;
-  const step = 100;
-  const minDiff = 1000;
+  const minDiff = 4;
 
-  let curMinValue = minValue >= minLimit ? minValue : minLimit;
-  let curMaxValue = maxValue <= maxLimit ? maxValue : maxLimit;
+  let curMinValue = minValue >= 0 ? minValue : 0;
+  let curMaxValue = maxValue <= 24 ? maxValue : 24;
   if (curMinValue + minDiff > curMaxValue) {
-    curMinValue = minLimit;
-    curMaxValue = maxLimit;
+    curMinValue = 0;
+    curMaxValue = 24;
   }
 
-  const curMinPos = Math.round((curMinValue - minLimit) / (maxLimit - minLimit) * 100);
-  const curMaxPos = 100 - Math.round((curMaxValue - minLimit) / (maxLimit - minLimit) * 100);
+  const curMinPos = Math.round(curMinValue / 24 * 100);
+  const curMaxPos = 100 - Math.round(curMaxValue / 24 * 100);
 
   const onPointerDownMin = (evt) => {
     evt.target.setPointerCapture(evt.pointerId);
@@ -33,78 +30,74 @@ function PriceRangeBar(props) {
   }
 
   const onPointerMoveMin = (evt) => {
-    if (evt.buttons !== 1) {
+    if (evt.buttons !== 1 || isDisabled) {
       return;
     }
 
-    const deltaX = evt.target.parentElement.parentElement.clientWidth * step / (maxLimit - minLimit);
+    const deltaX = evt.target.parentElement.parentElement.clientWidth / 24;
 
     if (evt.clientX > curX + deltaX) {
       setCurX(evt.clientX);
       if (curMinValue + minDiff < curMaxValue) {
-        curMinValue += step;
-        setMinValue(curMinValue);
+        setMinValue(curMinValue + 1);
       }
     }
 
     if (evt.clientX < curX - deltaX) {
       setCurX(evt.clientX);
-      if (curMinValue > minLimit) {
-        curMinValue -= step;
-        setMinValue(curMinValue > minLimit ? curMinValue : -Infinity);
+      if (curMinValue > 0) {
+        setMinValue(curMinValue - 1);
       }
     }
   }
 
   const onPointerMoveMax = (evt) => {
-    if (evt.buttons !== 1) {
+    if (evt.buttons !== 1 || isDisabled) {
       return;
     }
   
-    const deltaX = evt.target.parentElement.parentElement.clientWidth * step / (maxLimit - minLimit);
+    const deltaX = evt.target.parentElement.parentElement.clientWidth / 24;
 
     if (evt.clientX < curX - deltaX) {
       setCurX(evt.clientX);
       if (curMinValue + minDiff < curMaxValue) {
-        curMaxValue -= step;
-        setMaxValue(curMaxValue);
+        setMaxValue(curMaxValue - 1);
       }
     }
 
     if (evt.clientX > curX + deltaX) {
       setCurX(evt.clientX);
-      if (curMaxValue < maxLimit) {
-        curMaxValue += step;
-        setMaxValue(curMaxValue < maxLimit ? curMaxValue : Infinity);
+      if (curMaxValue < 24) {
+        setMaxValue(curMaxValue + 1);
       }
     }
   }  
 
   const onPointerUpMin = () => {
+    if (isDisabled) {
+      return;
+    }
     changeRange(minValue, maxValue);
   }
 
   const onPointerUpMax = () => {
+    if (isDisabled) {
+      return;
+    }
     changeRange(minValue, maxValue);
   }  
 
   return (
-    <div className="price-range-bar"> 
-      <div className="price-range-bar__range" style={{ left: `${curMinPos}%`, right: `${curMaxPos}%` }}>
-        <div className="price-range-bar__handle price-range-bar__handle-min" onPointerDown={onPointerDownMin} onPointerMove={onPointerMoveMin} onPointerUp={onPointerUpMin}>
-          <p className="price-range-bar__handle-title">
-            от
-          </p>
-          <p className="price-range-bar__handle-value">
-            {curMinValue > minLimit ? curMinValue : 'min'}
+    <div className="time-range-bar"> 
+      <div className={'time-range-bar__range' + (isDisabled ? ' time-range-bar__range_disabled' : '')} style={{ left: `${curMinPos}%`, right: `${curMaxPos}%` }}>
+        <div className="time-range-bar__handle time-range-bar__handle-min" onPointerDown={onPointerDownMin} onPointerMove={onPointerMoveMin} onPointerUp={onPointerUpMin}>
+          <p className="time-range-bar__handle-value">
+            {curMinValue}:00
           </p>
         </div>
-        <div className="price-range-bar__handle price-range-bar__handle-max" onPointerDown={onPointerDownMax} onPointerMove={onPointerMoveMax} onPointerUp={onPointerUpMax}>
-          <p className="price-range-bar__handle-title">
-            до
-          </p>
-          <p className="price-range-bar__handle-value">
-            {curMaxValue < maxLimit ? curMaxValue : 'max'}
+        <div className="time-range-bar__handle time-range-bar__handle-max" onPointerDown={onPointerDownMax} onPointerMove={onPointerMoveMax} onPointerUp={onPointerUpMax}>
+          <p className="time-range-bar__handle-value">
+            {curMaxValue}:00
           </p>
         </div>
       </div>
@@ -112,12 +105,13 @@ function PriceRangeBar(props) {
   )
 }
 
-PriceRangeBar.propTypes = {
+TimeRangeBar.propTypes = {
   minValue: PropTypes.number.isRequired,
   maxValue: PropTypes.number.isRequired,
   setMinValue: PropTypes.func.isRequired,
   setMaxValue: PropTypes.func.isRequired,
-  changeRange: PropTypes.func.isRequired
+  changeRange: PropTypes.func.isRequired,
+  isDisabled: PropTypes.bool.isRequired,
 };
 
-export default PriceRangeBar;*/
+export default TimeRangeBar;

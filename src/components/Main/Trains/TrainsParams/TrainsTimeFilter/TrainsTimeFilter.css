@@ -6,6 +6,10 @@
   padding: 29px 34px 31px 32px;
 }
 
+.trains-time-filter__collapsed_exp {
+  padding-bottom: 20px;
+}
+
 .trains-time-filter__arrow {
   display: block;
 }
@@ -81,3 +85,23 @@
   display: none;
 }
 
+.trains-time-filter__full {
+  padding: 0 34px 68px 32px;
+}
+
+.trains-time-filter__bar-title {
+  color: #e5e5e5;
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: normal;
+}
+
+.trains-time-filter__bar-title_arrival {
+  margin-top: 84px;
+  text-align: right;
+}
+
+.trains-time-filter__bar {
+  margin-top: 18px;
+  padding: 0 9px;
+}
