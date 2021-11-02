@@ -30,6 +30,14 @@ function AppProvider(props) {
   }
   const [backwardTrain, setBackwardTrain] = useState(storageBackwardTrain);
 
+  let storageSeatsInfo;
+  try {
+    storageSeatsInfo = JSON.parse(localStorage.getItem('seatsInfo'));
+  } catch {
+    storageSeatsInfo = null;
+  }
+  const [seatsInfo, setSeatsInfo] = useState(storageSeatsInfo);
+
   return (
     <AppContext.Provider 
       value={{ 
@@ -38,7 +46,8 @@ function AppProvider(props) {
         popup, setPopup,
         trainsInfo, setTrainsInfo,
         forwardTrain, setForwardTrain,
-        backwardTrain, setBackwardTrain
+        backwardTrain, setBackwardTrain,
+        seatsInfo, setSeatsInfo
       }}>
       {props.children}  
     </AppContext.Provider>

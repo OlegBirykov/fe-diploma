@@ -9,7 +9,7 @@ import icons from 'components/Main/icons.svg';
 import { secToHourMin, durationToHourMin } from 'api/utils';
 
 function TrainsListItem(props) {
-  const { trainInfo, isForward, reloadInfo } = props;
+  const { trainInfo, isForward, reloadInfo, loadSeats } = props;
   const { 
     from,
     to,
@@ -23,9 +23,10 @@ function TrainsListItem(props) {
     price_info,
     have_wifi,
     is_express,
+    _id
   } = trainInfo.departure;
 
-  const { backwardTrain, setForwardTrain, setBackwardTrain } = useContext(AppContext);
+  const { forwardTrain, setForwardTrain, backwardTrain, setBackwardTrain } = useContext(AppContext);
 
   const history = useHistory();
 
@@ -46,6 +47,11 @@ function TrainsListItem(props) {
         offset: 0
       });    
     } else {
+      if (isForward) {
+        loadSeats( _id, backwardTrain._id );
+      } else {
+        loadSeats( forwardTrain._id, _id );  
+      }
       history.push(process.env.PUBLIC_URL + '/run/seats');
     }
   }
@@ -142,7 +148,8 @@ function TrainsListItem(props) {
 TrainsListItem.propTypes = {
   trainInfo: PropTypes.object.isRequired,
   isForward: PropTypes.bool.isRequired,
-  reloadInfo: PropTypes.func.isRequired
+  reloadInfo: PropTypes.func.isRequired,
+  loadSeats: PropTypes.func.isRequired
 };
 
 export default TrainsListItem;

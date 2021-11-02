@@ -7,7 +7,7 @@ import SelectTrainsPage from './SelectTrainsPage/SelectTrainsPage';
 import shortid from 'shortid';
 
 function TrainsList(props) {
-  const { reloadInfo } = props; 
+  const { reloadInfo, loadSeats } = props; 
 
   const [sortIndex, setSortIndex] = useState(0);
   const [limitIndex, setLimitIndex] = useState(0);
@@ -106,6 +106,7 @@ function TrainsList(props) {
             trainInfo={item}
             isForward={isForward} 
             reloadInfo={reloadInfo} 
+            loadSeats={loadSeats}
             key={shortid.generate()} 
           />)
         }
@@ -122,10 +123,9 @@ function TrainsList(props) {
   )
 }
 
-TrainsListItem.propTypes = {
-  trainInfo: PropTypes.object.isRequired,
-  isForward: PropTypes.bool.isRequired,
-  reloadInfo: PropTypes.func.isRequired
+TrainsList.propTypes = {
+  reloadInfo: PropTypes.func.isRequired,
+  loadSeats: PropTypes.func.isRequired
 };
 
 export default TrainsList;

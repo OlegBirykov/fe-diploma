@@ -5,16 +5,17 @@ import AppContext from 'AppContext';
 import ProgressIndicator from '../ProgressIndicator/ProgressIndicator';
 import TrainsParams from '../Trains/TrainsParams/TrainsParams';
 import LastRoutes from '../Trains/LastRoutes/LastRoutes';
+import { loadSeatsInfo } from 'api/http';
 
 function Seats() {
-  const { setBookingStage } = useContext(AppContext);
+  const { setBookingStage, setAnimation, setPopup, seatsInfo, setSeatsInfo } = useContext(AppContext);
 
   useEffect(() => {
     setBookingStage('seats');
   }, [setBookingStage]);
   
-  const reloadInfo = async (/*params*/) => {
-//    await loadTrainsInfo(setAnimation, setPopup, setTrainsInfo, { ...trainsInfo.params, ...params });
+  const reloadInfo = async (params) => {
+    await loadSeatsInfo(setAnimation, setPopup, setSeatsInfo, { ...seatsInfo.params, ...params });
   }
 
   return (

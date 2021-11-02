@@ -33,7 +33,7 @@ function TrainsParams(props) {
   const [endArrivalHourFrom, setEndArrivalHourFrom] = useState(0);
   const [endArrivalHourTo, setEndArrivalHourTo] = useState(24);
 
-  const { bookingStage, trainsInfo } = useContext(AppContext);
+  const { bookingStage, trainsInfo, seatsInfo } = useContext(AppContext);
 
   useEffect(() => {
     setDateStart(dayInFirstPosition(trainsInfo.params.dateStart));
@@ -43,29 +43,29 @@ function TrainsParams(props) {
     setDateEnd(dayInFirstPosition(trainsInfo.params.dateEnd));
   }, [trainsInfo.params.dateEnd]);
 
-  useEffect(() => {
-    setHaveFirstClass(!!trainsInfo.params.haveFirstClass);
-  }, [trainsInfo.params.haveFirstClass]);
+  useEffect(() => { 
+    setHaveFirstClass(!!(bookingStage === 'trains' ? trainsInfo.params.haveFirstClass : seatsInfo.params.haveFirstClass));
+  }, [bookingStage, trainsInfo.params.haveFirstClass, seatsInfo.params.haveFirstClass]);
 
   useEffect(() => {
-    setHaveSecondClass(!!trainsInfo.params.haveSecondClass);
-  }, [trainsInfo.params.haveSecondClass]);
+    setHaveSecondClass(!!(bookingStage === 'trains' ? trainsInfo.params.haveSecondClass : seatsInfo.params.haveSecondClass));
+  }, [bookingStage, trainsInfo.params.haveSecondClass, seatsInfo.params.haveSecondClass]);
 
   useEffect(() => {
-    setHaveThirdClass(!!trainsInfo.params.haveThirdClass);
-  }, [trainsInfo.params.haveThirdClass]);
+    setHaveThirdClass(!!(bookingStage === 'trains' ? trainsInfo.params.haveThirdClass : seatsInfo.params.haveThirdClass));
+  }, [bookingStage, trainsInfo.params.haveThirdClass, seatsInfo.params.haveThirdClass]);
 
   useEffect(() => {
-    setHaveFourthClass(!!trainsInfo.params.haveFourthClass);
-  }, [trainsInfo.params.haveFourthClass]);
+    setHaveFourthClass(!!(bookingStage === 'trains' ? trainsInfo.params.haveFourthClass : seatsInfo.params.haveFourthClass));
+  }, [bookingStage, trainsInfo.params.haveFourthClass, seatsInfo.params.haveFourthClass]);
 
   useEffect(() => {
-    setHaveWifi(!!trainsInfo.params.haveWifi);
-  }, [trainsInfo.params.haveWifi]);
+    setHaveWifi(!!(bookingStage === 'trains' ? trainsInfo.params.haveWifi : seatsInfo.params.haveWifi));
+  }, [bookingStage, trainsInfo.params.haveWifi, seatsInfo.params.haveWifi]);
 
   useEffect(() => {
-    setIsExpress(!!trainsInfo.params.isExpress);
-  }, [trainsInfo.params.isExpress]);
+    setIsExpress(!!(bookingStage === 'trains' ? trainsInfo.params.isExpress : seatsInfo.params.isExpress));
+  }, [bookingStage, trainsInfo.params.isExpress, seatsInfo.params.isExpress]);
 
   useEffect(() => {
     if (trainsInfo.params.priceFrom !== undefined) {
