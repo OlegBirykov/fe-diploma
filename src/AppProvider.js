@@ -10,7 +10,10 @@ function AppProvider(props) {
   try {
     storageTrainsInfo = JSON.parse(localStorage.getItem('trainsInfo'));
   } catch {
-    storageTrainsInfo = {};
+    storageTrainsInfo = null;
+  }
+  if (!storageTrainsInfo || !storageTrainsInfo.params) {
+    storageTrainsInfo = { params: {} };
   }
   const [trainsInfo, setTrainsInfo] = useState(storageTrainsInfo);
 
@@ -35,6 +38,9 @@ function AppProvider(props) {
     storageSeatsInfo = JSON.parse(localStorage.getItem('seatsInfo'));
   } catch {
     storageSeatsInfo = null;
+  }
+  if (!storageSeatsInfo || !storageSeatsInfo.params) {
+    storageSeatsInfo = { params: {} };
   }
   const [seatsInfo, setSeatsInfo] = useState(storageSeatsInfo);
 

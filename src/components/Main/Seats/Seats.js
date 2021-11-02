@@ -5,6 +5,7 @@ import AppContext from 'AppContext';
 import ProgressIndicator from '../ProgressIndicator/ProgressIndicator';
 import TrainsParams from '../Trains/TrainsParams/TrainsParams';
 import LastRoutes from '../Trains/LastRoutes/LastRoutes';
+import TrainSeats from './TrainSeats/TrainSeats';
 import { loadSeatsInfo } from 'api/http';
 
 function Seats() {
@@ -26,8 +27,17 @@ function Seats() {
           <TrainsParams reloadInfo={reloadInfo}/>
           <LastRoutes />
         </section>
-        <section className="seats-right"> 
-          <Link to={process.env.PUBLIC_URL + '/run/passengers'} className="seats__xxx"> 
+        <section className="seats__right"> 
+          <h3 className="seats__title">
+            Выбор мест
+          </h3>
+          <div className="seats__train-seats">
+            <TrainSeats />
+          </div>
+          <div className="seats__train-seats">
+            <TrainSeats />
+          </div>
+          <Link to={process.env.PUBLIC_URL + '/run/passengers'} className="seats__button seats__button_no-active"> 
             Далее
           </Link>
         </section>
