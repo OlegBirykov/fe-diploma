@@ -2,7 +2,7 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import './TrainsTimeFilter.css';
 import TimeRangeBar from './TimeRangeBar/TimeRangeBar';
-import arrow from './arrow.svg';
+import icons from 'components/Main/icons.svg';
 
 function TrainsTimeFilter(props) {
   const { times, setTimes, changeTimes, isStart, isDisabled } = props;
@@ -34,7 +34,9 @@ function TrainsTimeFilter(props) {
   return (
     <div className="trains-time-filter"> 
       <div className={'trains-time-filter__collapsed' + (isCollapsed ? '' : ' trains-time-filter__collapsed_exp')}>
-        <img className={'trains-time-filter__arrow' + (isStart ? '' : ' trains-time-filter__arrow_mirror')} src={arrow} width="32" height="26" alt="arrow"/>
+        <svg className={'trains-time-filter__arrow' + (isStart ? '' : ' trains-time-filter__arrow_mirror')} width="32" height="26">
+          <use xlinkHref={icons + '#arrow-negative'} />
+        </svg>
         <p className="trains-time-filter__title">
           {isStart ? 'Туда' : 'Обратно'}
         </p>

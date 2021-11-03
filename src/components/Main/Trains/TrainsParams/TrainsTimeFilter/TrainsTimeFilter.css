@@ -12,6 +12,7 @@
 
 .trains-time-filter__arrow {
   display: block;
+  fill: #ffa800;
 }
 
 .trains-time-filter__arrow_mirror {

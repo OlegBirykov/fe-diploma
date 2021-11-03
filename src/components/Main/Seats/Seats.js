@@ -9,7 +9,7 @@ import TrainSeats from './TrainSeats/TrainSeats';
 import { loadSeatsInfo } from 'api/http';
 
 function Seats() {
-  const { setBookingStage, setAnimation, setPopup, seatsInfo, setSeatsInfo } = useContext(AppContext);
+  const { setBookingStage, setAnimation, setPopup, forwardTrain, backwardTrain, seatsInfo, setSeatsInfo } = useContext(AppContext);
 
   useEffect(() => {
     setBookingStage('seats');
@@ -32,12 +32,12 @@ function Seats() {
             Выбор мест
           </h3>
           <div className="seats__train-seats">
-            <TrainSeats />
+            <TrainSeats train={forwardTrain} isForward={true}/>
           </div>
           <div className="seats__train-seats">
-            <TrainSeats />
+            <TrainSeats train={backwardTrain} isForward={false}/>
           </div>
-          <Link to={process.env.PUBLIC_URL + '/run/passengers'} className="seats__button seats__button_no-active"> 
+          <Link to={process.env.PUBLIC_URL + '/run/passengers'} className="seats__button seats__button_active"> 
             Далее
           </Link>
         </section>

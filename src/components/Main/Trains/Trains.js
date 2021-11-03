@@ -15,11 +15,11 @@ function Trains() {
   }, [setBookingStage]);
 
   const reloadInfo = async (params) => {
-    await loadTrainsInfo(setAnimation, setPopup, setTrainsInfo, { ...trainsInfo.params, ...params });
+    return await loadTrainsInfo(setAnimation, setPopup, setTrainsInfo, { ...trainsInfo.params, ...params });
   }
 
   const loadSeats = async (forwardTrainId, backwardTrainId) => {
-    await loadSeatsInfo(setAnimation, setPopup, setSeatsInfo, { forwardTrainId, backwardTrainId });
+    return await loadSeatsInfo(setAnimation, setPopup, setSeatsInfo, { forwardTrainId, backwardTrainId });
   }
 
   return (

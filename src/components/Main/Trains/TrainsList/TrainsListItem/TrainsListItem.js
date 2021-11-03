@@ -30,7 +30,7 @@ function TrainsListItem(props) {
 
   const history = useHistory();
 
-  const goToNextPage = () => {
+  const goToNextPage = async () => {
     const trainInfoString = JSON.stringify(trainInfo.departure);
 
     if (isForward) {
@@ -47,12 +47,10 @@ function TrainsListItem(props) {
         offset: 0
       });    
     } else {
-      if (isForward) {
-        loadSeats( _id, backwardTrain._id );
-      } else {
-        loadSeats( forwardTrain._id, _id );  
+      const result = isForward ? await loadSeats( _id, backwardTrain._id) : await loadSeats(forwardTrain._id, _id );
+      if (result) {
+        history.push(process.env.PUBLIC_URL + '/run/seats');
       }
-      history.push(process.env.PUBLIC_URL + '/run/seats');
     }
   }
 
@@ -95,9 +93,9 @@ function TrainsListItem(props) {
           <p className="trains-list-item__duration">
             {durationToHourMin(duration)}
           </p>
-          <p className={'trains-list-item__arrow' + (isForward ? '' : ' trains-list-item__arrow_mirror')}>
-            &#x279e;
-          </p>
+          <svg className={'trains-list-item__arrow' + (isForward ? '' : ' trains-list-item__arrow_mirror')} width="30" height="20">
+            <use xlinkHref={icons + '#arrow'} />
+          </svg>
         </div>
         <div className="trains-list-item__middle-to">
           <p className="trains-list-item__time">

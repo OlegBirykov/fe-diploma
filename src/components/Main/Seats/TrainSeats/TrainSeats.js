@@ -1,72 +1,52 @@
-//import { useContext } from 'react'; 
-//import { useHistory } from 'react-router-dom';
-//import PropTypes from 'prop-types';
+import { useContext } from 'react'; 
+import { useHistory, Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import './TrainSeats.css';
-//import AppContext from 'AppContext';
-//import TrainClassSeatsInfo from './TrainClassSeatsInfo/TrainClassSeatsInfo';
-//import OptionIcons from '../../OptionIcons/OptionIcons';
-//import icons from 'components/Main/icons.svg';
-//import { secToHourMin, durationToHourMin } from 'api/utils';
+import AppContext from 'AppContext';
+import TrainSeatsHeader from './TrainSeatsHeader/TrainSeatsHeader';
+import icons from 'components/Main/icons.svg';
+import { loadTrainsInfo } from 'api/http';
 
-function TrainSeats() {
-//  const { trainInfo, isForward, reloadInfo, loadSeats } = props;
-//  const { 
-//    from,
-//    to,
-//    train,
-//    duration,
-//    have_first_class,
-//    have_second_class,
-//    have_third_class,
-//    have_fourth_class,
-//    available_seats_info,
-//    price_info,
-//    have_wifi,
-//    is_express,
-//    _id
-//  } = trainInfo.departure;
 
-//  const { forwardTrain, setForwardTrain, backwardTrain, setBackwardTrain } = useContext(AppContext);
+function TrainSeats(props) {
+  const { train, isForward } = props;
 
-//  const history = useHistory();
+  const { setAnimation, setPopup, trainsInfo, setTrainsInfo } = useContext(AppContext);
 
-//  const goToNextPage = () => {
-//    const trainInfoString = JSON.stringify(trainInfo.departure);
+  const history = useHistory();
 
-//    if (isForward) {
-//      setForwardTrain(JSON.parse(trainInfoString));
-//      localStorage.setItem('forwardTrain', trainInfoString);
-//    } else {
-//      setBackwardTrain(JSON.parse(trainInfoString));
-//      localStorage.setItem('backwardTrain', trainInfoString);
-//    }
+  const returnToTrains = async (evt) => {
+    evt.preventDefault();
+    
+    const result = await loadTrainsInfo(setAnimation, setPopup, setTrainsInfo, {
+      ...trainsInfo.params, 
+      offset: 0,
+      direction: isForward ? 'forward' : 'backward'
+    });
 
-//    if (isForward && !backwardTrain) {
-//      reloadInfo({ 
-//        direction: 'backward',
-//        offset: 0
-//      });    
-//    } else {
-//      if (isForward) {
-//        loadSeats( _id, backwardTrain._id );
-//      } else {
-//        loadSeats( forwardTrain._id, _id );  
-//      }
-//      history.push(process.env.PUBLIC_URL + '/run/seats');
-//    }
-//  }
+    if (result) {
+      history.push(process.env.PUBLIC_URL + '/run/trains');
+    }
+  }
 
   return (
-    <div className="train-seats">   
+    <div className="train-seats">  
+      <div className={'train-seats__return' + (isForward ? '' : ' train-seats__return_mirror')}>  
+        <svg className={'train-seats__return-icon' + (isForward ? '' : ' train-seats__return-icon_mirror')} width="76" height="60">
+          <use xlinkHref={icons + '#arrow-negative-big'} />
+        </svg> 
+        <Link to={process.env.PUBLIC_URL + '/run/trains'} className="train-seats__return-button" onClick={returnToTrains}> 
+          Выбрать другой поезд
+        </Link>
+      </div> 
+      <TrainSeatsHeader train={train} isForward={isForward} />  
     </div>    
   )
 }
 
-//TrainSeats.propTypes = {
-//  trainInfo: PropTypes.object.isRequired,
-// isForward: PropTypes.bool.isRequired,
-//  reloadInfo: PropTypes.func.isRequired,
-//  loadSeats: PropTypes.func.isRequired
-//};
+TrainSeats.propTypes = {
+  train: PropTypes.object.isRequired,
+  isForward: PropTypes.bool.isRequired
+};
 
 export default TrainSeats;
