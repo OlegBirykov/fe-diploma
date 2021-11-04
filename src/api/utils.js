@@ -101,6 +101,58 @@ export function durationToHourMin(duration) {
   return `${hour} : ${min}`;
 }
 
+export function durationToHourMinText(duration) {
+  const sec = +duration;
+  let min = Math.trunc(sec / 60) % 60;
+  let hour = Math.trunc(sec / 3600);
+
+  switch (hour % 100) {
+    case 11:
+    case 12:
+    case 13:
+    case 14:
+      hour += ' часов';
+      break;
+    default: 
+      switch (hour % 10) {
+        case 1:
+          hour += ' час';
+          break;
+        case 2:
+        case 3:
+        case 4:
+          hour += ' часа';
+          break;
+        default: 
+          hour += ' часов';        
+      }
+  }
+
+  switch (min) {
+    case 11:
+    case 12:
+    case 13:
+    case 14:
+      min += ' минут';
+      break;
+    default: 
+      switch (min % 10) {
+        case 1:
+          min += ' минута';
+          break;
+        case 2:
+        case 3:
+        case 4:
+          min += ' минуты';
+          break;
+        default: 
+          min += ' минут';        
+      }
+  }
+
+  return { hour, min };
+}
+
 export function separateThousands(value) {
   let result = value + '';
   if (result.length > 3) {

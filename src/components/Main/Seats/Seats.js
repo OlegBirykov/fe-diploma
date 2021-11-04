@@ -32,10 +32,10 @@ function Seats() {
             Выбор мест
           </h3>
           <div className="seats__train-seats">
-            <TrainSeats train={forwardTrain} isForward={true}/>
+            <TrainSeats trainInfo={forwardTrain} isForward={true}/>
           </div>
           <div className="seats__train-seats">
-            <TrainSeats train={backwardTrain} isForward={false}/>
+            <TrainSeats trainInfo={backwardTrain} isForward={false}/>
           </div>
           <Link to={process.env.PUBLIC_URL + '/run/passengers'} className="seats__button seats__button_active"> 
             Далее

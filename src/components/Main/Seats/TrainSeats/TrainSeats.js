@@ -9,7 +9,7 @@ import { loadTrainsInfo } from 'api/http';
 
 
 function TrainSeats(props) {
-  const { train, isForward } = props;
+  const { trainInfo, isForward } = props;
 
   const { setAnimation, setPopup, trainsInfo, setTrainsInfo } = useContext(AppContext);
 
@@ -39,13 +39,13 @@ function TrainSeats(props) {
           Выбрать другой поезд
         </Link>
       </div> 
-      <TrainSeatsHeader train={train} isForward={isForward} />  
+      <TrainSeatsHeader trainInfo={trainInfo} isForward={isForward} />  
     </div>    
   )
 }
 
 TrainSeats.propTypes = {
-  train: PropTypes.object.isRequired,
+  trainInfo: PropTypes.object.isRequired,
   isForward: PropTypes.bool.isRequired
 };
 
