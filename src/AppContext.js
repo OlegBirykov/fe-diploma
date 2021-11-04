@@ -15,7 +15,9 @@ const AppContext = createContext({
   trainsInfo: {},
   forwardTrain: null,
   backwardTrain: null,
-  seatsInfo: {}
+  seatsInfo: {},
+  reservedSeats: {},
+  orderInfo: {}
 });
 
 export default AppContext;

@@ -4,12 +4,13 @@ import PropTypes from 'prop-types';
 import './TrainSeats.css';
 import AppContext from 'AppContext';
 import TrainSeatsHeader from './TrainSeatsHeader/TrainSeatsHeader';
+import SeatsCount from './SeatsCount/SeatsCount';
+import CoachType from './CoachType/CoachType';
 import icons from 'components/Main/icons.svg';
 import { loadTrainsInfo } from 'api/http';
 
-
 function TrainSeats(props) {
-  const { trainInfo, isForward } = props;
+  const { trainInfo, seatsState, setSeatsState, isForward } = props;
 
   const { setAnimation, setPopup, trainsInfo, setTrainsInfo } = useContext(AppContext);
 
@@ -39,13 +40,17 @@ function TrainSeats(props) {
           Выбрать другой поезд
         </Link>
       </div> 
-      <TrainSeatsHeader trainInfo={trainInfo} isForward={isForward} />  
+      <TrainSeatsHeader trainInfo={trainInfo} isForward={isForward} /> 
+      <SeatsCount seatsState={seatsState} /> 
+      <CoachType seatsState={seatsState} setSeatsState={setSeatsState} />
     </div>    
   )
 }
 
 TrainSeats.propTypes = {
   trainInfo: PropTypes.object.isRequired,
+  seatsState: PropTypes.object.isRequired,
+  setSeatsState: PropTypes.func.isRequired,
   isForward: PropTypes.bool.isRequired
 };
 

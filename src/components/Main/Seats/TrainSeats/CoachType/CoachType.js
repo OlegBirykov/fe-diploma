@@ -1,0 +1,53 @@
+import PropTypes from 'prop-types';
+import './CoachType.css';
+//import TrainSeatsHeader from './TrainSeatsHeader/TrainSeatsHeader';
+import icons from 'components/Main/icons.svg';
+
+function CoachType(props) {
+  const { seatsState, setSeatsState } = props;
+
+  const arrayTypes = [
+    { iconName: 'fourth-class', className: 'Сидячий' , classNumber: 4, margin: 0 },
+    { iconName: 'third-class', className: 'Плацкарт' , classNumber: 3, margin: 80 },
+    { iconName: 'second-class', className: 'Купе' , classNumber: 2, margin: 45 },
+    { iconName: 'first-class', className: 'Люкс' , classNumber: 1, margin: 68 }
+  ];
+
+  console.log(seatsState);
+
+  const iconClick = (classNumber) => {
+    setSeatsState({ ...seatsState, classNumber });
+  }
+
+  return (
+    <div className={'coach-type' + (seatsState.classNumber ? ' coach-type_active' : '')}>   
+      <h3 className="coach-type__title">
+        Тип вагона
+      </h3>
+      <ul className="coach-type__list">
+        {arrayTypes.map((item, i) => 
+          <li className="coach-type__item" style={{ marginLeft: `${item.margin}px` }} key={i}>
+            <svg 
+              className={'coach-type__icon' + (item.classNumber === seatsState.classNumber ? ' coach-type__icon_active' : '')} 
+              width="50"
+              height="50" 
+              onClick={() => iconClick(item.classNumber)}
+            >
+              <use xlinkHref={`${icons}#${item.iconName}`} />
+            </svg> 
+            <p className={'coach-type__name' + (item.classNumber === seatsState.classNumber ? ' coach-type__name_active' : '')}>
+              {item.className}
+            </p>
+          </li>
+        )}
+      </ul>
+    </div>    
+  )
+}
+
+CoachType.propTypes = {
+  seatsState: PropTypes.object.isRequired,
+  setSeatsState: PropTypes.func.isRequired
+};
+
+export default CoachType;

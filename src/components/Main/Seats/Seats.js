@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Seats.css';
 import AppContext from 'AppContext';
@@ -9,11 +9,27 @@ import TrainSeats from './TrainSeats/TrainSeats';
 import { loadSeatsInfo } from 'api/http';
 
 function Seats() {
+  const [forwardSeats, setForwardSeats] = useState({});
+  const [backwardSeats, setBackwardSeats] = useState({});
+
   const { setBookingStage, setAnimation, setPopup, forwardTrain, backwardTrain, seatsInfo, setSeatsInfo } = useContext(AppContext);
+
+  console.log(seatsInfo);
 
   useEffect(() => {
     setBookingStage('seats');
   }, [setBookingStage]);
+
+  useEffect(() => {
+    setForwardSeats({ 
+      info: seatsInfo.forwardSeatsInfo,
+      classNumber: 0
+    });
+    setBackwardSeats({ 
+      info: seatsInfo.backwardSeatsInfo,
+      classNumber: 0
+    });
+  }, [seatsInfo]);
   
   const reloadInfo = async (params) => {
     await loadSeatsInfo(setAnimation, setPopup, setSeatsInfo, { ...seatsInfo.params, ...params });
@@ -28,14 +44,14 @@ function Seats() {
           <LastRoutes />
         </section>
         <section className="seats__right"> 
-          <h3 className="seats__title">
+          <h2 className="seats__title">
             Выбор мест
-          </h3>
+          </h2>
           <div className="seats__train-seats">
-            <TrainSeats trainInfo={forwardTrain} isForward={true}/>
+            <TrainSeats trainInfo={forwardTrain} seatsState={forwardSeats} setSeatsState={setForwardSeats} isForward={true}/>
           </div>
           <div className="seats__train-seats">
-            <TrainSeats trainInfo={backwardTrain} isForward={false}/>
+            <TrainSeats trainInfo={backwardTrain} seatsState={backwardSeats} setSeatsState={setBackwardSeats} isForward={false}/>
           </div>
           <Link to={process.env.PUBLIC_URL + '/run/passengers'} className="seats__button seats__button_active"> 
             Далее
