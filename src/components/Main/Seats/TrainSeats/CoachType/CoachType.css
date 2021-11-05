@@ -1,10 +1,5 @@
 .coach-type {
   padding-top: 30px;
-  padding-bottom: 124px;
-}
-
-.coach-type_active {
-  padding-bottom: 26px;
 }
 
 .coach-type__title {
@@ -19,7 +14,12 @@
 .coach-type__list {
   display: flex;
   margin-top: 23px;
+  padding-bottom: 124px;
   list-style: none;
+}
+
+.coach-type__list_active {
+  padding-bottom: 26px;
 }
 
 .coach-type__item {
@@ -31,6 +31,7 @@
   display: block;
   margin: 0 auto;
   fill: #e5e5e5;
+  cursor: pointer;
 }
 
 .coach-type__icon_active {

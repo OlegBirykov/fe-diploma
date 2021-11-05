@@ -321,6 +321,14 @@ export async function loadSeatsInfo (setAnimation, setPopup, setSeatsInfo, param
     return false;
   }
 
+  //Добавление имитатора номера вагона (отсутствует в данных, полученных от сервера)
+  forwardSeatsInfo = forwardSeatsInfo.map((item) => {
+    return { ...item, index: item.coach._id % 15 + 1 };
+  });
+  backwardSeatsInfo = backwardSeatsInfo.map((item) => {
+    return { ...item, index: item.coach._id % 15 + 1 };
+  });
+
   const seatsInfo = {
     params,
     forwardSeatsInfo,

@@ -1,15 +1,15 @@
 //import { useContext } from 'react'; 
 //import { useHistory, Link } from 'react-router-dom';
-//import PropTypes from 'prop-types';
-import './CoachType.css';
+import PropTypes from 'prop-types';
+import './CoachProperties.css';
 //import AppContext from 'AppContext';
 //import TrainSeatsHeader from './TrainSeatsHeader/TrainSeatsHeader';
 //import icons from 'components/Main/icons.svg';
 //import { loadTrainsInfo } from 'api/http';
 
 
-function CoachType() {
-//  const { trainInfo, isForward } = props;
+function CoachProperties(props) {
+  const { coach/*, checkSeat */} = props;
 
 //  const { setAnimation, setPopup, trainsInfo, setTrainsInfo } = useContext(AppContext);
 
@@ -30,17 +30,17 @@ function CoachType() {
 //  }
 
   return (
-    <div className="coach-type">   
-      <h3>
-        Тип вагона
-      </h3>
+    <div className="coach-properties">   
+      <p>
+        {coach.index}
+      </p>
     </div>    
   )
 }
 
-//CoachType.propTypes = {
-//  trainInfo: PropTypes.object.isRequired,
-//  isForward: PropTypes.bool.isRequired
-//};
+CoachProperties.propTypes = {
+  coach: PropTypes.object.isRequired,
+  checkSeat: PropTypes.func.isRequired
+};
 
-export default CoachType;
+export default CoachProperties;

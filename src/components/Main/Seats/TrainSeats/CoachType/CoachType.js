@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import './CoachType.css';
-//import TrainSeatsHeader from './TrainSeatsHeader/TrainSeatsHeader';
+import CoachSelect from './CoachSelect/CoachSelect';
 import icons from 'components/Main/icons.svg';
 
 function CoachType(props) {
@@ -13,18 +13,16 @@ function CoachType(props) {
     { iconName: 'first-class', className: 'Люкс' , classNumber: 1, margin: 68 }
   ];
 
-  console.log(seatsState);
-
   const iconClick = (classNumber) => {
     setSeatsState({ ...seatsState, classNumber });
   }
 
   return (
-    <div className={'coach-type' + (seatsState.classNumber ? ' coach-type_active' : '')}>   
+    <div className="coach-type">   
       <h3 className="coach-type__title">
         Тип вагона
       </h3>
-      <ul className="coach-type__list">
+      <ul className={'coach-type__list' + (seatsState.classNumber ? ' coach-type__list_active' : '')}>
         {arrayTypes.map((item, i) => 
           <li className="coach-type__item" style={{ marginLeft: `${item.margin}px` }} key={i}>
             <svg 
@@ -41,6 +39,7 @@ function CoachType(props) {
           </li>
         )}
       </ul>
+      {!!seatsState.classNumber && <CoachSelect seatsState={seatsState} setSeatsState={setSeatsState} />}
     </div>    
   )
 }

@@ -1,46 +1,54 @@
-//import { useContext } from 'react'; 
-//import { useHistory, Link } from 'react-router-dom';
-//import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import './CoachSelect.css';
-//import AppContext from 'AppContext';
-//import TrainSeatsHeader from './TrainSeatsHeader/TrainSeatsHeader';
-//import icons from 'components/Main/icons.svg';
-//import { loadTrainsInfo } from 'api/http';
+import CoachProperties from './CoachProperties/CoachProperties';
+import shortid from 'shortid';
 
+function CoachSelect(props) {
+  const { seatsState, setSeatsState } = props;
 
-function CoachSelect() {
-//  const { trainInfo, isForward } = props;
+  console.log(seatsState);
 
-//  const { setAnimation, setPopup, trainsInfo, setTrainsInfo } = useContext(AppContext);
+  const classTypes = ['first', 'second', 'third', 'fourth'];
+  const coachArray = seatsState.info
+    .filter((item) => item.coach.class_type === classTypes[seatsState.classNumber - 1])
+    .sort((a, b) => a.index - b.index);
 
-//  const history = useHistory();
+  const coachClick = (index) => {
+    const info = seatsState.info.map((item) => index === item.index ? { ...item, isSelected: !item.isSelected } : item);
+    setSeatsState({ ...seatsState, info });
+  }
 
-//  const returnToTrains = async (evt) => {
-//    evt.preventDefault();
-    
-//    const result = await loadTrainsInfo(setAnimation, setPopup, setTrainsInfo, {
-//      ...trainsInfo.params, 
-//      offset: 0,
-//      direction: isForward ? 'forward' : 'backward'
-//    });
+  const checkSeat = (coachIndex, seatIndex, isChecked) => {
 
-//    if (result) {
-//      history.push(process.env.PUBLIC_URL + '/run/trains');
-//    }
-//  }
+  }
 
   return (
-    <div className="coach-select">   
-      <h3>
-        выбор вагонов
-      </h3>
+    <div className="coach-select">  
+      <div className="coach-select__header"> 
+        <p className="coach-select__title">
+          Вагоны
+        </p>
+        {coachArray.map((item) =>
+          <p className={'coach-select__number' + (item.isSelected ? ' coach-select__number_selected' : '')} key={shortid.generate()} onClick={() => coachClick(item.index)}>
+            {item.index}
+          </p> 
+        )}
+        <p className="coach-select__numbering">
+          Нумерация вагонов начинается с головы поезда
+        </p>
+      </div>
+      {coachArray.filter((item) => item.isSelected).map((item) => 
+        <div className="coach-select__coach" key={shortid.generate()}>
+          <CoachProperties coach={item} checkSeat={checkSeat} />
+        </div>
+      )}
     </div>    
   )
 }
 
-//CoachSelect.propTypes = {
-//  trainInfo: PropTypes.object.isRequired,
-//  isForward: PropTypes.bool.isRequired
-//};
+CoachSelect.propTypes = {
+  seatsState: PropTypes.object.isRequired,
+  setSeatsState: PropTypes.func.isRequired
+};
 
 export default CoachSelect;

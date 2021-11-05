@@ -14,8 +14,6 @@ function Seats() {
 
   const { setBookingStage, setAnimation, setPopup, forwardTrain, backwardTrain, seatsInfo, setSeatsInfo } = useContext(AppContext);
 
-  console.log(seatsInfo);
-
   useEffect(() => {
     setBookingStage('seats');
   }, [setBookingStage]);
