@@ -6,8 +6,6 @@ import shortid from 'shortid';
 function CoachSelect(props) {
   const { seatsState, setSeatsState } = props;
 
-  console.log(seatsState);
-
   const classTypes = ['first', 'second', 'third', 'fourth'];
   const coachArray = seatsState.info
     .filter((item) => item.coach.class_type === classTypes[seatsState.classNumber - 1])
@@ -16,6 +14,10 @@ function CoachSelect(props) {
   const coachClick = (index) => {
     const info = seatsState.info.map((item) => index === item.index ? { ...item, isSelected: !item.isSelected } : item);
     setSeatsState({ ...seatsState, info });
+  }
+
+  const checkOption = (coachIndex, optionName, isChecked) => {
+
   }
 
   const checkSeat = (coachIndex, seatIndex, isChecked) => {
@@ -30,7 +32,7 @@ function CoachSelect(props) {
         </p>
         {coachArray.map((item) =>
           <p className={'coach-select__number' + (item.isSelected ? ' coach-select__number_selected' : '')} key={shortid.generate()} onClick={() => coachClick(item.index)}>
-            {item.index}
+            {item.index > 9 ? item.index : '0' + item.index}
           </p> 
         )}
         <p className="coach-select__numbering">
@@ -39,7 +41,7 @@ function CoachSelect(props) {
       </div>
       {coachArray.filter((item) => item.isSelected).map((item) => 
         <div className="coach-select__coach" key={shortid.generate()}>
-          <CoachProperties coach={item} checkSeat={checkSeat} />
+          <CoachProperties coach={item} checkOption={checkOption} checkSeat={checkSeat} competitorCount={seatsState.competitorCount}/>
         </div>
       )}
     </div>    

@@ -9,8 +9,8 @@ import TrainSeats from './TrainSeats/TrainSeats';
 import { loadSeatsInfo } from 'api/http';
 
 function Seats() {
-  const [forwardSeats, setForwardSeats] = useState({});
-  const [backwardSeats, setBackwardSeats] = useState({});
+  const [forwardSeats, setForwardSeats] = useState({ competitorCount: 0 });
+  const [backwardSeats, setBackwardSeats] = useState({ competitorCount: 0 });
 
   const { setBookingStage, setAnimation, setPopup, forwardTrain, backwardTrain, seatsInfo, setSeatsInfo } = useContext(AppContext);
 
@@ -21,11 +21,13 @@ function Seats() {
   useEffect(() => {
     setForwardSeats({ 
       info: seatsInfo.forwardSeatsInfo,
-      classNumber: 0
+      classNumber: 0,
+      competitorCount: Math.trunc(Math.random() * 10) + 5
     });
     setBackwardSeats({ 
       info: seatsInfo.backwardSeatsInfo,
-      classNumber: 0
+      classNumber: 0,
+      competitorCount: Math.trunc(Math.random() * 10) + 5
     });
   }, [seatsInfo]);
   

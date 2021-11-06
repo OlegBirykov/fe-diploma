@@ -1,50 +1,170 @@
-/*.train-seats {
-  border: 1px solid #c4c4c4;
-  background-color: white;
-  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
-}
-
-.train-seats__return {
+.coach-properties__header {
   display: flex;
-  align-items: stretch;
-  padding: 36px 24px 32px 19px;
 }
 
-.train-seats__return_mirror {
-  justify-content: flex-end;
+.coach-properties__label {
+  width: 190px;
+  height: 161px;
+  padding: 35px 0 0 37px;
+
+  background-color: #ffd98f;
 }
 
-.train-seats__return-icon {
-  display: block; 
-  fill: #ffa800;
-}
-
-.train-seats__return-icon_mirror {
-  transform: rotate(180deg);
-}
-
-.train-seats__return-button {
-  margin-left: 10px;
-  padding: 16px 34px 0 34px;
-  border: 1px solid #292929;
-  border-radius: 5px;
+.coach-properties__index {
+  position: relative;
 
   color: #292929;
+  font-size: 72px;
+  line-height: 84px;
+  font-weight: bold;
+}
+
+.coach-properties__index::after {
+  content: "вагон";
+
+  position: absolute;
+  left: 5px;
+  bottom: -15px;
+
+  color: #292929;
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: normal;
+}
+
+.coach-properties__seats {
+  margin-left: 85px;
+  padding-top: 33px;
+  width: 242px;
+}
+
+.coach-properties__seats-all-title {
+  color: #928f94;
+  font-size: 18px;
+  line-height: 21px;
+  font-weight: normal;
+}
+
+.coach-properties__seats-all-count {
+  margin-left: 0.5em;
+  color: black;
+}
+
+.coach-properties__seats-title {
+  margin-top: 21px;
+
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: normal;
+}
+
+.coach-properties__seats-count {
+  margin-left: 0.5em;
+  font-weight: bold; 
+}
+
+.coach-properties__prices {
+  padding-top: 33px;
+  width: 200px;
+}
+
+.coach-properties__prices-title {
+  color: #928f94;
+  font-size: 18px;
+  line-height: 21px;
+  font-weight: normal;
+}
+
+.coach-properties__price {
+  margin-top: 21px;
+
   font-size: 24px;
   line-height: 28px;
   font-weight: bold;
 }
 
-.train-seats__return-button:hover {
-  color: #ffa800;
-  filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
+.coach-properties__currency {
+  margin-left: 0.5em;
+  color: #928f94;
+  font-weight: normal; 
 }
 
-.train-seats__return-button:active {
-  border: 1px solid #ffa800;
-  color: #292929;
-  background-color: #ffa800;
-  filter: none;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+.coach-properties__service {
+  padding-top: 33px;
 }
-*/
+
+.coach-properties__service-title {
+  color: #928f94;
+  font-size: 18px;
+  line-height: 21px;
+  font-weight: normal;
+}
+
+.coach-propertis__service-title_light {
+  margin-left: 0.6em;
+  
+  color: #c4c4c4;
+  text-transform: uppercase;
+}
+
+.coach-properties__options {
+  display: flex;
+  margin-top: 17px;
+
+  list-style: none;
+}
+
+.coach-properties__button {
+  display: flex;
+  width: 36px;
+  height: 34px;
+
+  border: 1px solid #292929;
+  border-radius: 5px;
+
+  cursor: pointer;
+}
+
+.coach-properties__button_included {
+  border-color: #fcdc9d;
+  background-color: #fcdc9d;
+}
+
+.coach-properties__button_selected {
+  border-color: #fdb935;
+  background-color: #fdb935;
+}
+
+.coach-properties__button_enabled:active {
+  border-color: #292929;
+  background-color: #ffa800;
+}
+
+.coach-properties__button:not(:first-child) {
+  margin-left: 13px;
+}
+
+.coach-properties__button-icon {
+  margin: auto;
+  fill: #928f94;
+}
+
+.coach-properties__button-icon_enabled {
+  fill: #292929;
+}
+
+.coach-properties__button-icon_selected {
+  fill: #f4f2f6; 
+}
+
+.coach-properties__button-hint {
+  
+}
+
+.coach-properties__map-container {
+
+}
+
+.coach-properties__hint {
+
+}
