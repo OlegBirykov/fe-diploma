@@ -194,9 +194,53 @@
 }
 
 .coach-properties__map-container {
-  
+  position: relative;
+
+  height: 283px;
+  padding-top: 69px;
 }
 
 .coach-properties__hint {
+  position: absolute;
+  top: 0;
+  right: 42px;
 
+  max-width: 200px;
+  padding: 16px;
+  border-radius: 5px;
+
+  color: #292929;
+  font-size: 16px;
+  line-height: 19px;
+  font-weight: normal;
+
+  background-color: #f3f3f3;
 }
+
+.coach-properties__map {
+  position: relative;
+
+  width: 921px;
+  height: 145px;
+  margin: 0 auto;
+
+  background-repeat: no-repeat;
+  background-size: auto;
+}
+
+.coach-properties__map_1 {
+  background-image: url(class1.png);
+}
+
+.coach-properties__map_2 {
+  background-image: url(class2.png);
+}
+
+.coach-properties__map_3 {
+  background-image: url(class3.png);
+}
+
+.coach-properties__map_4 {
+  background-image: url(class4.png); 
+}
+

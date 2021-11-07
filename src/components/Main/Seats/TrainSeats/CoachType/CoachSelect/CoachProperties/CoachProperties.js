@@ -119,6 +119,23 @@ function CoachProperties(props) {
     changeHint(optionIndex, false);
   }
 
+  let mapClassName = 'coach-properties__map coach-properties__map_';
+  switch (coach.coach.class_type) {
+    case 'first':
+      mapClassName += '1';
+      break;
+    case 'second':
+      mapClassName += '2';
+      break;
+    case 'third':
+      mapClassName += '3';
+      break;
+    case 'fourth':
+      mapClassName += '4';
+      break;
+    default:
+  }
+
   return (
     <div className="coach-properties">
       <div className="coach-properties__header"> 
@@ -207,6 +224,8 @@ function CoachProperties(props) {
         <p className="coach-properties__hint">
           {competitorCount} человек выбирают места в этом поезде
         </p>
+        <div className={mapClassName}>
+        </div>
       </div>
     </div>  
   )
