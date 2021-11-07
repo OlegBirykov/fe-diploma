@@ -1,13 +1,14 @@
-import { Fragment } from 'react';
+import { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import './CoachProperties.css';
-//import TrainSeatsHeader from './TrainSeatsHeader/TrainSeatsHeader';
 import icons from 'components/Main/icons.svg';
 import { separateThousands } from 'api/utils';
 
 function CoachProperties(props) {
-  const { coach, /*checkOption, checkSeat, */competitorCount } = props;
+  const { coach, checkOption, /*checkSeat, */competitorCount } = props;
 
+  const [showHints, setShowHints] = useState([false, false, false, false]);
+ 
   const isTop = (coach.coach.class_type === 'second') || (coach.coach.class_type === 'third');
 
   const availableSeatsCount = { top: 0, bottom: 0 };
@@ -36,6 +37,86 @@ function CoachProperties(props) {
       price1 = coach.coach.bottom_price;
       break;
       default:
+  }
+
+  const buttonClassName = "coach-properties__button";
+  const iconClassName = "coach-properties__button-icon";
+
+  let conditionerClassName = buttonClassName;
+  let conditionerIconClassName = iconClassName;
+  if (coach.coach.have_air_conditioning) {
+    conditionerClassName += ` ${buttonClassName}_included`;
+  }
+
+  let wifiClassName = buttonClassName;
+  let wifiIconClassName = iconClassName;
+  if (coach.coach.have_wifi) {
+    wifiClassName += ` ${buttonClassName}_enabled`;
+    wifiIconClassName += ` ${iconClassName}_enabled`;
+  }
+  if (coach.addWifi) {
+    wifiClassName += ` ${buttonClassName}_selected`;
+    wifiIconClassName += ` ${iconClassName}_selected`;
+  } 
+  
+  let linensClassName = buttonClassName;
+  let linensIconClassName = iconClassName;
+  if (coach.coach.class_type !== 'fourth') {
+    if (coach.coach.is_linens_included) {
+      linensClassName += ` ${buttonClassName}_included`;
+    } else { 
+      linensClassName += ` ${buttonClassName}_enabled`;
+      linensIconClassName += ` ${iconClassName}_enabled`;
+
+      if (coach.addLinens) {
+        linensClassName += ` ${buttonClassName}_selected`;
+        linensIconClassName += ` ${iconClassName}_selected`;
+      }  
+    }
+  }
+
+  let foodClassName = buttonClassName;
+  let foodIconClassName = iconClassName;
+  if (coach.coach.have_food) {
+    foodClassName += ` ${buttonClassName}_enabled`;
+    foodIconClassName += ` ${iconClassName}_enabled`;
+  }
+  if (coach.addFood) {
+    foodClassName += ` ${buttonClassName}_selected`;
+    foodIconClassName += ` ${iconClassName}_selected`;
+  } 
+
+  const wifiChange = () => {
+    if (coach.coach.have_wifi) {
+      checkOption(coach.index, 'addWifi');
+    }
+  }
+
+  const linensChange = () => {
+    if (coach.coach.class_type === 'fourth' || coach.coach.is_linens_included) {
+      return;
+    }
+    checkOption(coach.index, 'addLinens');
+  }
+
+  const foodChange = () => {
+    if (coach.coach.have_food) {
+      checkOption(coach.index, 'addFood');
+    }
+  }
+
+  const changeHint = (optionIndex, isShow) => {
+    const hints = [...showHints];
+    hints[optionIndex] = isShow;
+    setShowHints(hints); 
+  }
+
+  const buttonMouseOver = (optionIndex) => {
+    changeHint(optionIndex, true);
+  }
+
+  const buttonMouseOut = (optionIndex) => {
+    changeHint(optionIndex, false);
   }
 
   return (
@@ -79,25 +160,45 @@ function CoachProperties(props) {
             Обслуживание<span className="coach-propertis__service-title_light">Фпк</span>
           </p>
           <ul className="coach-properties__options">
-            <li className="coach-properties__button">
-              <svg className="coach-properties__button-icon" width="21" height="21">
+            <li className={conditionerClassName} onMouseOver={() => buttonMouseOver(0)} onMouseOut={() => buttonMouseOut(0)}>
+              <svg className={conditionerIconClassName} width="21" height="21">
                 <use xlinkHref={icons + '#conditioner'} />
               </svg> 
+              {showHints[0] &&
+                <p className="coach-properties__button-hint">
+                  Кондиционер
+                </p>
+              }
             </li>
-            <li className="coach-properties__button">
-              <svg className="coach-properties__button-icon" width="20" height="16">
+            <li className={wifiClassName} onClick={wifiChange} onMouseOver={() => buttonMouseOver(1)} onMouseOut={() => buttonMouseOut(1)}>
+              <svg className={wifiIconClassName} width="20" height="16">
                 <use xlinkHref={icons + '#wifi'} />
               </svg> 
+              {showHints[1] &&
+                <p className="coach-properties__button-hint">
+                  WI-FI
+                </p>
+              }
             </li>
-            <li className="coach-properties__button">
-              <svg className="coach-properties__button-icon" width="22" height="16">
+            <li className={linensClassName} onClick={linensChange} onMouseOver={() => buttonMouseOver(2)} onMouseOut={() => buttonMouseOut(2)}>
+              <svg className={linensIconClassName} width="22" height="16">
                 <use xlinkHref={icons + '#linens'} />
               </svg> 
+              {showHints[2] &&
+                <p className="coach-properties__button-hint">
+                  Бельё
+                </p>
+              }
             </li>
-            <li className="coach-properties__button">
-              <svg className="coach-properties__button-icon" width="20" height="18">
+            <li className={foodClassName} onClick={foodChange} onMouseOver={() => buttonMouseOver(3)} onMouseOut={() => buttonMouseOut(3)}>
+              <svg className={foodIconClassName} width="20" height="18">
                 <use xlinkHref={icons + '#food'} />
               </svg> 
+              {showHints[3] &&
+                <p className="coach-properties__button-hint">
+                  Питание
+                </p>
+              }
             </li>
           </ul>
         </div>

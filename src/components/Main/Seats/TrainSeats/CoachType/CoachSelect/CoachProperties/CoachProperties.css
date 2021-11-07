@@ -115,14 +115,14 @@
 }
 
 .coach-properties__button {
+  position: relative;
+
   display: flex;
   width: 36px;
   height: 34px;
 
   border: 1px solid #292929;
   border-radius: 5px;
-
-  cursor: pointer;
 }
 
 .coach-properties__button_included {
@@ -130,12 +130,16 @@
   background-color: #fcdc9d;
 }
 
+.coach-properties__button_enabled {
+  cursor: pointer;
+}
+
 .coach-properties__button_selected {
   border-color: #fdb935;
   background-color: #fdb935;
 }
 
-.coach-properties__button_enabled:active {
+.coach-properties__button_enabled:hover {
   border-color: #292929;
   background-color: #ffa800;
 }
@@ -158,11 +162,39 @@
 }
 
 .coach-properties__button-hint {
-  
+  position: absolute;
+  left: 50%;
+  bottom: -5px;
+  transform: translate(-50%, 100%);
+
+  min-width: 84px;
+  padding: 8px 13px;
+  border-radius: 5px;
+
+  color: #292929;
+  font-size: 16px;
+  line-height: 19px;
+  font-weight: normal;
+  text-align: center;
+
+  background-color: #e5e5e5;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.coach-properties__button-hint::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, -50%) rotate(45deg);
+
+  width: 4px;
+  height: 4px;
+  background-color: #e5e5e5;
 }
 
 .coach-properties__map-container {
-
+  
 }
 
 .coach-properties__hint {

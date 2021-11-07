@@ -16,11 +16,14 @@ function CoachSelect(props) {
     setSeatsState({ ...seatsState, info });
   }
 
-  const checkOption = (coachIndex, optionName, isChecked) => {
-
+  const checkOption = (coachIndex, optionFlagName) => {
+    const info = seatsState.info;
+    const index = info.findIndex((item) => item.index === coachIndex);
+    info[index][optionFlagName] = !info[index][optionFlagName];
+    setSeatsState({ ...seatsState, info });
   }
 
-  const checkSeat = (coachIndex, seatIndex, isChecked) => {
+  const checkSeat = (coachIndex, seatIndex) => {
 
   }
 
