@@ -8,32 +8,22 @@ function CoachProperties(props) {
   const { coach, checkOption, /*checkSeat, */competitorCount } = props;
 
   const [showHints, setShowHints] = useState([false, false, false, false]);
- 
-  const isTop = (coach.coach.class_type === 'second') || (coach.coach.class_type === 'third');
-
-  const availableSeatsCount = { top: 0, bottom: 0 };
-  coach.seats.forEach((item) => {
-    if (item.available) {
-      if (!isTop || item.index % 2) {
-        availableSeatsCount.bottom++;
-      } else {
-        availableSeatsCount.top++;
-      }
-    }
-  });
 
   let price1 = null;
   let price2 = null;
-  switch (coach.coach.class_type) {
-    case 'first':
+  let isTop = false;
+
+  switch (coach.classNumber) {
+    case 1:
       price1 = coach.coach.price;
       break;
-    case 'second':
-    case 'third':
+    case 2:
+    case 3:
       price1 = coach.coach.top_price;
       price2 = coach.coach.bottom_price;
+      isTop = true;
       break;
-    case 'fourth':
+    case 4:
       price1 = coach.coach.bottom_price;
       break;
       default:
@@ -119,22 +109,7 @@ function CoachProperties(props) {
     changeHint(optionIndex, false);
   }
 
-  let mapClassName = 'coach-properties__map coach-properties__map_';
-  switch (coach.coach.class_type) {
-    case 'first':
-      mapClassName += '1';
-      break;
-    case 'second':
-      mapClassName += '2';
-      break;
-    case 'third':
-      mapClassName += '3';
-      break;
-    case 'fourth':
-      mapClassName += '4';
-      break;
-    default:
-  }
+  let mapClassName = 'coach-properties__map coach-properties__map_' + coach.classNumber;
 
   return (
     <div className="coach-properties">
@@ -146,15 +121,15 @@ function CoachProperties(props) {
         </div>
         <div className="coach-properties__seats">
           <p className="coach-properties__seats-all-title">
-            Места<span className="coach-properties__seats-all-count">{availableSeatsCount.top + availableSeatsCount.bottom}</span>
+            Места<span className="coach-properties__seats-all-count">{coach.getAvailableSeatsCount()}</span>
           </p>
           {isTop && 
             <Fragment>
               <p className="coach-properties__seats-title">
-                Верхние<span className="coach-properties__seats-count">{availableSeatsCount.top}</span>
+                Верхние<span className="coach-properties__seats-count">{coach.getTopAvailableSeatsCount()}</span>
               </p>
               <p className="coach-properties__seats-title">
-                Нижние<span className="coach-properties__seats-count">{availableSeatsCount.bottom}</span>
+                Нижние<span className="coach-properties__seats-count">{coach.getBottomAvailableSeatsCount()}</span>
               </p>
             </Fragment>
           }

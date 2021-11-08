@@ -35,6 +35,10 @@ function Seats() {
     await loadSeatsInfo(setAnimation, setPopup, setSeatsInfo, { ...seatsInfo.params, ...params });
   }
 
+  console.log(seatsInfo);
+  console.log(forwardSeats);
+  console.log(backwardSeats);
+
   return (
     <main className="seats"> 
       <ProgressIndicator stepNumber={1} /> 

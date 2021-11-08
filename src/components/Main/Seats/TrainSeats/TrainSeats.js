@@ -12,9 +12,6 @@ import { loadTrainsInfo } from 'api/http';
 function TrainSeats(props) {
   const { trainInfo, seatsState, setSeatsState, isForward } = props;
 
-  console.log(isForward ? 'Туда:' : 'Обратно:');
-  console.log(seatsState);
-
   const { setAnimation, setPopup, trainsInfo, setTrainsInfo } = useContext(AppContext);
 
   const history = useHistory();
