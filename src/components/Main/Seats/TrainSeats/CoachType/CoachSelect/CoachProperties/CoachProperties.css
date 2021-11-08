@@ -244,3 +244,46 @@
   background-image: url(class4.png); 
 }
 
+.coach-properties__map-label {
+  position: absolute;
+  top: 0px;
+  left: 40px;
+
+  width: 33px;
+  height: 25px;
+  padding-top: 2px;
+
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+
+  background-color: #333333;
+}
+
+.coach-properties__map-seat {
+  position: absolute;
+
+  border: 2px solid #cccccc;
+
+  color: #ececec;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+
+  background-color: #cccccc;
+}
+
+.coach-properties__map-seat_available {
+  border-color: #f2f2f2;
+  color: black;
+  background-color: #f2f2f2;
+
+  cursor: pointer;
+}
+
+.coach-properties__map-seat_selected {
+  border-color: #ffa800;  
+}
+
+

@@ -11,20 +11,22 @@ function CoachSelect(props) {
     .filter((item) => item.coach.class_type === classTypes[seatsState.classNumber - 1])
     .sort((a, b) => a.index - b.index);
 
-  const coachClick = (index) => {
-    const info = seatsState.info.map((item) => index === item.index ? { ...item, isSelected: !item.isSelected } : item);
-    setSeatsState({ ...seatsState, info });
+  const coachClick = (coachIndex) => {
+    const coach = seatsState.info.find((item) => coachIndex === item.index);
+    coach.isSelected = !coach.isSelected;
+    setSeatsState({ ...seatsState, info: seatsState.info });
   }
 
   const checkOption = (coachIndex, optionFlagName) => {
-    const info = seatsState.info;
-    const index = info.findIndex((item) => item.index === coachIndex);
-    info[index][optionFlagName] = !info[index][optionFlagName];
-    setSeatsState({ ...seatsState, info });
+    const coach = seatsState.info.find((item) => coachIndex === item.index);
+    coach[optionFlagName] = !coach[optionFlagName];
+    setSeatsState({ ...seatsState, info: seatsState.info });
   }
 
   const checkSeat = (coachIndex, seatIndex) => {
-
+    const coach = seatsState.info.find((item) => coachIndex === item.index);
+    coach.seatsMap[seatIndex].selected = !coach.seatsMap[seatIndex].selected;
+    setSeatsState({ ...seatsState, info: seatsState.info });
   }
 
   return (

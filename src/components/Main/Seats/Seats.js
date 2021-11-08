@@ -36,8 +36,6 @@ function Seats() {
   }
 
   console.log(seatsInfo);
-  console.log(forwardSeats);
-  console.log(backwardSeats);
 
   return (
     <main className="seats"> 

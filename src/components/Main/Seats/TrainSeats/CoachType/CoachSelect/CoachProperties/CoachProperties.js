@@ -5,7 +5,7 @@ import icons from 'components/Main/icons.svg';
 import { separateThousands } from 'api/utils';
 
 function CoachProperties(props) {
-  const { coach, checkOption, /*checkSeat, */competitorCount } = props;
+  const { coach, checkOption, checkSeat, competitorCount } = props;
 
   const [showHints, setShowHints] = useState([false, false, false, false]);
 
@@ -111,6 +111,12 @@ function CoachProperties(props) {
 
   let mapClassName = 'coach-properties__map coach-properties__map_' + coach.classNumber;
 
+  const seatChange = (seatIndex) => {
+    if (coach.seatsMap[seatIndex].available) {
+      checkSeat(coach.index, seatIndex);
+    }  
+  }
+
   return (
     <div className="coach-properties">
       <div className="coach-properties__header"> 
@@ -200,6 +206,25 @@ function CoachProperties(props) {
           {competitorCount} человек выбирают места в этом поезде
         </p>
         <div className={mapClassName}>
+          <p className="coach-properties__map-label">
+            {coach.index > 9 ? coach.index : '0' + coach.index}
+          </p>
+          {coach.seatsMap.map((item, i) => 
+            <p 
+              className={'coach-properties__map-seat' + (item.available ? ' coach-properties__map-seat_available' : '') + (item.selected ? ' coach-properties__map-seat_selected' : '')} 
+              key={i} 
+              style={{
+                top: `${item.top}px`,
+                left: `${item.left}px`,
+                width: `${item.width}px`,
+                height: `${item.height}px`, 
+                paddingTop: `${item.paddingTop}px`          
+              }}
+              onClick = {() => seatChange(i)}
+            >
+              {i + 1}
+            </p>
+          )}
         </div>
       </div>
     </div>  
