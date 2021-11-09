@@ -1,4 +1,3 @@
-import SeatsMap from './Classes/SeatsMap';
 import { httpErrorBox, incorrectDataErrorBox } from './gui';
 
 async function fetchData(url, opt) {
@@ -321,9 +320,6 @@ export async function loadSeatsInfo (setAnimation, setPopup, setSeatsInfo, param
     incorrectDataErrorBox(setPopup);
     return false;
   }
-
-  forwardSeatsInfo = forwardSeatsInfo.map((item) => new SeatsMap(item));
-  backwardSeatsInfo = backwardSeatsInfo.map((item) => new SeatsMap(item));
 
   const seatsInfo = {
     params,

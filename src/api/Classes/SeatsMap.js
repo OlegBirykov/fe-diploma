@@ -394,4 +394,30 @@ export default class SeatsMap {
   getBottomAvailableSeatsCount() {
     return this.seatsMap.reduce((count, item) => (item.available && !item.isTop) ? count + 1 : count, 0);   
   }
+
+  getPrice(param) {
+    const seat = typeof param === 'object' ? param : this.seatsMap[param];
+
+    if (!seat.selected) {
+      return 0;
+    }
+
+    let price = seat.price;
+    if (this.addWifi) {
+      price += this.coach.wifi_price;
+    }
+
+    if (this.addLinens) {
+      price += this.coach.linens_price;
+    }
+
+    if (seat.ticketType === 'child') {
+      price = Math.trunc(price * 0.5);
+    }
+    return price;
+  }
+
+  getSumPrice() {
+    return this.seatsMap.reduce((sum, item) => sum + this.getPrice(item), 0);
+  }
 }

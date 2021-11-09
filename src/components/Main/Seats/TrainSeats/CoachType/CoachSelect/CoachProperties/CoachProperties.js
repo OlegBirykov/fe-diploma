@@ -117,6 +117,8 @@ function CoachProperties(props) {
     }  
   }
 
+  const sumPrice = coach.getSumPrice();
+
   return (
     <div className="coach-properties">
       <div className="coach-properties__header"> 
@@ -231,6 +233,11 @@ function CoachProperties(props) {
             </p>
           )}
         </div>
+        {!!sumPrice &&
+          <p className="coach-properties__sum-price">
+            {separateThousands(sumPrice)}<span className="coach-properties__sum-price-currency">&#x20bd;</span>
+          </p>
+        }
       </div>
     </div>  
   )
