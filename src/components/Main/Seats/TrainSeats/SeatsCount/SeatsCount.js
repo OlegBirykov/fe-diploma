@@ -1,46 +1,58 @@
-//import { useContext } from 'react'; 
-//import { useHistory, Link } from 'react-router-dom';
-//import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import './SeatsCount.css';
-//import AppContext from 'AppContext';
-//import TrainSeatsHeader from './TrainSeatsHeader/TrainSeatsHeader';
-//import icons from 'components/Main/icons.svg';
-//import { loadTrainsInfo } from 'api/http';
 
+function SeatsCount(props) {
+  const { seatsState, setSeatsState } = props;
 
-function SeatsCount() {
-//  const { trainInfo, isForward } = props;
+  const ticketsCount = seatsState.fullTicketsCount + seatsState.childTicketsCount + seatsState.parentTicketsCount;
+  const maxCountValue = 6;
 
-//  const { setAnimation, setPopup, trainsInfo, setTrainsInfo } = useContext(AppContext);
+  const fullClassName = 'seats-count__types-item' + (seatsState.curTicketType === 'full' ? ' seats-count__types-item_active' : '');
+  const childClassName = 'seats-count__types-item' + (seatsState.curTicketType === 'child' ? ' seats-count__types-item_active' : '');
+  const parentClassName = 'seats-count__types-item' + (seatsState.curTicketType === 'parent' ? ' seats-count__types-item_active' : '');
 
-//  const history = useHistory();
-
-//  const returnToTrains = async (evt) => {
-//    evt.preventDefault();
-    
-//    const result = await loadTrainsInfo(setAnimation, setPopup, setTrainsInfo, {
-//      ...trainsInfo.params, 
-//      offset: 0,
-//      direction: isForward ? 'forward' : 'backward'
-//    });
-
-//    if (result) {
-//      history.push(process.env.PUBLIC_URL + '/run/trains');
-//    }
-//  }
+  const setCurTicketType = (curTicketType) => {
+    setSeatsState({ ...seatsState, curTicketType });
+  }
 
   return (
     <div className="seats-count">   
-      <h3>
+      <h3 className="seats-count__title">
         Количество билетов
       </h3>
+      <div className="seats-count__types-list">
+        <div className={fullClassName} onClick={() => setCurTicketType('full')}>
+          <p className="seats-count__type-count">
+            Взрослых - {seatsState.fullTicketsCount + seatsState.parentTicketsCount}
+          </p>
+          <p className="seats-count__type-description">
+            Можно добавить ещё<br/>{maxCountValue - ticketsCount} пассажиров
+          </p>
+        </div>
+        <div className={childClassName} onClick={() => setCurTicketType('child')}>
+          <p className="seats-count__type-count">
+            Детских - {seatsState.childTicketsCount}
+          </p>
+          <p className="seats-count__type-description">
+            Можно добавить еще {maxCountValue - ticketsCount} детей до 10 лет. Свое место в вагоне, как у взрослых, но дешевле в среднем на 50-65%
+          </p>
+        </div>
+        <div className={parentClassName} onClick={() => setCurTicketType('parent')}>
+          <p className="seats-count__type-count">
+            Детских «без места» - {seatsState.parentTicketsCount}
+          </p>
+          <p className="seats-count__type-description">
+            Автоматически добавляется взрослый билет
+          </p>
+        </div>
+      </div>
     </div>    
   )
 }
 
-//SeatsCount.propTypes = {
-//  trainInfo: PropTypes.object.isRequired,
-//  isForward: PropTypes.bool.isRequired
-//};
+SeatsCount.propTypes = {
+  seatsState: PropTypes.object.isRequired,
+  setSeatsState: PropTypes.func.isRequired
+};
 
 export default SeatsCount;

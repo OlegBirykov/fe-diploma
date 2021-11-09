@@ -211,7 +211,12 @@ function CoachProperties(props) {
           </p>
           {coach.seatsMap.map((item, i) => 
             <p 
-              className={'coach-properties__map-seat' + (item.available ? ' coach-properties__map-seat_available' : '') + (item.selected ? ' coach-properties__map-seat_selected' : '')} 
+              className={'coach-properties__map-seat' 
+                + (item.available ? ' coach-properties__map-seat_available' : '') 
+                + (item.selected ? ' coach-properties__map-seat_selected' : '')
+                + ((item.selected && item.ticketType === 'child') ? ' coach-properties__map-seat_child' : '')
+                + ((item.selected && item.ticketType === 'parent') ? ' coach-properties__map-seat_parent' : '')
+              } 
               key={i} 
               style={{
                 top: `${item.top}px`,

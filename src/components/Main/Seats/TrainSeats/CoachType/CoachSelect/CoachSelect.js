@@ -25,8 +25,41 @@ function CoachSelect(props) {
 
   const checkSeat = (coachIndex, seatIndex) => {
     const coach = seatsState.info.find((item) => coachIndex === item.index);
-    coach.seatsMap[seatIndex].selected = !coach.seatsMap[seatIndex].selected;
-    setSeatsState({ ...seatsState, info: seatsState.info });
+
+    if (coach.seatsMap[seatIndex].selected) {
+      coach.seatsMap[seatIndex].selected = false;
+      switch (coach.seatsMap[seatIndex].ticketType) {
+        case 'full':
+          setSeatsState({ ...seatsState, info: seatsState.info, fullTicketsCount: seatsState.fullTicketsCount - 1 });
+          break;
+        case 'child':
+          setSeatsState({ ...seatsState, info: seatsState.info, childTicketsCount: seatsState.childTicketsCount - 1 });
+          break;
+        case 'parent':
+          setSeatsState({ ...seatsState, info: seatsState.info, parentTicketsCount: seatsState.parentTicketsCount - 1 });
+          break;
+        default:
+      }
+
+    } else if (seatsState.fullTicketsCount + seatsState.childTicketsCount + seatsState.parentTicketsCount >= 6) {
+      return;
+
+    } else {
+      coach.seatsMap[seatIndex].selected = true; 
+      coach.seatsMap[seatIndex].ticketType = seatsState.curTicketType;
+      switch (seatsState.curTicketType) {
+        case 'full':
+          setSeatsState({ ...seatsState, info: seatsState.info, fullTicketsCount: seatsState.fullTicketsCount + 1 });
+          break;
+        case 'child':
+          setSeatsState({ ...seatsState, info: seatsState.info, childTicketsCount: seatsState.childTicketsCount + 1 });
+          break;
+        case 'parent':
+          setSeatsState({ ...seatsState, info: seatsState.info, parentTicketsCount: seatsState.parentTicketsCount + 1 });
+          break;
+        default:
+      }     
+    }
   }
 
   return (

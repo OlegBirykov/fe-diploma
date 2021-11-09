@@ -286,4 +286,12 @@
   border-color: #ffa800;  
 }
 
+.coach-properties__map-seat_child {
+  border-color: red;  
+}
+
+.coach-properties__map-seat_parent {
+  border-color: blue;
+}
+
 

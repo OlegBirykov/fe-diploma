@@ -22,11 +22,19 @@ function Seats() {
     setForwardSeats({ 
       info: seatsInfo.forwardSeatsInfo,
       classNumber: 0,
+      curTicketType: 'full',
+      fullTicketsCount: 0,
+      childTicketsCount: 0,
+      parentTicketsCount: 0,
       competitorCount: Math.trunc(Math.random() * 10) + 5
     });
     setBackwardSeats({ 
       info: seatsInfo.backwardSeatsInfo,
       classNumber: 0,
+      curTicketType: 'full',
+      fullTicketsCount: 0,
+      childTicketsCount: 0,
+      parentTicketsCount: 0,
       competitorCount: Math.trunc(Math.random() * 10) + 5
     });
   }, [seatsInfo]);

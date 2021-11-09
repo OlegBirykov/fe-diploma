@@ -1,55 +1,61 @@
 .seats-count {
+  padding: 40px 0 49px 0;
   border-bottom: 1px dashed #c4c4c4;
 }
 
-/*
-.train-seats {
-  border: 1px solid #c4c4c4;
-  background-color: white;
-  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
-}
-
-.train-seats__return {
-  display: flex;
-  align-items: stretch;
-  padding: 36px 24px 32px 19px;
-}
-
-.train-seats__return_mirror {
-  justify-content: flex-end;
-}
-
-.train-seats__return-icon {
-  display: block; 
-  fill: #ffa800;
-}
-
-.train-seats__return-icon_mirror {
-  transform: rotate(180deg);
-}
-
-.train-seats__return-button {
-  margin-left: 10px;
-  padding: 16px 34px 0 34px;
-  border: 1px solid #292929;
-  border-radius: 5px;
+.seats-count__title {
+  padding-left: 20px;
 
   color: #292929;
-  font-size: 24px;
-  line-height: 28px;
+  font-size: 30px;
+  line-height: 35px;
   font-weight: bold;
 }
 
-.train-seats__return-button:hover {
-  color: #ffa800;
-  filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
+.seats-count__types-list {
+  display: flex;
+  padding-top: 25px;
 }
 
-.train-seats__return-button:active {
-  border: 1px solid #ffa800;
-  color: #292929;
-  background-color: #ffa800;
-  filter: none;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+.seats-count__types-item {
+  flex-basis: 33%;
+
+  padding: 20px 41px 60px 35px;
+  border: 1px solid transparent;
+  cursor: pointer;
 }
-*/
+
+.seats-count__types-item:last-child {
+  flex-grow: 1;
+}
+
+.seats-count__types-item:hover {
+  background-color: #f7f6f6;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
+}
+
+.seats-count__types-item_active {
+  border-color: rgba(255, 168, 0, 0.79);
+}
+
+.seats-count__type-count {
+  padding: 16px 17px;
+  border: 1px solid #928f94;
+  border-radius: 5px;
+
+  color: #292929;
+  font-size: 18px;
+  line-height: 21px;
+  font-weight: normal;
+
+  background-color: white;
+}
+
+.seats-count__type-description {
+  padding-top: 25px;
+
+  color: black;
+  font-size: 16px;
+  line-height: 19px;
+  font-weight: normal;
+}

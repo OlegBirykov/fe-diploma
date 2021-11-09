@@ -41,7 +41,7 @@ function TrainSeats(props) {
         </Link>
       </div> 
       <TrainSeatsHeader trainInfo={trainInfo} isForward={isForward} /> 
-      <SeatsCount seatsState={seatsState} /> 
+      <SeatsCount seatsState={seatsState} setSeatsState={setSeatsState} /> 
       <CoachType seatsState={seatsState} setSeatsState={setSeatsState} />
     </div>    
   )
