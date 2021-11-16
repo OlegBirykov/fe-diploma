@@ -112,7 +112,7 @@ function Seats() {
           </div>
           <Link 
             to={process.env.PUBLIC_URL + '/run/passengers'} 
-            className={'seats__button seats__button' + (isNextEnabled ? ' seats__button seats__button_active' : '')}
+            className={'seats__button' + (isNextEnabled ? ' seats__button_active' : '')}
             onClick={goToNext}
           > 
             Далее
