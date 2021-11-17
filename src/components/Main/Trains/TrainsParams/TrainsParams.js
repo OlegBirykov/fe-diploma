@@ -264,32 +264,32 @@ function TrainsParams(props) {
   return (
     <div className="trains-params"> 
       <section className="trains-params__dates">
-      <label className="trains-params__date-title">
-        Дата поездки
-        <div className="trains-params__date-container">
-          <DateInput 
-            name='start-date' 
-            value={dateStart}
-            placeholder='ДД ММ ГГГГ' 
-            setValue={changeDateStart} 
-            isMini={true}
-            isDisabled={!(bookingStage === 'trains' && trainsInfo.params.direction === 'forward')}
-          />
-        </div>    
-      </label>
-      <label className="trains-params__date-title">
-        Дата возвращения
-        <div className="trains-params__date-container">
-          <DateInput 
-            name='end-date' 
-            value={dateEnd} 
-            placeholder='ДД ММ ГГГГ' 
-            setValue={changeDateEnd} 
-            isMini={true}
-            isDisabled={!(bookingStage === 'trains' && trainsInfo.params.direction === 'backward')}
-          />
-        </div>    
-      </label>
+        <label className="trains-params__date-title">
+          Дата поездки
+          <div className="trains-params__date-container">
+            <DateInput 
+              name='start-date' 
+              value={dateStart}
+              placeholder='ДД ММ ГГГГ' 
+              setValue={changeDateStart} 
+              isMini={true}
+              isDisabled={!(bookingStage === 'trains' && trainsInfo.params.direction === 'forward')}
+            />
+          </div>    
+        </label>
+        <label className="trains-params__date-title">
+          Дата возвращения
+          <div className="trains-params__date-container">
+            <DateInput 
+              name='end-date' 
+              value={dateEnd} 
+              placeholder='ДД ММ ГГГГ' 
+              setValue={changeDateEnd} 
+              isMini={true}
+              isDisabled={!(bookingStage === 'trains' && trainsInfo.params.direction === 'backward')}
+            />
+          </div>    
+        </label>
       </section>
       <section className="trains-params__options">
         <div className="trains-params__option">

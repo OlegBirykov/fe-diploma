@@ -1,0 +1,26 @@
+.travel-details {
+  background-color: #3e3c41;
+}
+
+.travel-details__title {
+  padding: 35px 0 35px 0;
+  text-align: center;
+
+  color: #e5e5e5;
+  font-size: 30px;
+  line-height: 35px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.travel-details__train {
+  border-top: 1px solid #e5e5e5;
+}
+
+.trains-params__passengers {
+  border-top: 1px solid #e5e5e5;
+}
+
+.trains-params__total {
+  border-top: 1px solid #e5e5e5;
+}

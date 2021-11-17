@@ -9,15 +9,21 @@ function TravelDetails() {
 
   return (
     <div className="travel-details"> 
-      <section className="travel-details__train">
+      <div className="travel-details__title">
+        Детали поездки
+      </div>
+      <div className="travel-details__train">
         Туда
-      </section>
-      <section className="travel-details__train">
+      </div>
+      <div className="travel-details__train">
         Обратно
-      </section>
-      <section className="trains-params__passengers">
+      </div>
+      <div className="trains-params__passengers">
         Пассажиры
-      </section>
+      </div>
+      <div className="trains-params__total">
+        Итог
+      </div>
     </div>    
   )
 }
