@@ -1,9 +1,6 @@
-//import { useState, useContext, useEffect } from 'react';
 //import PropTypes from 'prop-types';
 import './TravelDetails.css';
-//import AppContext from 'AppContext';
-//import DateInput from 'components/Header/TicketSearchForm/DateInput/DateInput';
-//import { dayInFirstPosition, dayInLastPosition } from 'api/utils';
+import TravelDetailsTrain from './TravelDetailsTrain/TravelDetailsTrain';
 
 function TravelDetails() {
 
@@ -13,15 +10,15 @@ function TravelDetails() {
         Детали поездки
       </div>
       <div className="travel-details__train">
-        Туда
+        <TravelDetailsTrain isForward={true} />
       </div>
       <div className="travel-details__train">
-        Обратно
+        <TravelDetailsTrain isForward={false} />
       </div>
-      <div className="trains-params__passengers">
+      <div className="travel-details__passengers">
         Пассажиры
       </div>
-      <div className="trains-params__total">
+      <div className="travel-details__total">
         Итог
       </div>
     </div>    
