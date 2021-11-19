@@ -6,9 +6,9 @@ function TravelDetails() {
 
   return (
     <div className="travel-details"> 
-      <div className="travel-details__title">
+      <h2 className="travel-details__title">
         Детали поездки
-      </div>
+      </h2>
       <div className="travel-details__train">
         <TravelDetailsTrain isForward={true} />
       </div>

@@ -36,8 +36,6 @@
   margin-left: auto;
   border: 2px solid white;
   border-radius: 5px;
-
-  color: #c4c4c4;
 }
 
 .trains-time-filter__button::before {

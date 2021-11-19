@@ -9,19 +9,23 @@ function TravelDetailsTrain(props) {
   const [isCollapsed, setIsCollapsed] = useState(true);
 
   return (
-    <div className="trains-time-filter"> 
-      <div className={'trains-time-filter__collapsed' + (isCollapsed ? '' : ' trains-time-filter__collapsed_exp')}>
-        <svg className={'trains-time-filter__arrow' + (isForward ? '' : ' trains-time-filter__arrow_mirror')} width="32" height="26">
+    <div className="travel-details-train"> 
+      <div className="travel-details-train__collapsed">
+        <svg className={'travel-details-train__arrow' + (isForward ? '' : ' travel-details-train__arrow_mirror')} width="32" height="26">
           <use xlinkHref={icons + '#arrow-negative'} />
         </svg>
-        <p className="trains-time-filter__title">
+        <p className="travel-details-train__title">
           {isForward ? 'Туда' : 'Обратно'}
         </p>
-        <button className={'trains-time-filter__button' + (isCollapsed ? '' : ' trains-time-filter__button_minus')} type="button" onClick={() => setIsCollapsed(!isCollapsed)}>      
+        <p className={'travel-details-train__title-date' + (isForward ? '' : ' travel-details-train__title-date_backward')}>
+          01.01.2000
+        </p>
+        <button className={'travel-details-train__button' + (isCollapsed ? '' : ' travel-details-train__button_minus')} type="button" onClick={() => setIsCollapsed(!isCollapsed)}>      
         </button>
       </div>
       {!isCollapsed &&
-        <div className="trains-time-filter__full">
+        <div className="travel-details-train__full">
+          Номер поезда
         </div> 
       }
     </div>    
