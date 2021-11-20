@@ -14,13 +14,16 @@
 }
 
 .travel-details__train {
+  padding: 0 27px 0 28px;
   border-top: 1px solid #e5e5e5;
 }
 
 .travel-details__passengers {
+  padding: 0 27px 0 28px;
   border-top: 1px solid #e5e5e5;
 }
 
 .travel-details__total {
+  padding: 0 27px 0 28px;
   border-top: 1px solid #e5e5e5;
 }

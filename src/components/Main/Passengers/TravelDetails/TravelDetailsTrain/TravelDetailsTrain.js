@@ -11,7 +11,7 @@ function TravelDetailsTrain(props) {
   return (
     <div className="travel-details-train"> 
       <div className="travel-details-train__collapsed">
-        <svg className={'travel-details-train__arrow' + (isForward ? '' : ' travel-details-train__arrow_mirror')} width="32" height="26">
+        <svg className={'travel-details-train__arrow-neg' + (isForward ? '' : ' travel-details-train__arrow-neg_mirror')} width="32" height="26">
           <use xlinkHref={icons + '#arrow-negative'} />
         </svg>
         <p className="travel-details-train__title">
@@ -25,7 +25,60 @@ function TravelDetailsTrain(props) {
       </div>
       {!isCollapsed &&
         <div className="travel-details-train__full">
-          Номер поезда
+          <div className="travel-details-train__number">
+            <p className="travel-details-train__number-left">
+              № Поезда
+            </p>
+            <p className="travel-details-train__number-right">
+              1313
+            </p>
+          </div>
+          <div className="travel-details-train__name">
+            <p className="travel-details-train__name-left">
+              Название
+            </p>
+            <p className="travel-details-train__name-right">
+              Москва<br/>Санкт-Петербург
+            </p> 
+          </div>
+          <p className="travel-details-train__duration">
+            0 : 00
+          </p>
+          <div className="travel-details-train__times">
+            <p className="travel-details-train__time-left">
+              00:00
+            </p>
+            <svg className={'travel-details-train__arrow' + (isForward ? '' : ' travel-details-train__arrow_mirror')} width="30" height="20">
+              <use xlinkHref={icons + '#arrow'} />
+            </svg>
+            <p className="travel-details-train__time-right">
+              00:00
+            </p>
+          </div>
+          <div className="travel-details-train__dates">
+            <p className="travel-details-train__date-left">
+              01.01.2021
+            </p>
+            <p className="travel-details-train__date-right">
+              01.01.2021
+            </p>
+          </div>
+          <div className="travel-details-train__cities">
+            <p className="travel-details-train__city-left">
+              Москва
+            </p>
+            <p className="travel-details-train__city-right">
+              Санкт-Петербург
+            </p>
+          </div>
+          <div className="travel-details-train__stations">
+            <p className="travel-details-train__station-left">
+              Ленинградский вокзал
+            </p>
+            <p className="travel-details-train__station-right">
+              Московский вокзал
+            </p>
+          </div>
         </div> 
       }
     </div>    

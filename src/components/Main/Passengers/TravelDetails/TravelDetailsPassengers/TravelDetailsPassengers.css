@@ -1,0 +1,102 @@
+/*
+.travel-details-train__collapsed {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 20px 0;
+}
+
+.travel-details-train__arrow {
+  display: block;
+  fill: #ffa800;
+}
+
+.travel-details-train__arrow_mirror {
+  transform: rotate(180deg);
+}
+
+.travel-details-train__title {
+  margin-left: 12px;
+
+  color: white;
+  font-size: 30px;
+  line-height: 35px;
+  font-weight: bold;  
+}
+
+.travel-details-train__title-date {
+  align-self: flex-end;
+  margin-left: 19px;
+  margin-bottom: 4px;
+
+  color: white;
+  font-size: 18px;
+  line-height: 21px;
+  font-weight: normal;  
+}
+
+.travel-details-train__title-date_backward {
+  margin-left: 11px;
+}
+
+.travel-details-train__button {
+  position: relative;
+
+  width: 20px;
+  height: 20px;
+  margin-left: auto;
+  border: 2px solid white;
+  border-radius: 5px; 
+}
+
+.travel-details-train__button::before {
+  content: "";
+  position: absolute;
+  left: 22%;
+  right: 22%;
+  top: 50%;
+  transform: translateY(-50%);
+
+  border-top: 2px solid white; 
+}
+
+.travel-details-train__button::after {
+  content: "";
+  position: absolute;
+  top: 22%;
+  bottom: 22%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  border-left: 2px solid white;
+}
+
+.travel-details-train__button:hover {
+  border-color: #fcdc9d;
+}
+
+.travel-details-train__button:hover::before {
+  border-color: #fcdc9d;  
+}
+
+.travel-details-train__button:hover::after {
+  border-color: #fcdc9d;  
+}
+
+.travel-details-train__button_minus {
+  border-color: #c4c4c4;  
+}
+
+.travel-details-train__button_minus::before {
+  border-color: #c4c4c4;  
+}
+
+.travel-details-train__button_minus::after {
+  display: none;  
+}
+
+.travel-details-train__full {
+  padding: 30px 0 70px 0;
+}
+*/

@@ -1,6 +1,8 @@
 //import PropTypes from 'prop-types';
 import './TravelDetails.css';
 import TravelDetailsTrain from './TravelDetailsTrain/TravelDetailsTrain';
+import TravelDetailsPassengers from './TravelDetailsPassengers/TravelDetailsPassengers';
+
 
 function TravelDetails() {
 
@@ -16,7 +18,7 @@ function TravelDetails() {
         <TravelDetailsTrain isForward={false} />
       </div>
       <div className="travel-details__passengers">
-        Пассажиры
+        <TravelDetailsPassengers />
       </div>
       <div className="travel-details__total">
         Итог
