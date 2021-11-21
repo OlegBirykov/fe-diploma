@@ -2,6 +2,7 @@
 import './TravelDetails.css';
 import TravelDetailsTrain from './TravelDetailsTrain/TravelDetailsTrain';
 import TravelDetailsPassengers from './TravelDetailsPassengers/TravelDetailsPassengers';
+import { separateThousands } from 'api/utils';
 
 
 function TravelDetails() {
@@ -21,7 +22,15 @@ function TravelDetails() {
         <TravelDetailsPassengers />
       </div>
       <div className="travel-details__total">
-        Итог
+        <p className="travel-details__total-title">
+          Итог
+        </p>
+        <p className="travel-details__price">
+          {separateThousands(7760)}
+        </p>
+        <p className="travel-details__currency">
+          &#x20bd;
+        </p>
       </div>
     </div>    
   )
