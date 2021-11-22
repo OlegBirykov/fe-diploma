@@ -1,3 +1,20 @@
+.completion {
+  height: 1080px;
+  background-color: #e5e5e5;
+}
+
+.completion__window {
+  position: absolute;
+  top: 509px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 1404px;
+  height: 1230px;
+
+  background-color: white;
+}
+
 .completion__xxx {
   display: block;
   width: 323px;
@@ -13,4 +30,10 @@
   text-transform: uppercase;
   color: #292929;
   background-color: #ffa800;
+}
+
+.development-label {
+  color: red;
+  font-size: 40px;
+  text-align: center;
 }

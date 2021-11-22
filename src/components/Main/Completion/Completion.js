@@ -12,9 +12,14 @@ function Completion() {
 
   return (
     <main className="completion"> 
-      <Link to={process.env.PUBLIC_URL} className="completion__xxx"> 
-        Вернуться на главную
-      </Link>
+      <div className="completion__window">
+        <p className="development-label">
+          Страница находится в процессе разработки
+        </p>
+        <Link to={process.env.PUBLIC_URL} className="completion__xxx"> 
+           Вернуться на главную
+        </Link>
+      </div>
     </main>
   )
 }

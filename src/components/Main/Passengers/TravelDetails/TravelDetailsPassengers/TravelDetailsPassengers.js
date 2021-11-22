@@ -7,7 +7,7 @@ import { separateThousands } from 'api/utils';
 function TravelDetailsPassengers() {
 //  const { isForward } = props;
 
-  const [isCollapsed, setIsCollapsed] = useState(true);
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   return (
     <div className="travel-details-passengers"> 

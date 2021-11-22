@@ -6,7 +6,7 @@ import icons from 'components/Main/icons.svg';
 function TravelDetailsTrain(props) {
   const { isForward } = props;
 
-  const [isCollapsed, setIsCollapsed] = useState(true);
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   return (
     <div className="travel-details-train"> 

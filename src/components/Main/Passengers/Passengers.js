@@ -20,6 +20,9 @@ function Passengers() {
           <TravelDetails />
         </section>
         <section className="passengers__right">
+          <p className="development-label">
+            Страница находится в процессе разработки
+          </p>
           <Link to={process.env.PUBLIC_URL + '/run/payment'} className="passengers__button passengers__button_active"> 
             Далее
           </Link>
