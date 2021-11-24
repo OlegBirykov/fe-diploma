@@ -4,6 +4,8 @@ import './Passengers.css';
 import AppContext from 'AppContext';
 import ProgressIndicator from '../ProgressIndicator/ProgressIndicator';
 import TravelDetails from './TravelDetails/TravelDetails';
+import EditPassenger from './EditPassenger/EditPassenger';
+import AddPassenger from './AddPassenger/AddPassenger';
 
 function Passengers() {  
   const { setBookingStage } = useContext(AppContext);
@@ -23,6 +25,15 @@ function Passengers() {
           <p className="development-label">
             Страница находится в процессе разработки
           </p>
+          <div className="passengers__edit-passenger">
+            <EditPassenger />
+          </div>   
+          <div className="passengers__edit-passenger">
+            <EditPassenger />
+          </div> 
+          <div className="passengers__add-passenger">
+            <AddPassenger />
+          </div>   
           <Link to={process.env.PUBLIC_URL + '/run/payment'} className="passengers__button passengers__button_active"> 
             Далее
           </Link>

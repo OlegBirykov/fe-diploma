@@ -19,6 +19,14 @@
   width: 960px;
 }
 
+.confirmation__passengers {
+  margin-top: 45px;
+}
+
+.confirmation__payment {
+  margin-top: 45px;
+}
+
 .confirmation__button {
   display: block;
   width: 323px;

@@ -4,6 +4,7 @@ import './Payment.css';
 import AppContext from 'AppContext';
 import ProgressIndicator from '../ProgressIndicator/ProgressIndicator';
 import TravelDetails from '../Passengers/TravelDetails/TravelDetails';
+import UserData from './UserData/UserData';
 
 function Payment() {  
   const { setBookingStage } = useContext(AppContext);
@@ -23,6 +24,7 @@ function Payment() {
           <p className="development-label">
             Страница находится в процессе разработки
           </p>
+          <UserData />
           <Link to={process.env.PUBLIC_URL + '/run/confirmation'} className="payment__button payment__button_active"> 
             Купить билеты
           </Link>

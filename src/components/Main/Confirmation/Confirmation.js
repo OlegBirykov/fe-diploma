@@ -4,6 +4,9 @@ import './Confirmation.css';
 import AppContext from 'AppContext';
 import ProgressIndicator from '../ProgressIndicator/ProgressIndicator';
 import TravelDetails from '../Passengers/TravelDetails/TravelDetails';
+import TrainsConfirmation from './TrainsConfirmation/TrainsConfirmation';
+import PassengersConfirmation from './PassengersConfirmation/PassengersConfirmation';
+import PaymentConfirmation from './PaymentConfirmation/PaymentConfirmation';
 
 function Confirmation() { 
   const { setBookingStage } = useContext(AppContext);
@@ -23,6 +26,15 @@ function Confirmation() {
           <p className="development-label">
             Страница находится в процессе разработки
           </p>
+          <div className="confirmation__trains">
+            <TrainsConfirmation />
+          </div>
+          <div className="confirmation__passengers">
+            <PassengersConfirmation />
+          </div>
+          <div className="confirmation__payment">
+            <PaymentConfirmation />
+          </div>
           <Link to={process.env.PUBLIC_URL + '/run/completion'} className="confirmation__button confirmation__button_active"> 
             Подтвердить
           </Link>

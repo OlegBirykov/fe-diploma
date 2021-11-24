@@ -19,6 +19,14 @@
   width: 960px;
 }
 
+.passengers__edit-passenger:not(:first-child) {
+  margin-top: 45px;
+}
+
+.passengers__add-passenger {
+  margin-top: 45px;
+}
+
 .passengers__button {
   display: block;
   width: 222px;
