@@ -1,11 +1,16 @@
-//import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import './TravelDetails.css';
 import TravelDetailsTrain from './TravelDetailsTrain/TravelDetailsTrain';
 import TravelDetailsPassengers from './TravelDetailsPassengers/TravelDetailsPassengers';
 import { separateThousands } from 'api/utils';
 
 
-function TravelDetails() {
+function TravelDetails(props) {
+  const { collapsed, setCollapsed } = props;
+
+  const setSectionCollapsed = (name) => {
+    setCollapsed({ ...collapsed, [name]: !collapsed[name] });
+  }
 
   return (
     <div className="travel-details"> 
@@ -13,13 +18,13 @@ function TravelDetails() {
         Детали поездки
       </h2>
       <div className="travel-details__train">
-        <TravelDetailsTrain isForward={true} />
+        <TravelDetailsTrain isForward={true} isCollapsed={collapsed.forward} setCollapsed={() => setSectionCollapsed('forward')}/>
       </div>
       <div className="travel-details__train">
-        <TravelDetailsTrain isForward={false} />
+        <TravelDetailsTrain isForward={false} isCollapsed={collapsed.backward} setCollapsed={() => setSectionCollapsed('backward')}/>
       </div>
       <div className="travel-details__passengers">
-        <TravelDetailsPassengers />
+        <TravelDetailsPassengers isCollapsed={collapsed.passengers} setCollapsed={() => setSectionCollapsed('passengers')}/>
       </div>
       <div className="travel-details__total">
         <p className="travel-details__total-title">
@@ -36,8 +41,9 @@ function TravelDetails() {
   )
 }
 
-//TravelDetails.propTypes = {
-//  reloadInfo: PropTypes.func.isRequired
-//};
+TravelDetails.propTypes = {
+  collapsed: PropTypes.object.isRequired,
+  setCollapsed: PropTypes.func.isRequired
+};
 
 export default TravelDetails;

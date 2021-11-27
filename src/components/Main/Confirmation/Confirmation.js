@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Confirmation.css';
 import AppContext from 'AppContext';
@@ -9,6 +9,12 @@ import PassengersConfirmation from './PassengersConfirmation/PassengersConfirmat
 import PaymentConfirmation from './PaymentConfirmation/PaymentConfirmation';
 
 function Confirmation() { 
+  const [detailsCollapsed, setDetailsCollapsed] = useState({
+    forward: false,
+    backward: false,
+    passengers: false,
+  });
+
   const { setBookingStage } = useContext(AppContext);
 
   useEffect(() => {
@@ -20,7 +26,7 @@ function Confirmation() {
       <ProgressIndicator stepNumber={4} />
       <div className="confirmation__main">
         <section className="confirmation__left">
-          <TravelDetails />
+          <TravelDetails collapsed={detailsCollapsed} setCollapsed={setDetailsCollapsed} />
         </section>
         <section className="confirmation__right">
           <p className="development-label">

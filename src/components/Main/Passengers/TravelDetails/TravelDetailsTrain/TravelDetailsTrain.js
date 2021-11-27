@@ -1,12 +1,9 @@
-import { useState } from 'react';
 import PropTypes from 'prop-types';
 import './TravelDetailsTrain.css';
 import icons from 'components/Main/icons.svg';
 
 function TravelDetailsTrain(props) {
-  const { isForward } = props;
-
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const { isForward, isCollapsed, setCollapsed } = props;
 
   return (
     <div className="travel-details-train"> 
@@ -20,7 +17,7 @@ function TravelDetailsTrain(props) {
         <p className={'travel-details-train__title-date' + (isForward ? '' : ' travel-details-train__title-date_backward')}>
           01.01.2000
         </p>
-        <button className={'travel-details-train__button' + (isCollapsed ? '' : ' travel-details-train__button_minus')} type="button" onClick={() => setIsCollapsed(!isCollapsed)}>      
+        <button className={'travel-details-train__button' + (isCollapsed ? '' : ' travel-details-train__button_minus')} type="button" onClick={setCollapsed}>      
         </button>
       </div>
       {!isCollapsed &&
@@ -86,7 +83,9 @@ function TravelDetailsTrain(props) {
 }
 
 TravelDetailsTrain.propTypes = {
-  isForward: PropTypes.bool.isRequired
+  isForward: PropTypes.bool.isRequired,
+  isCollapsed: PropTypes.bool.isRequired,
+  setCollapsed: PropTypes.func.isRequired
 };
 
 export default TravelDetailsTrain;

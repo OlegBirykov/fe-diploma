@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Passengers.css';
 import AppContext from 'AppContext';
@@ -7,7 +7,13 @@ import TravelDetails from './TravelDetails/TravelDetails';
 import EditPassenger from './EditPassenger/EditPassenger';
 import AddPassenger from './AddPassenger/AddPassenger';
 
-function Passengers() {  
+function Passengers() {
+  const [detailsCollapsed, setDetailsCollapsed] = useState({
+    forward: false,
+    backward: false,
+    passengers: false,
+  });
+  
   const { setBookingStage } = useContext(AppContext);
 
   useEffect(() => {
@@ -19,7 +25,7 @@ function Passengers() {
       <ProgressIndicator stepNumber={2} />
       <div className="passengers__main">
         <section className="passengers__left">
-          <TravelDetails />
+          <TravelDetails collapsed={detailsCollapsed} setCollapsed={setDetailsCollapsed} />
         </section>
         <section className="passengers__right">
           <p className="development-label">
