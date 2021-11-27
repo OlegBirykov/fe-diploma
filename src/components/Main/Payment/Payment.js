@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Payment.css';
 import AppContext from 'AppContext';
@@ -7,6 +7,12 @@ import TravelDetails from '../Passengers/TravelDetails/TravelDetails';
 import UserData from './UserData/UserData';
 
 function Payment() {  
+  const [detailsCollapsed, setDetailsCollapsed] = useState({
+    forward: false,
+    backward: false,
+    passengers: false,
+  });
+
   const { setBookingStage } = useContext(AppContext);
 
   useEffect(() => {
@@ -18,7 +24,7 @@ function Payment() {
       <ProgressIndicator stepNumber={3} />
       <div className="payment__main">
         <section className="payment__left">
-          <TravelDetails />
+          <TravelDetails collapsed={detailsCollapsed} setCollapsed={setDetailsCollapsed} />
         </section>
         <section className="payment__right">
           <p className="development-label">

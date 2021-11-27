@@ -1,13 +1,10 @@
-import { useState } from 'react';
-//import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import './TravelDetailsPassengers.css';
 import icons from 'components/Main/icons.svg';
 import { separateThousands } from 'api/utils';
 
-function TravelDetailsPassengers() {
-//  const { isForward } = props;
-
-  const [isCollapsed, setIsCollapsed] = useState(false);
+function TravelDetailsPassengers(props) {
+  const { isCollapsed, setCollapsed } = props;
 
   return (
     <div className="travel-details-passengers"> 
@@ -18,7 +15,7 @@ function TravelDetailsPassengers() {
         <p className="travel-details-passengers__title">
           Пассажиры
         </p>
-        <button className={'travel-details-passengers__button' + (isCollapsed ? '' : ' travel-details-passengers__button_minus')} type="button" onClick={() => setIsCollapsed(!isCollapsed)}>      
+        <button className={'travel-details-passengers__button' + (isCollapsed ? '' : ' travel-details-passengers__button_minus')} type="button" onClick={setCollapsed}>      
         </button>
       </div>
       {!isCollapsed &&
@@ -51,8 +48,9 @@ function TravelDetailsPassengers() {
   )
 }
 
-//TravelDetailsPassengers.propTypes = {
-//  isForward: PropTypes.bool.isRequired
-//};
+TravelDetailsPassengers.propTypes = {
+  isCollapsed: PropTypes.bool.isRequired,
+  setCollapsed: PropTypes.func.isRequired
+};
 
 export default TravelDetailsPassengers;
