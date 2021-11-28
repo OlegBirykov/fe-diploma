@@ -6,6 +6,7 @@ import ProgressIndicator from '../ProgressIndicator/ProgressIndicator';
 import TravelDetails from './TravelDetails/TravelDetails';
 import EditPassenger from './EditPassenger/EditPassenger';
 import AddPassenger from './AddPassenger/AddPassenger';
+import shortid from 'shortid';
 
 function Passengers() {
   const [detailsCollapsed, setDetailsCollapsed] = useState({
@@ -13,12 +14,28 @@ function Passengers() {
     backward: false,
     passengers: false,
   });
+  const [passengerList, setPassengerList] = useState([]);
   
   const { setBookingStage } = useContext(AppContext);
 
   useEffect(() => {
     setBookingStage('passengers');
   }, [setBookingStage]);
+
+  const addPassenger = () => {
+    setPassengerList([...passengerList, {
+      number: passengerList.length + 1,
+      name: ''
+    }]);
+  }
+
+  const editPassenger = (index, passenger) => {
+    console.log(index, passenger);
+  }
+
+  const deletePassenger = (index) => {
+    console.log(index);
+  }
 
   return (
     <main className="passengers"> 
@@ -31,14 +48,13 @@ function Passengers() {
           <p className="development-label">
             Страница находится в процессе разработки
           </p>
-          <div className="passengers__edit-passenger">
-            <EditPassenger />
-          </div>   
-          <div className="passengers__edit-passenger">
-            <EditPassenger />
-          </div> 
+          {passengerList.map((item, i) => 
+            <div className="passengers__edit-passenger" key={shortid.generate()}>
+              <EditPassenger passenger={item} edit={(passenger) => editPassenger(i, passenger)} del={() => deletePassenger(i)} />
+            </div>  
+          )}
           <div className="passengers__add-passenger">
-            <AddPassenger />
+            <AddPassenger add={addPassenger}/>
           </div>   
           <Link to={process.env.PUBLIC_URL + '/run/payment'} className="passengers__button passengers__button_active"> 
             Далее

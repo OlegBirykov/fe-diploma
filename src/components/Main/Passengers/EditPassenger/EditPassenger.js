@@ -1,9 +1,10 @@
-//import { useState } from 'react';
-//import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import './EditPassenger.css';
 
-function EditPassenger() {
-//  const { isForward } = props;
+function EditPassenger(props) {
+  const { passenger/*, edit, del */} = props;
+
+  const { number } = passenger;
 
 //  const [isCollapsed, setIsCollapsed] = useState(false);
 
@@ -48,13 +49,15 @@ function EditPassenger() {
 
   return (
     <div className="edit-passenger"> 
-      Пассажир N
+      Пассажир {number}
     </div>    
   )
 }
 
-//EditPassenger.propTypes = {
-//  isForward: PropTypes.bool.isRequired
-//};
+EditPassenger.propTypes = {
+  passenger: PropTypes.object.isRequired,
+  edit: PropTypes.func.isRequired,
+  del: PropTypes.func.isRequired
+};
 
 export default EditPassenger;
