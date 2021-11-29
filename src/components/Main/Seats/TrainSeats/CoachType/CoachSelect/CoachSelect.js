@@ -6,9 +6,8 @@ import shortid from 'shortid';
 function CoachSelect(props) {
   const { seatsState, setSeatsState } = props;
 
-  const classTypes = ['first', 'second', 'third', 'fourth'];
   const coachArray = seatsState.info
-    .filter((item) => item.coach.class_type === classTypes[seatsState.classNumber - 1])
+    .filter((item) => item.classNumber === seatsState.classNumber)
     .sort((a, b) => a.index - b.index);
 
   const coachClick = (coachIndex) => {

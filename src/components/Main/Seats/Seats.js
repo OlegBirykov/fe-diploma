@@ -8,7 +8,7 @@ import LastRoutes from '../Trains/LastRoutes/LastRoutes';
 import TrainSeats from './TrainSeats/TrainSeats';
 import { loadSeatsInfo } from 'api/http';
 import { errorBox } from 'api/gui';
-import SeatsMap from 'api/Classes/SeatsMap';
+import { createSeatsMap } from 'api/seats';
 
 function Seats() {
   const [forwardSeats, setForwardSeats] = useState({ competitorCount: 0 });
@@ -22,7 +22,7 @@ function Seats() {
 
   useEffect(() => {
     setForwardSeats({ 
-      info: seatsInfo.forwardSeatsInfo.map((item) => new SeatsMap(item)),
+      info: seatsInfo.forwardSeatsInfo.map((item) => createSeatsMap(item)),
       classNumber: 0,
       curTicketType: 'full',
       fullTicketsCount: 0,
@@ -31,7 +31,7 @@ function Seats() {
       competitorCount: Math.trunc(Math.random() * 10) + 5
     });
     setBackwardSeats({ 
-      info: seatsInfo.backwardSeatsInfo.map((item) => new SeatsMap(item)),
+      info: seatsInfo.backwardSeatsInfo.map((item) => createSeatsMap(item)),
       classNumber: 0,
       curTicketType: 'full',
       fullTicketsCount: 0,

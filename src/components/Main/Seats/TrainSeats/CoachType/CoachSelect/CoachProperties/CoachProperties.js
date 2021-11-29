@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import './CoachProperties.css';
 import icons from 'components/Main/icons.svg';
 import { separateThousands } from 'api/utils';
+import { getAvailableSeatsCount, getTopAvailableSeatsCount, getBottomAvailableSeatsCount, getSumPrice } from 'api/seats';
 
 function CoachProperties(props) {
   const { coach, checkOption, checkSeat, competitorCount } = props;
@@ -15,16 +16,16 @@ function CoachProperties(props) {
 
   switch (coach.classNumber) {
     case 1:
-      price1 = coach.coach.price;
+      price1 = coach.price;
       break;
     case 2:
     case 3:
-      price1 = coach.coach.top_price;
-      price2 = coach.coach.bottom_price;
+      price1 = coach.topPrice;
+      price2 = coach.bottomPrice;
       isTop = true;
       break;
     case 4:
-      price1 = coach.coach.bottom_price;
+      price1 = coach.bottomPrice;
       break;
       default:
   }
@@ -34,13 +35,13 @@ function CoachProperties(props) {
 
   let conditionerClassName = buttonClassName;
   let conditionerIconClassName = iconClassName;
-  if (coach.coach.have_air_conditioning) {
+  if (coach.haveAirConditioning) {
     conditionerClassName += ` ${buttonClassName}_included`;
   }
 
   let wifiClassName = buttonClassName;
   let wifiIconClassName = iconClassName;
-  if (coach.coach.have_wifi) {
+  if (coach.haveWifi) {
     wifiClassName += ` ${buttonClassName}_enabled`;
     wifiIconClassName += ` ${iconClassName}_enabled`;
   }
@@ -51,8 +52,8 @@ function CoachProperties(props) {
   
   let linensClassName = buttonClassName;
   let linensIconClassName = iconClassName;
-  if (coach.coach.class_type !== 'fourth') {
-    if (coach.coach.is_linens_included) {
+  if (coach.classNumber !== 4) {
+    if (coach.isLinensIncluded) {
       linensClassName += ` ${buttonClassName}_included`;
     } else { 
       linensClassName += ` ${buttonClassName}_enabled`;
@@ -67,7 +68,7 @@ function CoachProperties(props) {
 
   let foodClassName = buttonClassName;
   let foodIconClassName = iconClassName;
-  if (coach.coach.have_food) {
+  if (coach.haveFood) {
     foodClassName += ` ${buttonClassName}_enabled`;
     foodIconClassName += ` ${iconClassName}_enabled`;
   }
@@ -77,20 +78,20 @@ function CoachProperties(props) {
   } 
 
   const wifiChange = () => {
-    if (coach.coach.have_wifi) {
+    if (coach.haveWifi) {
       checkOption(coach.index, 'addWifi');
     }
   }
 
   const linensChange = () => {
-    if (coach.coach.class_type === 'fourth' || coach.coach.is_linens_included) {
+    if (coach.classNumber === 4 || coach.isLinensIncluded) {
       return;
     }
     checkOption(coach.index, 'addLinens');
   }
 
   const foodChange = () => {
-    if (coach.coach.have_food) {
+    if (coach.haveFood) {
       checkOption(coach.index, 'addFood');
     }
   }
@@ -117,7 +118,7 @@ function CoachProperties(props) {
     }  
   }
 
-  const sumPrice = coach.getSumPrice();
+  const sumPrice = getSumPrice(coach);
 
   return (
     <div className="coach-properties">
@@ -129,15 +130,15 @@ function CoachProperties(props) {
         </div>
         <div className="coach-properties__seats">
           <p className="coach-properties__seats-all-title">
-            Места<span className="coach-properties__seats-all-count">{coach.getAvailableSeatsCount()}</span>
+            Места<span className="coach-properties__seats-all-count">{getAvailableSeatsCount(coach.seatsMap)}</span>
           </p>
           {isTop && 
             <Fragment>
               <p className="coach-properties__seats-title">
-                Верхние<span className="coach-properties__seats-count">{coach.getTopAvailableSeatsCount()}</span>
+                Верхние<span className="coach-properties__seats-count">{getTopAvailableSeatsCount(coach.seatsMap)}</span>
               </p>
               <p className="coach-properties__seats-title">
-                Нижние<span className="coach-properties__seats-count">{coach.getBottomAvailableSeatsCount()}</span>
+                Нижние<span className="coach-properties__seats-count">{getBottomAvailableSeatsCount(coach.seatsMap)}</span>
               </p>
             </Fragment>
           }
