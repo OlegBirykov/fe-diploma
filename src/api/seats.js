@@ -399,6 +399,7 @@ export function createSeatsMap(coach) {
   result.haveFood = coach.coach.have_food;
   result.wifiPrice = coach.coach.wifi_price;
   result.linensPrice = coach.coach.linens_price;
+  result.coachId = coach.coach._id;
 
   return result;
 }

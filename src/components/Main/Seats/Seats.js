@@ -14,7 +14,7 @@ function Seats() {
   const [forwardSeats, setForwardSeats] = useState({ competitorCount: 0 });
   const [backwardSeats, setBackwardSeats] = useState({ competitorCount: 0 });
 
-  const { setBookingStage, setAnimation, setPopup, forwardTrain, backwardTrain, seatsInfo, setSeatsInfo } = useContext(AppContext);
+  const { setBookingStage, setAnimation, setPopup, forwardTrain, backwardTrain, seatsInfo, setSeatsInfo, setOrderInfo } = useContext(AppContext);
 
   useEffect(() => {
     setBookingStage('seats');
@@ -89,7 +89,40 @@ function Seats() {
       return;
     }
 
-    // В этом месте информация о билетах будет сохранена в структуре orderInfo контекста приложения
+    console.log(forwardSeats);
+    console.log(backwardSeats);
+
+    const forwardPreliminaryList = [];
+    const backwardPreliminaryList = [];
+
+    forwardSeats.info.forEach((coach) => 
+      coach.seatsMap.forEach((seat, i) => {
+        if (seat.selected) {
+          forwardPreliminaryList.push({
+            coachId: coach.coachId,
+            seatNumber: i + 1,
+          });
+        }
+      })
+    );
+
+    backwardSeats.info.forEach((coach) => 
+      coach.seatsMap.forEach((seat, i) => {
+        if (seat.selected) {
+          backwardPreliminaryList.push({
+            coachId: coach.coachId,
+            seatNumber: i + 1,
+          });
+        }
+      })
+    );
+
+    setOrderInfo({ 
+      preliminaryList: {
+        forward: forwardPreliminaryList,
+        backward: backwardPreliminaryList
+      } 
+    });
   }
 
   return (
