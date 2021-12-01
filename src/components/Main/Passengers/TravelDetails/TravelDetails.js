@@ -4,9 +4,8 @@ import TravelDetailsTrain from './TravelDetailsTrain/TravelDetailsTrain';
 import TravelDetailsPassengers from './TravelDetailsPassengers/TravelDetailsPassengers';
 import { separateThousands } from 'api/utils';
 
-
 function TravelDetails(props) {
-  const { collapsed, setCollapsed } = props;
+  const { collapsed, setCollapsed, forwardTrain, backwardTrain } = props;
 
   const setSectionCollapsed = (name) => {
     setCollapsed({ ...collapsed, [name]: !collapsed[name] });
@@ -18,13 +17,26 @@ function TravelDetails(props) {
         Детали поездки
       </h2>
       <div className="travel-details__train">
-        <TravelDetailsTrain isForward={true} isCollapsed={collapsed.forward} setCollapsed={() => setSectionCollapsed('forward')}/>
+        <TravelDetailsTrain 
+          isForward={true} 
+          isCollapsed={collapsed.forward} 
+          setCollapsed={() => setSectionCollapsed('forward')}
+          train={forwardTrain}
+        />
       </div>
       <div className="travel-details__train">
-        <TravelDetailsTrain isForward={false} isCollapsed={collapsed.backward} setCollapsed={() => setSectionCollapsed('backward')}/>
+        <TravelDetailsTrain 
+          isForward={false} 
+          isCollapsed={collapsed.backward} 
+          setCollapsed={() => setSectionCollapsed('backward')}
+          train={backwardTrain}
+        />
       </div>
       <div className="travel-details__passengers">
-        <TravelDetailsPassengers isCollapsed={collapsed.passengers} setCollapsed={() => setSectionCollapsed('passengers')}/>
+        <TravelDetailsPassengers 
+          isCollapsed={collapsed.passengers} 
+          setCollapsed={() => setSectionCollapsed('passengers')}
+        />
       </div>
       <div className="travel-details__total">
         <p className="travel-details__total-title">
@@ -43,7 +55,9 @@ function TravelDetails(props) {
 
 TravelDetails.propTypes = {
   collapsed: PropTypes.object.isRequired,
-  setCollapsed: PropTypes.func.isRequired
+  setCollapsed: PropTypes.func.isRequired,
+  forwardTrain: PropTypes.object.isRequired,
+  backwardTrain: PropTypes.object.isRequired
 };
 
 export default TravelDetails;

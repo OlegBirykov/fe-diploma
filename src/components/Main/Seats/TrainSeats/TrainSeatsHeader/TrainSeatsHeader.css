@@ -82,6 +82,12 @@
   font-weight: 700;
 }
 
+.train-seats-header__date {
+  font-size: 18px;
+  line-height: 21px;
+  font-weight: 700;
+}
+
 .train-seats-header__city {
   color: #292929;
   font-size: 18px;

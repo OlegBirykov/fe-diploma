@@ -88,8 +88,12 @@ export function readDate(date1, date2) {
   return result;
 }
 
+export function secToDate(sec) {
+  return moment(sec * 1000).format('DD.MM.YYYY');
+}
+
 export function secToHourMin(sec) {
-  return moment(sec * 1000).format('DD.MM.YYYY HH:mm');
+  return moment(sec * 1000).format('HH:mm');
 }
 
 export function durationToHourMin(duration) {

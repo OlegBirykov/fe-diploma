@@ -77,6 +77,12 @@
   font-weight: 700;
 }
 
+.trains-list-item__date {
+  font-size: 18px;
+  line-height: 21px;
+  font-weight: 700;
+}
+
 .trains-list-item__city {
   color: #292929;
   font-size: 18px;

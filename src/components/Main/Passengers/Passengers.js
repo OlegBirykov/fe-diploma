@@ -12,15 +12,23 @@ function Passengers() {
   const [detailsCollapsed, setDetailsCollapsed] = useState({
     forward: false,
     backward: false,
-    passengers: false,
+    passengers: false
   });
   const [passengerList, setPassengerList] = useState([]);
   
-  const { setBookingStage } = useContext(AppContext);
+  const { setBookingStage, forwardTrain, backwardTrain, orderInfo } = useContext(AppContext);
 
   useEffect(() => {
     setBookingStage('passengers');
   }, [setBookingStage]);
+
+  useEffect(() => {
+    setDetailsCollapsed(orderInfo.detailsCollapsed ? orderInfo.detailsCollapsed : {
+      forward: false,
+      backward: false,
+      passengers: false
+    });
+  }, [orderInfo.detailsCollapsed]);
 
   const addPassenger = () => {
     setPassengerList([...passengerList, {
@@ -42,7 +50,12 @@ function Passengers() {
       <ProgressIndicator stepNumber={2} />
       <div className="passengers__main">
         <section className="passengers__left">
-          <TravelDetails collapsed={detailsCollapsed} setCollapsed={setDetailsCollapsed} />
+          <TravelDetails 
+            collapsed={detailsCollapsed} 
+            setCollapsed={setDetailsCollapsed} 
+            forwardTrain={forwardTrain} 
+            backwardTrain={backwardTrain} 
+          />
         </section>
         <section className="passengers__right">
           <p className="development-label">
@@ -50,8 +63,12 @@ function Passengers() {
           </p>
           {passengerList.map((item, i) => 
             <div className="passengers__edit-passenger" key={shortid.generate()}>
-              <EditPassenger passenger={item} edit={(passenger) => editPassenger(i, passenger)} del={() => deletePassenger(i)} />
-            </div>  
+              <EditPassenger 
+                passenger={item} 
+                edit={(passenger) => editPassenger(i, passenger)} 
+                del={() => deletePassenger(i)} 
+              />
+            </div>
           )}
           <div className="passengers__add-passenger">
             <AddPassenger add={addPassenger}/>

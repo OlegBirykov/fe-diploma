@@ -8,7 +8,7 @@ import LastRoutes from '../Trains/LastRoutes/LastRoutes';
 import TrainSeats from './TrainSeats/TrainSeats';
 import { loadSeatsInfo } from 'api/http';
 import { errorBox } from 'api/gui';
-import { createSeatsMap } from 'api/seats';
+import { createSeatsMap, getPrice } from 'api/seats';
 
 function Seats() {
   const [forwardSeats, setForwardSeats] = useState({ competitorCount: 0 });
@@ -89,9 +89,6 @@ function Seats() {
       return;
     }
 
-    console.log(forwardSeats);
-    console.log(backwardSeats);
-
     const forwardPreliminaryList = [];
     const backwardPreliminaryList = [];
 
@@ -101,6 +98,8 @@ function Seats() {
           forwardPreliminaryList.push({
             coachId: coach.coachId,
             seatNumber: i + 1,
+            fullPrice: getPrice({ ...seat, ticketType: 'full' }, coach),
+            childPrice: getPrice({ ...seat, ticketType: 'child' }, coach)
           });
         }
       })
@@ -112,17 +111,20 @@ function Seats() {
           backwardPreliminaryList.push({
             coachId: coach.coachId,
             seatNumber: i + 1,
+            fullPrice: getPrice({ ...seat, ticketType: 'full' }, coach),
+            childPrice: getPrice({ ...seat, ticketType: 'child' }, coach)
           });
         }
       })
     );
 
-    setOrderInfo({ 
-      preliminaryList: {
-        forward: forwardPreliminaryList,
-        backward: backwardPreliminaryList
-      } 
-    });
+    const preliminaryList = {
+      forward: forwardPreliminaryList,
+      backward: backwardPreliminaryList
+    }
+
+    setOrderInfo({ preliminaryList });
+    localStorage.setItem('orderInfo', JSON.stringify({ preliminaryList }));
   }
 
   return (

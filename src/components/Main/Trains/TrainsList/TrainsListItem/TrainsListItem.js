@@ -6,7 +6,7 @@ import AppContext from 'AppContext';
 import TrainClassSeatsInfo from './TrainClassSeatsInfo/TrainClassSeatsInfo';
 import OptionIcons from '../../OptionIcons/OptionIcons';
 import icons from 'components/Main/icons.svg';
-import { secToHourMin, durationToHourMin } from 'api/utils';
+import { secToDate, secToHourMin, durationToHourMin } from 'api/utils';
 
 function TrainsListItem(props) {
   const { trainInfo, isForward, reloadInfo, loadSeats } = props;
@@ -82,6 +82,9 @@ function TrainsListItem(props) {
           <p className="trains-list-item__time">
             {secToHourMin(isForward ? from.datetime : to.datetime)}
           </p>
+          <p className="trains-list-item__date">
+            {secToDate(isForward ? from.datetime : to.datetime)}
+          </p>
           <p className="trains-list-item__city">
             {isForward ? from.city.name : to.city.name}
           </p>
@@ -100,6 +103,9 @@ function TrainsListItem(props) {
         <div className="trains-list-item__middle-to">
           <p className="trains-list-item__time">
             {secToHourMin(isForward ? to.datetime : from.datetime)}
+          </p>
+          <p className="trains-list-item__date">
+            {secToDate(isForward ? to.datetime : from.datetime)}
           </p>
           <p className="trains-list-item__city">
             {isForward ? to.city.name : from.city.name}

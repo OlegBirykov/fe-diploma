@@ -3,7 +3,8 @@ import './TravelDetailsTrain.css';
 import icons from 'components/Main/icons.svg';
 
 function TravelDetailsTrain(props) {
-  const { isForward, isCollapsed, setCollapsed } = props;
+  const { isForward, isCollapsed, setCollapsed, train } = props;
+  console.log(train);
 
   return (
     <div className="travel-details-train"> 
@@ -15,7 +16,7 @@ function TravelDetailsTrain(props) {
           {isForward ? 'Туда' : 'Обратно'}
         </p>
         <p className={'travel-details-train__title-date' + (isForward ? '' : ' travel-details-train__title-date_backward')}>
-          01.01.2000
+          xx.xx.xxxx
         </p>
         <button className={'travel-details-train__button' + (isCollapsed ? '' : ' travel-details-train__button_minus')} type="button" onClick={setCollapsed}>      
         </button>
@@ -27,7 +28,7 @@ function TravelDetailsTrain(props) {
               № Поезда
             </p>
             <p className="travel-details-train__number-right">
-              1313
+              xxxx
             </p>
           </div>
           <div className="travel-details-train__name">
@@ -85,7 +86,8 @@ function TravelDetailsTrain(props) {
 TravelDetailsTrain.propTypes = {
   isForward: PropTypes.bool.isRequired,
   isCollapsed: PropTypes.bool.isRequired,
-  setCollapsed: PropTypes.func.isRequired
+  setCollapsed: PropTypes.func.isRequired,
+  train: PropTypes.object.isRequired
 };
 
 export default TravelDetailsTrain;

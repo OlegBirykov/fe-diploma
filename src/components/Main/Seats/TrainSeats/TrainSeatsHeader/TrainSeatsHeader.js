@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import './TrainSeatsHeader.css';
 import icons from 'components/Main/icons.svg';
-import { secToHourMin, durationToHourMinText } from 'api/utils';
+import { secToDate, secToHourMin, durationToHourMinText } from 'api/utils';
 
 function TrainSeatsHeader(props) {
   const { trainInfo, isForward } = props;
@@ -45,6 +45,9 @@ function TrainSeatsHeader(props) {
           <p className="train-seats-header__time">
             {secToHourMin(isForward ? from.datetime : to.datetime)}
           </p>
+          <p className="train-seats-header__date">
+            {secToDate(isForward ? from.datetime : to.datetime)}
+          </p>
           <p className="train-seats-header__city">
             {isForward ? from.city.name : to.city.name}
           </p>
@@ -58,6 +61,9 @@ function TrainSeatsHeader(props) {
         <div className="train-seats-header__middle-to">
           <p className="train-seats-header__time">
             {secToHourMin(isForward ? to.datetime : from.datetime)}
+          </p>
+          <p className="train-seats-header__date">
+            {secToDate(isForward ? to.datetime : from.datetime)}
           </p>
           <p className="train-seats-header__city">
             {isForward ? to.city.name : from.city.name}
