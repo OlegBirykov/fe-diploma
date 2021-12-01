@@ -1,11 +1,15 @@
+import { useContext } from 'react';
 import PropTypes from 'prop-types';
 import './TravelDetails.css';
+import AppContext from 'AppContext';
 import TravelDetailsTrain from './TravelDetailsTrain/TravelDetailsTrain';
 import TravelDetailsPassengers from './TravelDetailsPassengers/TravelDetailsPassengers';
 import { separateThousands } from 'api/utils';
 
 function TravelDetails(props) {
-  const { collapsed, setCollapsed, forwardTrain, backwardTrain } = props;
+  const { collapsed, setCollapsed } = props;
+
+  const { forwardTrain, backwardTrain } = useContext(AppContext);
 
   const setSectionCollapsed = (name) => {
     setCollapsed({ ...collapsed, [name]: !collapsed[name] });
@@ -43,7 +47,7 @@ function TravelDetails(props) {
           Итог
         </p>
         <p className="travel-details__price">
-          {separateThousands(7760)}
+          {separateThousands(0)}
         </p>
         <p className="travel-details__currency">
           &#x20bd;
@@ -56,8 +60,6 @@ function TravelDetails(props) {
 TravelDetails.propTypes = {
   collapsed: PropTypes.object.isRequired,
   setCollapsed: PropTypes.func.isRequired,
-  forwardTrain: PropTypes.object.isRequired,
-  backwardTrain: PropTypes.object.isRequired
 };
 
 export default TravelDetails;

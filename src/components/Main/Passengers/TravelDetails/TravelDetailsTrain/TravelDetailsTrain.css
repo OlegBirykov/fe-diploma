@@ -140,6 +140,8 @@
   line-height: 19px;
   font-weight: bold;
   text-align: right;
+  text-transform: capitalize;
+  ;
 }
 
 .travel-details-train__duration {
@@ -196,6 +198,7 @@
   font-size: 18px;
   line-height: 21px;
   font-weight: normal;
+  text-transform: capitalize;
 }
 
 .travel-details-train__city-left {

@@ -14,9 +14,15 @@ function Passengers() {
     backward: false,
     passengers: false
   });
-  const [passengerList, setPassengerList] = useState([]);
+
+  const initPassenger = {
+    isCollapsed: false,
+    isReady: false
+  }
+
+  const [passengerList, setPassengerList] = useState([initPassenger]);
   
-  const { setBookingStage, forwardTrain, backwardTrain, orderInfo } = useContext(AppContext);
+  const { setBookingStage, orderInfo } = useContext(AppContext);
 
   useEffect(() => {
     setBookingStage('passengers');
@@ -31,10 +37,7 @@ function Passengers() {
   }, [orderInfo.detailsCollapsed]);
 
   const addPassenger = () => {
-    setPassengerList([...passengerList, {
-      number: passengerList.length + 1,
-      name: ''
-    }]);
+    setPassengerList([...passengerList, initPassenger]);
   }
 
   const editPassenger = (index, passenger) => {
@@ -50,12 +53,7 @@ function Passengers() {
       <ProgressIndicator stepNumber={2} />
       <div className="passengers__main">
         <section className="passengers__left">
-          <TravelDetails 
-            collapsed={detailsCollapsed} 
-            setCollapsed={setDetailsCollapsed} 
-            forwardTrain={forwardTrain} 
-            backwardTrain={backwardTrain} 
-          />
+          <TravelDetails collapsed={detailsCollapsed} setCollapsed={setDetailsCollapsed} />
         </section>
         <section className="passengers__right">
           <p className="development-label">
@@ -65,14 +63,17 @@ function Passengers() {
             <div className="passengers__edit-passenger" key={shortid.generate()}>
               <EditPassenger 
                 passenger={item} 
+                number={i + 1}
                 edit={(passenger) => editPassenger(i, passenger)} 
                 del={() => deletePassenger(i)} 
               />
             </div>
           )}
-          <div className="passengers__add-passenger">
-            <AddPassenger add={addPassenger}/>
-          </div>   
+          {orderInfo.preliminaryList.forward.length > passengerList.length &&
+            <div className="passengers__add-passenger">
+              <AddPassenger add={addPassenger}/>
+            </div>
+          }   
           <Link to={process.env.PUBLIC_URL + '/run/payment'} className="passengers__button passengers__button_active"> 
             Далее
           </Link>

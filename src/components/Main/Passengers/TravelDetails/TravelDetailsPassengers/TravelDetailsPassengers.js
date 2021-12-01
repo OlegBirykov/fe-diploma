@@ -25,7 +25,7 @@ function TravelDetailsPassengers(props) {
               2 Взрослых
             </p>
             <p className="travel-details-passengers__price">
-              {separateThousands(5840)}
+              {separateThousands(0)}
             </p>
             <p className="travel-details-passengers__currency">
               &#x20bd;
@@ -36,7 +36,7 @@ function TravelDetailsPassengers(props) {
               1 Ребенок
             </p>
             <p className="travel-details-passengers__price">
-              {separateThousands(1920)}
+              {separateThousands(0)}
             </p>
             <p className="travel-details-passengers__currency">
               &#x20bd;

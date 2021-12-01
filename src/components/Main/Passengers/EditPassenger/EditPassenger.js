@@ -2,9 +2,9 @@ import PropTypes from 'prop-types';
 import './EditPassenger.css';
 
 function EditPassenger(props) {
-  const { passenger/*, edit, del */} = props;
+  const { /*passenger, */number/*, edit, del */} = props;
 
-  const { number } = passenger;
+ // const { } = passenger;
 
 //  const [isCollapsed, setIsCollapsed] = useState(false);
 
@@ -56,6 +56,7 @@ function EditPassenger(props) {
 
 EditPassenger.propTypes = {
   passenger: PropTypes.object.isRequired,
+  number: PropTypes.number.isRequired,
   edit: PropTypes.func.isRequired,
   del: PropTypes.func.isRequired
 };
