@@ -1,18 +1,16 @@
 import { useContext } from 'react';
-import PropTypes from 'prop-types';
 import './TravelDetails.css';
 import AppContext from 'AppContext';
 import TravelDetailsTrain from './TravelDetailsTrain/TravelDetailsTrain';
 import TravelDetailsPassengers from './TravelDetailsPassengers/TravelDetailsPassengers';
 import { separateThousands } from 'api/utils';
 
-function TravelDetails(props) {
-  const { collapsed, setCollapsed } = props;
+function TravelDetails() {
 
-  const { forwardTrain, backwardTrain } = useContext(AppContext);
+  const { forwardTrain, backwardTrain, travelDetailsCollapsed, setTravelDetailsCollapsed } = useContext(AppContext);
 
   const setSectionCollapsed = (name) => {
-    setCollapsed({ ...collapsed, [name]: !collapsed[name] });
+    setTravelDetailsCollapsed({ ...travelDetailsCollapsed, [name]: !travelDetailsCollapsed[name] });
   }
 
   return (
@@ -23,7 +21,7 @@ function TravelDetails(props) {
       <div className="travel-details__train">
         <TravelDetailsTrain 
           isForward={true} 
-          isCollapsed={collapsed.forward} 
+          isCollapsed={travelDetailsCollapsed.forward} 
           setCollapsed={() => setSectionCollapsed('forward')}
           train={forwardTrain}
         />
@@ -31,14 +29,14 @@ function TravelDetails(props) {
       <div className="travel-details__train">
         <TravelDetailsTrain 
           isForward={false} 
-          isCollapsed={collapsed.backward} 
+          isCollapsed={travelDetailsCollapsed.backward} 
           setCollapsed={() => setSectionCollapsed('backward')}
           train={backwardTrain}
         />
       </div>
       <div className="travel-details__passengers">
         <TravelDetailsPassengers 
-          isCollapsed={collapsed.passengers} 
+          isCollapsed={travelDetailsCollapsed.passengers} 
           setCollapsed={() => setSectionCollapsed('passengers')}
         />
       </div>
@@ -56,10 +54,5 @@ function TravelDetails(props) {
     </div>    
   )
 }
-
-TravelDetails.propTypes = {
-  collapsed: PropTypes.object.isRequired,
-  setCollapsed: PropTypes.func.isRequired,
-};
 
 export default TravelDetails;

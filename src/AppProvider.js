@@ -60,6 +60,12 @@ function AppProvider(props) {
   }
   const [orderInfo, setOrderInfo] = useState(storageOrderInfo);
 
+  const [travelDetailsCollapsed, setTravelDetailsCollapsed] = useState({
+    forward: false,
+    backward: false,
+    passengers: false
+  });
+
   return (
     <AppContext.Provider 
       value={{ 
@@ -71,7 +77,8 @@ function AppProvider(props) {
         backwardTrain, setBackwardTrain,
         seatsInfo, setSeatsInfo,
         reservedSeats, setReservedSeats,
-        orderInfo, setOrderInfo
+        orderInfo, setOrderInfo,
+        travelDetailsCollapsed, setTravelDetailsCollapsed
       }}>
       {props.children}  
     </AppContext.Provider>

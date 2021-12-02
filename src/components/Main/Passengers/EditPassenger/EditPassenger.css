@@ -3,3 +3,27 @@
   background-color: white;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
 }
+
+.edit-passenger__collapsed {
+  display: flex;
+}
+
+.edit-passenger__button-collapsed_gray {
+  background-color: #f9f9f9;
+}
+
+.edit-passenger__button-collapse {
+  color: red;
+}
+
+.edit-passenger__button-collapse_minus {
+  color: red
+}
+
+.edit-passenger__title {
+  color: red;
+}
+
+.edit-passenger__button-close {
+  color: red;
+}

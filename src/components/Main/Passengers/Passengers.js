@@ -9,12 +9,6 @@ import AddPassenger from './AddPassenger/AddPassenger';
 import shortid from 'shortid';
 
 function Passengers() {
-  const [detailsCollapsed, setDetailsCollapsed] = useState({
-    forward: false,
-    backward: false,
-    passengers: false
-  });
-
   const initPassenger = {
     isCollapsed: false,
     isReady: false
@@ -28,24 +22,8 @@ function Passengers() {
     setBookingStage('passengers');
   }, [setBookingStage]);
 
-  useEffect(() => {
-    setDetailsCollapsed(orderInfo.detailsCollapsed ? orderInfo.detailsCollapsed : {
-      forward: false,
-      backward: false,
-      passengers: false
-    });
-  }, [orderInfo.detailsCollapsed]);
-
   const addPassenger = () => {
     setPassengerList([...passengerList, initPassenger]);
-  }
-
-  const editPassenger = (index, passenger) => {
-    console.log(index, passenger);
-  }
-
-  const deletePassenger = (index) => {
-    console.log(index);
   }
 
   return (
@@ -53,19 +31,19 @@ function Passengers() {
       <ProgressIndicator stepNumber={2} />
       <div className="passengers__main">
         <section className="passengers__left">
-          <TravelDetails collapsed={detailsCollapsed} setCollapsed={setDetailsCollapsed} />
+          <TravelDetails />
         </section>
         <section className="passengers__right">
           <p className="development-label">
             Страница находится в процессе разработки
           </p>
-          {passengerList.map((item, i) => 
+          {passengerList.map((item, i, array) => 
             <div className="passengers__edit-passenger" key={shortid.generate()}>
               <EditPassenger 
                 passenger={item} 
-                number={i + 1}
-                edit={(passenger) => editPassenger(i, passenger)} 
-                del={() => deletePassenger(i)} 
+                index={i}
+                passengerList={passengerList}
+                setPassengerList={setPassengerList} 
               />
             </div>
           )}
