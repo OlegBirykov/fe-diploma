@@ -11,7 +11,7 @@ import shortid from 'shortid';
 function Passengers() {
   const [passengerList, setPassengerList] = useState([]);
   
-  const { setBookingStage, orderInfo } = useContext(AppContext);
+  const { setBookingStage, orderInfo, setOrderInfo } = useContext(AppContext);
 
   useEffect(() => {
     setBookingStage('passengers');
@@ -22,7 +22,10 @@ function Passengers() {
   }, [orderInfo.passengerList]);
 
   const addPassenger = () => {
-    setPassengerList([...passengerList, {}]);
+    const list = [...passengerList, {}];
+    const newOrderInfo = { ...orderInfo, passengerList: list };
+    setOrderInfo(newOrderInfo);
+    localStorage.setItem('orderInfo', JSON.stringify(newOrderInfo));
   }
 
   return (

@@ -6,24 +6,97 @@
 
 .edit-passenger__collapsed {
   display: flex;
+  align-items: center;
+
+  padding: 33px 40px 32px 23px;
 }
 
-.edit-passenger__button-collapsed_gray {
+.edit-passenger__collapsed_gray {
   background-color: #f9f9f9;
 }
 
 .edit-passenger__button-collapse {
-  color: red;
+  position: relative;
+
+  width: 32px;
+  height: 32px;
+  border: 2px solid #ffa800;
+  border-radius: 50%; 
+}
+
+.edit-passenger__button-collapse::before {
+  content: "";
+  position: absolute;
+  left: 7px;
+  right: 7px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  border-top: 2px solid #ffa800; 
+}
+
+.edit-passenger__button-collapse::after {
+  content: "";
+  position: absolute;
+  top: 7px;
+  bottom: 7px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  border-left: 2px solid #ffa800; 
+}
+
+.edit-passenger__button-collapse:hover {
+  border-color: transparent;
 }
 
 .edit-passenger__button-collapse_minus {
-  color: red
+  border-color: #928f94;
+}
+
+.edit-passenger__button-collapse_minus::before {
+  border-color: #928f94;  
+}
+
+.edit-passenger__button-collapse_minus::after {
+  display: none;
 }
 
 .edit-passenger__title {
-  color: red;
+  margin-left: 18px;
+
+  color: #292929;
+  font-size: 30px;
+  line-height: 35px;
+  font-weight: normal;
 }
 
 .edit-passenger__button-close {
-  color: red;
+  position: relative;
+
+  margin-left: auto;
+  width: 12px;
+  height: 12px;
+}
+
+.edit-passenger__button-close::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: rotate(-45deg);
+
+  border-top: 2px solid #928f94;
+}
+
+.edit-passenger__button-close::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: rotate(45deg);
+
+  border-top: 2px solid #928f94;
 }
