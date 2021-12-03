@@ -9,12 +9,7 @@ import AddPassenger from './AddPassenger/AddPassenger';
 import shortid from 'shortid';
 
 function Passengers() {
-  const initPassenger = {
-    isCollapsed: false,
-    isReady: false
-  }
-
-  const [passengerList, setPassengerList] = useState([initPassenger]);
+  const [passengerList, setPassengerList] = useState([]);
   
   const { setBookingStage, orderInfo } = useContext(AppContext);
 
@@ -22,8 +17,12 @@ function Passengers() {
     setBookingStage('passengers');
   }, [setBookingStage]);
 
+  useEffect(() => {
+    setPassengerList(orderInfo.passengerList ? orderInfo.passengerList : [{}]);
+  }, [orderInfo.passengerList]);
+
   const addPassenger = () => {
-    setPassengerList([...passengerList, initPassenger]);
+    setPassengerList([...passengerList, {}]);
   }
 
   return (
@@ -37,7 +36,7 @@ function Passengers() {
           <p className="development-label">
             Страница находится в процессе разработки
           </p>
-          {passengerList.map((item, i, array) => 
+          {passengerList.map((item, i) => 
             <div className="passengers__edit-passenger" key={shortid.generate()}>
               <EditPassenger 
                 passenger={item} 
@@ -47,7 +46,7 @@ function Passengers() {
               />
             </div>
           )}
-          {orderInfo.preliminaryList.forward.length > passengerList.length &&
+          {orderInfo.seatList.forward.length > passengerList.length &&
             <div className="passengers__add-passenger">
               <AddPassenger add={addPassenger}/>
             </div>

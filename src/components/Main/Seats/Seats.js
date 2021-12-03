@@ -89,13 +89,13 @@ function Seats() {
       return;
     }
 
-    const forwardPreliminaryList = [];
-    const backwardPreliminaryList = [];
+    const forwardSeatList = [];
+    const backwardSeatList = [];
 
     forwardSeats.info.forEach((coach) => 
       coach.seatsMap.forEach((seat, i) => {
         if (seat.selected) {
-          forwardPreliminaryList.push({
+          forwardSeatList.push({
             coachId: coach.coachId,
             seatNumber: i + 1,
             fullPrice: getPrice({ ...seat, ticketType: 'full' }, coach),
@@ -108,7 +108,7 @@ function Seats() {
     backwardSeats.info.forEach((coach) => 
       coach.seatsMap.forEach((seat, i) => {
         if (seat.selected) {
-          backwardPreliminaryList.push({
+          backwardSeatList.push({
             coachId: coach.coachId,
             seatNumber: i + 1,
             fullPrice: getPrice({ ...seat, ticketType: 'full' }, coach),
@@ -118,13 +118,15 @@ function Seats() {
       })
     );
 
-    const preliminaryList = {
-      forward: forwardPreliminaryList,
-      backward: backwardPreliminaryList
+    const initOrderInfo = {
+      seatList: {
+        forward: forwardSeatList,
+        backward: backwardSeatList
+      }
     }
 
-    setOrderInfo({ preliminaryList });
-    localStorage.setItem('orderInfo', JSON.stringify({ preliminaryList }));
+    setOrderInfo(initOrderInfo);
+    localStorage.setItem('orderInfo', JSON.stringify(initOrderInfo));
   }
 
   return (
