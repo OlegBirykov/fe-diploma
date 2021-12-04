@@ -100,3 +100,81 @@
 
   border-top: 2px solid #928f94;
 }
+
+.edit-passenger__form {
+  padding: 38px 0 0 36px;
+  border-top: 1px dashed #928f94;
+}
+
+.edit-passenger__ago-container {
+  position: relative;
+  width: 280px;
+}
+
+.edit-passenger__input {
+  display: block;
+
+  padding: 10px 13px;
+  border: 1px solid #928f94;
+  border-radius: 5px;
+
+  color: #292929;
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: normal;
+}
+
+.edit-passenger__input::placeholder {
+  color: #c4c4c4;
+}
+
+.edit-passenger__ago {
+  width: 100%;
+}
+
+.edit-passsenger__listbox {
+  background-image: url("./triangle.svg");
+  background-repeat: no-repeat;
+  background-size: 12px 5px;
+  background-position: right 21px center;
+
+  cursor: pointer;
+}
+
+.edit-passenger__list {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+
+  border-radius: 5px;
+  background-color: #f4f3f6;
+
+  list-style: none;
+}
+
+.edit-passenger__list-item {
+  padding: 10px 13px;
+
+  color: #292929;
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: normal;
+}
+
+.edit-passenger__list-item:not(:first-child) {
+  border-top: 1px solid #c4c4c4;
+}
+
+.edit-passenger__list-item:hover {
+  color: white;
+  background-color: #ffca62;
+}
+
+.edit-passenger__name-section {
+  background-color: aqua;
+}
+
+.edit-passenger__label {
+  display: block;
+}
