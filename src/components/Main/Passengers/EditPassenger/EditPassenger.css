@@ -102,18 +102,21 @@
 }
 
 .edit-passenger__form {
-  padding: 38px 0 0 36px;
+  padding-top: 38px;
   border-top: 1px dashed #928f94;
 }
 
 .edit-passenger__ago-container {
   position: relative;
   width: 280px;
+  margin-left: 36px;
 }
 
 .edit-passenger__input {
   display: block;
 
+  width: 100%;
+  margin-top: 12px;
   padding: 10px 13px;
   border: 1px solid #928f94;
   border-radius: 5px;
@@ -129,7 +132,7 @@
 }
 
 .edit-passenger__ago {
-  width: 100%;
+  margin-top: 0;
 }
 
 .edit-passsenger__listbox {
@@ -160,6 +163,8 @@
   font-size: 24px;
   line-height: 28px;
   font-weight: normal;
+
+  cursor: pointer;
 }
 
 .edit-passenger__list-item:not(:first-child) {
@@ -172,9 +177,113 @@
 }
 
 .edit-passenger__name-section {
-  background-color: aqua;
+  display: flex;
+  padding: 45px 0 0 36px;
 }
 
 .edit-passenger__label {
   display: block;
+
+  color: #928f94;
+  font-size: 16px;
+  line-height: 19px;
+  font-weight: normal;
+}
+
+.edit-passenger__last-name {
+  width: 280px;
+}
+
+.edit-passenger__first-name {
+  width: 280px;
+  margin-left: 25px;
+}
+
+.edit-passenger__patronymic {
+  width: 280px;
+  margin-left: 25px;
+}
+
+.edit-passenger__data-section {
+  display: flex;
+  padding: 45px 0 0 36px;
+}
+
+.edit-passenger__gender {
+  width: 204px;
+}
+
+.edit-passenger__gender-selector {
+  display: flex;
+
+  margin-top: 12px;
+  border: 1px solid #928f94;
+  border-radius: 5px;
+}
+
+.edit-passenger__gender-item {
+  width: 50%;
+  padding: 7px 0 6px 0;
+
+  color: black;
+  font-size: 30px;
+  line-height: 35px;
+  font-weight: 900;
+  text-transform: uppercase;
+  text-align: center;
+
+  cursor: pointer;
+}
+
+.edit-passenger__gender-item:not(:first-child) {
+  border-left: 1px solid #928f94;
+}
+
+.edit-passenger__gender-item_active {
+  background-color: #ffa800;
+}
+
+.edit-passenger__birthday {
+  width: 240px;
+  margin-left: 35px;
+}
+
+.edit-passenger__options-section {
+  padding: 45px 0 31px 36px;
+}
+
+.edit-passenger__label-checkbox {
+  display: flex;
+  align-items: center;
+
+  cursor: pointer;
+}
+
+.edit-passenger__label-checkbox:not(:first-child) {
+  margin-top: 30px;
+}
+/*
+.edit-passenger__label-checkbox::before {
+
+}
+
+.edit-passenger__label-checkbox_checked::before {
+
+}
+*/
+.edit-passenger__checkbox {
+  display: block;
+
+  width: 28px;
+  height: 28px;
+  margin-right: 20px;
+
+  opacity: 0.1;
+}
+
+.edit-passenger__document-data-section {
+  display: flex;
+
+  border-top: 1px dashed #928f94;
+  border-bottom: 1px dashed #928f94;
 }

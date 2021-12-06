@@ -35,7 +35,18 @@ function EditPassenger(props) {
   } = passengerState;
 
   const changeValue = (name, value) => {
-    setPassengerState({ ...passengerState, [name]: value});
+    setPassengerState({ ...passengerState, [name]: value });
+  }
+
+  const changeBirthday = (value) => {
+    const digitsArray = value.replace(/[^\d]/g, '').split('', 8);
+    if (digitsArray.length > 4) {
+      digitsArray.splice(4, 0, '.');
+    }
+    if (digitsArray.length > 2) {
+      digitsArray.splice(2, 0, '.');
+    }
+    changeValue('birthday', digitsArray.join(''));
   }
 
   const setValue = (name, value) => {
@@ -103,7 +114,7 @@ function EditPassenger(props) {
             }
           </div>
           <div className="edit-passenger__name-section">
-            <label className="edit-passenger__label">
+            <label className="edit-passenger__label edit-passenger__last-name">
               Фамилия
               <input 
                 className="edit-passenger__input" 
@@ -116,7 +127,7 @@ function EditPassenger(props) {
                 onBlur={(evt) => setValue('lastName', evt.target.value)}
               />
             </label>
-            <label className="edit-passenger__label">
+            <label className="edit-passenger__label edit-passenger__first-name">
               Имя
               <input 
                 className="edit-passenger__input" 
@@ -129,7 +140,7 @@ function EditPassenger(props) {
                 onBlur={(evt) => setValue('firstName', evt.target.value)}
               />
             </label>
-            <label className="edit-passenger__label">
+            <label className="edit-passenger__label edit-passenger__patronymic">
               Отчество
               <input 
                 className="edit-passenger__input" 
@@ -144,16 +155,24 @@ function EditPassenger(props) {
             </label>
           </div>
           <div className="edit-passenger__data-section">
-            <label className="edit-passenger__label">
+            <label className="edit-passenger__label edit-passenger__gender">
               Пол
-              <div className={'edit-passenger__male' + (gender ? ' edit-passenger__select-gender' : '')}>
-                М
-              </div>
-              <div className={'edit-passenger__female' + (gender ? '' : ' edit-passenger__select-gender')}>
-                Ж
+              <div className="edit-passenger__gender-selector">
+                <div 
+                  className={'edit-passenger__gender-item' + (gender ? ' edit-passenger__gender-item_active' : '')}
+                  onClick={() => setValue('gender', true)}
+                >
+                  М
+                </div>
+                <div 
+                  className={'edit-passenger__gender-item' + (gender ? '' : ' edit-passenger__gender-item_active')}
+                  onClick={() => setValue('gender', false)}
+                >
+                  Ж
+                </div>
               </div>
             </label>
-            <label className="edit-passenger__label">
+            <label className="edit-passenger__label edit-passenger__birthday">
               Дата рождения
               <input 
                 className="edit-passenger__input" 
@@ -162,14 +181,13 @@ function EditPassenger(props) {
                 placeholder="ДД ММ ГГГГ" 
                 value={birthday} 
                 required
-                onChange={(evt) => changeValue('birthday', evt.target.value)}
+                onChange={(evt) => changeBirthday(evt.target.value)}
                 onBlur={(evt) => setValue('birthday', evt.target.value)}
               />
             </label>
           </div>
           <div className="edit-passenger__options-section">
-            <label className="edit-passenger__label">
-              ограниченная подвижность
+            <label className={'edit-passenger__label edit-passenger__label-checkbox' + (isDisability ? ' edit-passenger__label-checkbox_checked' : '')}>
               <input 
                 className="edit-passenger__checkbox" 
                 type="checkbox" 
@@ -177,9 +195,9 @@ function EditPassenger(props) {
                 checked={isDisability}
                 onChange={() => setValue('isDisability', !isDisability)}
               />
+              ограниченная подвижность
             </label>
-            <label className="edit-passenger__label">
-              провоз ребёнка "без места"
+            <label className={'edit-passenger__label edit-passenger__label-checkbox' + (includeChild ? ' edit-passenger__label-checkbox_checked' : '')}>
               <input 
                 className="edit-passenger__checkbox" 
                 type="checkbox" 
@@ -187,6 +205,7 @@ function EditPassenger(props) {
                 checked={includeChild}
                 onChange={() => setValue('includeChild', !includeChild)}
               />
+              провоз ребёнка "без места"
             </label>
           </div>
           <div className="edit-passenger__document-data-section">
