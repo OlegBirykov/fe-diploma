@@ -206,7 +206,7 @@
 
 .edit-passenger__data-section {
   display: flex;
-  padding: 45px 0 0 36px;
+  padding: 52px 0 0 36px;
 }
 
 .edit-passenger__gender {
@@ -253,6 +253,8 @@
 }
 
 .edit-passenger__label-checkbox {
+  position: relative;
+
   display: flex;
   align-items: center;
 
@@ -262,15 +264,30 @@
 .edit-passenger__label-checkbox:not(:first-child) {
   margin-top: 30px;
 }
-/*
-.edit-passenger__label-checkbox::before {
 
+.edit-passenger__label-checkbox::before {
+  content: "";
+  position: absolute;
+
+  width: 28px;
+  height: 28px;
+  border: 1px solid #928f94;
+  border-radius: 5px;
+}
+
+.edit-passenger__label-checkbox_checked {
+  color: #ffa800;
 }
 
 .edit-passenger__label-checkbox_checked::before {
+  border-color: #ffa800;
 
+  background-image: url("./check-mark.svg");
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: center;
 }
-*/
+
 .edit-passenger__checkbox {
   display: block;
 
@@ -278,12 +295,57 @@
   height: 28px;
   margin-right: 20px;
 
-  opacity: 0.1;
+  opacity: 0;
+  cursor: pointer;
 }
 
 .edit-passenger__document-data-section {
   display: flex;
 
+  padding: 40px 0 31px 36px;
   border-top: 1px dashed #928f94;
   border-bottom: 1px dashed #928f94;
 }
+
+.edit-passenger__state-section {
+  display: flex;
+  align-items: center;
+
+  height: 118px;
+  padding: 0 30px 0 24px;
+}
+
+.edit-passenger__state-section_error {
+  background-color: rgba(255, 61, 0, 0.38);
+}
+
+.edit-passenger__state-section_ready {
+  background-color: #b2f6a1;
+}
+
+.edit-passenger__button-save {
+  margin-left: auto;
+  padding: 11px 25px 11px 25px;
+  border: 1px solid #292929;
+  border-radius: 5px;
+
+  color: #292929;
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: bold;
+}
+
+.edit-passenger__button-save:hover {
+  color: #ffa800;
+  filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.edit-passenger__button-save:active {
+  border-color: #ffa800;
+  color: #292929;
+  background-color: #ffa800;
+
+  filter: none;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+

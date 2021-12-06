@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import './EditPassenger.css';
 import AppContext from 'AppContext';
@@ -6,13 +6,9 @@ import AppContext from 'AppContext';
 function EditPassenger(props) {
   const { passenger, index, passengerList, setPassengerList } = props;
 
-  const [passengerState, setPassengerState] = useState({}); 
+  const [passengerState, setPassengerState] = useState(passenger); 
   const [ageListShow, setAgeListShow] = useState(false);
 //  const [documentTypeListShow, setDocumentTypeListShow] = useState(false);
-
-  useEffect(() => {
-    setPassengerState({ ...passenger });
-  }, [passenger]);  
 
   const { orderInfo, setOrderInfo } = useContext(AppContext);
 
@@ -29,9 +25,9 @@ function EditPassenger(props) {
     documentType = 'паспорт',
     documentData1 = '',
     documentData2 = '',
-//    isChange = false,
-//    isError = false,
-//    isReady = false 
+    isChange = false,
+    isError = false,
+    isReady = false 
   } = passengerState;
 
   const changeValue = (name, value) => {
@@ -64,6 +60,10 @@ function EditPassenger(props) {
 
     list[index][name] = value;
     setPassengerList(list);
+  }
+
+  const setIsAdult = (value) => {
+    setValue('isAdult', value);
   }
 
   const deletePassenger = () => {
@@ -100,14 +100,13 @@ function EditPassenger(props) {
               value={isAdult ? 'Взрослый' : 'Детский'} 
               readOnly
               onClick={() => setAgeListShow(true)}
-              onBlur={() => setTimeout(() => setAgeListShow(false), 1000)}
             />
             {ageListShow &&
               <ul className="edit-passenger__list">
-                <li className="edit-passenger__list-item" onClick={() => setValue('isAdult', false)}>
+                <li className="edit-passenger__list-item" onClick={() => setIsAdult(false)}>
                   Детский
                 </li>
-                <li className="edit-passenger__list-item" onClick={() => setValue('isAdult', true)}>
+                <li className="edit-passenger__list-item" onClick={() => setIsAdult(true)}>
                   Взрослый
                 </li>
               </ul>
@@ -197,16 +196,18 @@ function EditPassenger(props) {
               />
               ограниченная подвижность
             </label>
-            <label className={'edit-passenger__label edit-passenger__label-checkbox' + (includeChild ? ' edit-passenger__label-checkbox_checked' : '')}>
-              <input 
-                className="edit-passenger__checkbox" 
-                type="checkbox" 
-                name="include-child" 
-                checked={includeChild}
-                onChange={() => setValue('includeChild', !includeChild)}
-              />
-              провоз ребёнка "без места"
-            </label>
+            {isAdult &&
+              <label className={'edit-passenger__label edit-passenger__label-checkbox' + (includeChild ? ' edit-passenger__label-checkbox_checked' : '')}>
+                <input 
+                  className="edit-passenger__checkbox" 
+                  type="checkbox" 
+                  name="include-child" 
+                  checked={includeChild}
+                  onChange={() => setValue('includeChild', !includeChild)}
+                />
+                провоз ребёнка "без места"
+              </label>
+            }
           </div>
           <div className="edit-passenger__document-data-section">
             <label className="edit-passenger__label">
@@ -246,10 +247,12 @@ function EditPassenger(props) {
               />
             </label>
           </div>
-          <div className="edit-passenger__state-section">
-            <button className="edit-passenger__button-save" type="submit" onClick={null}> 
-              Сохранить изменения 
-            </button>            
+          <div className={'edit-passenger__state-section' + (isError ? ' edit-passenger__state-section_error' : '') + (isReady ? ' edit-passenger__state-section_ready' : '')}>
+            {isChange &&
+              <button className="edit-passenger__button-save" type="submit" onClick={null}> 
+                Сохранить изменения 
+              </button>  
+            }          
           </div>
         </form>
       }
