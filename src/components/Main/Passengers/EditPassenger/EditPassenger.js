@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import './EditPassenger.css';
 import AppContext from 'AppContext';
@@ -8,7 +8,7 @@ function EditPassenger(props) {
 
   const [passengerState, setPassengerState] = useState(passenger); 
   const [ageListShow, setAgeListShow] = useState(false);
-//  const [documentTypeListShow, setDocumentTypeListShow] = useState(false);
+  const [documentTypeListShow, setDocumentTypeListShow] = useState(false);
 
   const { orderInfo, setOrderInfo } = useContext(AppContext);
 
@@ -22,13 +22,16 @@ function EditPassenger(props) {
     birthday = '',
     isDisability = false,
     includeChild = false,
-    documentType = 'паспорт',
-    documentData1 = '',
-    documentData2 = '',
+    documentType = 'Паспорт РФ',
+    passportSeries = '',
+    passportNumber = '',
+    birthSertificateNumber = '',
     isChange = false,
     isError = false,
     isReady = false 
   } = passengerState;
+
+  const isPassport = documentType === 'Паспорт РФ';
 
   const changeValue = (name, value) => {
     setPassengerState({ ...passengerState, [name]: value });
@@ -60,10 +63,6 @@ function EditPassenger(props) {
 
     list[index][name] = value;
     setPassengerList(list);
-  }
-
-  const setIsAdult = (value) => {
-    setValue('isAdult', value);
   }
 
   const deletePassenger = () => {
@@ -103,11 +102,11 @@ function EditPassenger(props) {
             />
             {ageListShow &&
               <ul className="edit-passenger__list">
-                <li className="edit-passenger__list-item" onClick={() => setIsAdult(false)}>
-                  Детский
-                </li>
-                <li className="edit-passenger__list-item" onClick={() => setIsAdult(true)}>
+                <li className="edit-passenger__list-item" onClick={() => setValue('isAdult', true)}>
                   Взрослый
+                </li>
+                <li className="edit-passenger__list-item" onClick={() => setValue('isAdult', false)}>
+                  Детский
                 </li>
               </ul>
             }
@@ -210,42 +209,70 @@ function EditPassenger(props) {
             }
           </div>
           <div className="edit-passenger__document-data-section">
-            <label className="edit-passenger__label">
+            <label className={'edit-passenger__label edit-passenger__document-type' + (isPassport ? ' edit-passenger__document-type_passport' : ' edit-passenger__document-type_sertificate')}>
               Тип документа
               <input 
-                className="edit-passenger__input" 
+                className="edit-passenger__input edit-passsenger__listbox" 
                 type="text" 
-                name="" 
+                name="document-type" 
                 value={documentType} 
                 readOnly
+                onClick={() => setDocumentTypeListShow(true)}
               />
+              {documentTypeListShow &&
+                <ul className="edit-passenger__list edit-passenger__list_document-type">
+                  <li className="edit-passenger__list-item" onClick={() => setValue('documentType', 'Паспорт РФ')}>
+                    Паспорт РФ
+                  </li>
+                  <li className="edit-passenger__list-item" onClick={() => setValue('documentType', 'Свидетельство о рождении')}>
+                    Свидетельство о рождении
+                  </li>
+                </ul>
+              }
             </label>
-            <label className="edit-passenger__label">
-              Серия
-              <input 
-                className="edit-passenger__input" 
-                type="text" 
-                name="" 
-                placeholder="______" 
-                value={documentData1} 
-                required
-                onChange={(evt) => changeValue('documentData1', evt.target.value)}
-                onBlur={(evt) => setValue('documentData1', evt.target.value)}
-              />
-            </label>
-            <label className="edit-passenger__label">
-              Номер
-              <input 
-                className="edit-passenger__input" 
-                type="text" 
-                name="" 
-                placeholder="_________" 
-                value={documentData2} 
-                required
-                onChange={(evt) => changeValue('documentData2', evt.target.value)}
-                onBlur={(evt) => setValue('documentData2', evt.target.value)}
-              />
-            </label>
+            {isPassport ?
+              <Fragment>
+                <label className="edit-passenger__label">
+                  Серия
+                  <input 
+                    className="edit-passenger__input" 
+                    type="text" 
+                    name="passport-series" 
+                    placeholder="______" 
+                    value={passportSeries} 
+                    required
+                    onChange={(evt) => changeValue('passportSeries', evt.target.value)}
+                    onBlur={(evt) => setValue('passportSeries', evt.target.value)}
+                  />
+                </label>
+                <label className="edit-passenger__label">
+                  Номер
+                  <input 
+                    className="edit-passenger__input" 
+                    type="text" 
+                    name="passport-number" 
+                    placeholder="_________" 
+                    value={passportNumber} 
+                    required
+                    onChange={(evt) => changeValue('passportNumber', evt.target.value)}
+                    onBlur={(evt) => setValue('passportNumber', evt.target.value)}
+                  />
+                </label>
+              </Fragment> :
+              <label className="edit-passenger__label">
+                Номер
+                <input 
+                  className="edit-passenger__input" 
+                  type="text" 
+                  name="sertificate-number" 
+                  placeholder="_________" 
+                  value={birthSertificateNumber} 
+                  required
+                  onChange={(evt) => changeValue('birthSertificateNumber', evt.target.value)}
+                  onBlur={(evt) => setValue('birthSertificateNumber', evt.target.value)}
+                />
+              </label>
+            }
           </div>
           <div className={'edit-passenger__state-section' + (isError ? ' edit-passenger__state-section_error' : '') + (isReady ? ' edit-passenger__state-section_ready' : '')}>
             {isChange &&
