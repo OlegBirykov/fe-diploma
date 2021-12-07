@@ -232,26 +232,26 @@ function EditPassenger(props) {
             </label>
             {isPassport ?
               <Fragment>
-                <label className="edit-passenger__label">
+                <label className="edit-passenger__label edit-passenger__passport-series">
                   Серия
                   <input 
-                    className="edit-passenger__input" 
+                    className="edit-passenger__input edit-passenger__input_passport-series" 
                     type="text" 
                     name="passport-series" 
-                    placeholder="______" 
+                    placeholder="0000" 
                     value={passportSeries} 
                     required
                     onChange={(evt) => changeValue('passportSeries', evt.target.value)}
                     onBlur={(evt) => setValue('passportSeries', evt.target.value)}
                   />
                 </label>
-                <label className="edit-passenger__label">
+                <label className="edit-passenger__label edit-passenger__passport-number">
                   Номер
                   <input 
-                    className="edit-passenger__input" 
+                    className="edit-passenger__input edit-passenger__input_passport-number" 
                     type="text" 
                     name="passport-number" 
-                    placeholder="_________" 
+                    placeholder="000000" 
                     value={passportNumber} 
                     required
                     onChange={(evt) => changeValue('passportNumber', evt.target.value)}
@@ -259,13 +259,13 @@ function EditPassenger(props) {
                   />
                 </label>
               </Fragment> :
-              <label className="edit-passenger__label">
+              <label className="edit-passenger__label edit-passenger__sertificate-number">
                 Номер
                 <input 
-                  className="edit-passenger__input" 
+                  className="edit-passenger__input edit-passenger__input_sertificate" 
                   type="text" 
                   name="sertificate-number" 
-                  placeholder="_________" 
+                  placeholder="12 символов " 
                   value={birthSertificateNumber} 
                   required
                   onChange={(evt) => changeValue('birthSertificateNumber', evt.target.value)}

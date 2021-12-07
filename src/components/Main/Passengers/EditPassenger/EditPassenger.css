@@ -324,6 +324,33 @@
   top: 29px;
 }
 
+.edit-passenger__passport-series {
+  width: 205px;
+  margin-left: 35px;
+}
+
+.edit-passenger__input_passport-series {
+  letter-spacing: 13px;
+}
+
+.edit-passenger__passport-number {
+  width: 205px;  
+  margin-left: 35px;
+}
+
+.edit-passenger__input_passport-number {
+  letter-spacing: 13px;
+}
+
+.edit-passenger__sertificate-number {
+  width: 220px;
+  margin-left: 35px;  
+}
+
+.edit-passenger__input_sertificate {
+  letter-spacing: 2px;
+}
+
 .edit-passenger__state-section {
   display: flex;
   align-items: center;
