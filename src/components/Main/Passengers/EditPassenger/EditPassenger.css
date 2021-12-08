@@ -196,6 +196,11 @@
   width: 280px;
 }
 
+.edit-passenger__error {
+  border-color: rgba(255, 61, 0, 0.76);
+  color: rgba(255, 61, 0, 0.8);
+}
+
 .edit-passenger__first-name {
   width: 280px;
   margin-left: 25px;
@@ -259,6 +264,8 @@
 
   display: flex;
   align-items: center;
+
+  width: fit-content;
 
   cursor: pointer;
 }
@@ -385,6 +392,26 @@
 
 .edit-passenger__state-section_ready {
   background-color: #b2f6a1;
+}
+
+.edit-passenger__state-text-container {
+  margin-left: 15px;
+
+  font-size: 18px;
+  line-height: 21px;
+  font-weight: normal;
+}
+
+.edit-passenger__state-text-ready {
+  color: white;
+}
+
+.edit-passenger__state-text-error {
+  color: #292929;
+}
+
+.edit-passenger__state-text-error_bold {
+  font-weight: 700;
 }
 
 .edit-passenger__button-save {

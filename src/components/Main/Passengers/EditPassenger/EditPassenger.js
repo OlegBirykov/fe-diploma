@@ -2,6 +2,9 @@ import { useState, useContext, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import './EditPassenger.css';
 import AppContext from 'AppContext';
+import { verifyData } from './verifyData';
+import readyIcon from './ready.svg';
+import errorIcon from './error.svg';
 
 function EditPassenger(props) {
   const { passenger, index, passengerList, setPassengerList } = props;
@@ -28,7 +31,7 @@ function EditPassenger(props) {
     birthSertificateNumber = '',
     isChange = false,
     isError = false,
-    isReady = false 
+    isReady = false
   } = passengerState;
 
   const isPassport = documentType === 'Паспорт РФ';
@@ -84,9 +87,24 @@ function EditPassenger(props) {
     setValue('birthSertificateNumber', newValue);
   }
 
+  let errorFlags = {};
+  //let errorText; 
+
   const savePassenger = (evt) => {
     evt.preventDefault();
-    setValue('isChange', false);
+    const list = [...passengerList];
+    const verify = verifyData(passengerState);
+
+   // errorFlags = verify.errorFlags;
+   // errorText = verify.errorText;
+
+    list[index].isChange = false;
+    list[index].isError = !verify.isReady;
+    list[index].isReady = verify.isReady;
+
+    const newOrderInfo = { ...orderInfo, passengerList: list };
+    setOrderInfo(newOrderInfo);
+    localStorage.setItem('orderInfo', JSON.stringify(newOrderInfo));
   }
 
   const deletePassenger = () => {
@@ -96,6 +114,8 @@ function EditPassenger(props) {
     setOrderInfo(newOrderInfo);
     localStorage.setItem('orderInfo', JSON.stringify(newOrderInfo));
   }
+
+  
 
   return (
     <div className="edit-passenger">
@@ -139,12 +159,11 @@ function EditPassenger(props) {
             <label className="edit-passenger__label edit-passenger__last-name">
               Фамилия
               <input 
-                className="edit-passenger__input" 
+                className={'edit-passenger__input' + (errorFlags.lastName ? ' edit-passenger__error' : '')} 
                 type="text" 
                 name="last-name" 
                 placeholder="Иванов" 
                 value={lastName} 
-                required
                 onChange={(evt) => changeValue('lastName', evt.target.value)}
                 onBlur={(evt) => setValue('lastName', evt.target.value.trim())}
               />
@@ -152,12 +171,11 @@ function EditPassenger(props) {
             <label className="edit-passenger__label edit-passenger__first-name">
               Имя
               <input 
-                className="edit-passenger__input" 
+                className={'edit-passenger__input' + (errorFlags.firstName ? ' edit-passenger__error' : '')} 
                 type="text" 
                 name="first-name" 
                 placeholder="Иван" 
                 value={firstName} 
-                required
                 onChange={(evt) => changeValue('firstName', evt.target.value)}
                 onBlur={(evt) => setValue('firstName', evt.target.value.trim())}
               />
@@ -165,12 +183,11 @@ function EditPassenger(props) {
             <label className="edit-passenger__label edit-passenger__patronymic">
               Отчество
               <input 
-                className="edit-passenger__input" 
+                className={'edit-passenger__input' + (errorFlags.patronymic ? ' edit-passenger__error' : '')}
                 type="text" 
                 name="patronymic" 
                 placeholder="Иванович" 
                 value={patronymic} 
-                required
                 onChange={(evt) => changeValue('patronymic', evt.target.value)}
                 onBlur={(evt) => setValue('patronymic', evt.target.value.trim())}
               />
@@ -197,12 +214,11 @@ function EditPassenger(props) {
             <label className="edit-passenger__label edit-passenger__birthday">
               Дата рождения
               <input 
-                className="edit-passenger__input" 
+                className={'edit-passenger__input' + (errorFlags.birthday ? ' edit-passenger__error' : '')} 
                 type="text" 
                 name="birthday" 
                 placeholder="ДД ММ ГГГГ" 
                 value={birthday} 
-                required
                 onChange={(evt) => changeBirthday(evt.target.value)}
                 onBlur={(evt) => setValue('birthday', evt.target.value)}
               />
@@ -259,12 +275,11 @@ function EditPassenger(props) {
                 <label className="edit-passenger__label edit-passenger__passport-series">
                   Серия
                   <input 
-                    className="edit-passenger__input edit-passenger__input_passport-series" 
+                    className={'edit-passenger__input edit-passenger__input_passport-series' + (errorFlags.passportSeries ? ' edit-passenger__error' : '')}
                     type="text" 
                     name="passport-series" 
                     placeholder=" " 
                     value={passportSeries} 
-                    required
                     onChange={(evt) => changePassportSeries(evt.target.value)}
                     onBlur={(evt) => setValue('passportSeries', evt.target.value)}
                   />
@@ -272,12 +287,11 @@ function EditPassenger(props) {
                 <label className="edit-passenger__label edit-passenger__passport-number">
                   Номер
                   <input 
-                    className="edit-passenger__input edit-passenger__input_passport-number" 
+                    className={'edit-passenger__input edit-passenger__input_passport-number' + (errorFlags.passportNumber ? ' edit-passenger__error' : '')}
                     type="text" 
                     name="passport-number" 
                     placeholder=" " 
                     value={passportNumber} 
-                    required
                     onChange={(evt) => changePassportNumber(evt.target.value)}
                     onBlur={(evt) => setValue('passportNumber', evt.target.value)}
                   />
@@ -286,12 +300,11 @@ function EditPassenger(props) {
               <label className="edit-passenger__label edit-passenger__sertificate-number">
                 Номер
                 <input 
-                  className="edit-passenger__input edit-passenger__input_sertificate" 
+                  className={'edit-passenger__input edit-passenger__input_sertificate' + (errorFlags.birthSertificateNumber ? ' edit-passenger__error' : '')}
                   type="text" 
                   name="sertificate-number" 
                   placeholder="12 символов " 
-                  value={birthSertificateNumber} 
-                  required
+                  value={birthSertificateNumber}
                   onChange={(evt) => changeValue('birthSertificateNumber', evt.target.value.toUpperCase())}
                   onBlur={(evt) => setBirthSertificateNumber(evt.target.value)}
                 />
@@ -299,6 +312,26 @@ function EditPassenger(props) {
             }
           </div>
           <div className={'edit-passenger__state-section' + (isError ? ' edit-passenger__state-section_error' : '') + (isReady ? ' edit-passenger__state-section_ready' : '')}>
+            {isReady &&
+              <Fragment>
+                <img className="edit-passenger__state-icon" src={readyIcon} width="32" height="32" alt="ready-icon" />
+                <div className="edit-passenger__state-text-container">
+                  <p className="edit-passenger__state-text-ready">
+                    Готово
+                  </p>
+                </div>
+              </Fragment>
+            }
+            {isError &&
+              <Fragment>
+                <img className="edit-passenger__state-icon" src={errorIcon} width="32" height="32" alt="error-icon" />
+                <div className="edit-passenger__state-text-container">
+                  <p className="edit-passenger__state-text-error">
+                    {}
+                  </p>
+                </div>
+              </Fragment>
+            }
             {isChange &&
               <button className="edit-passenger__button-save" type="submit"> 
                 Сохранить изменения 
