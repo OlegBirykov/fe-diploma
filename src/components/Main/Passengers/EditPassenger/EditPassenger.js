@@ -48,6 +48,16 @@ function EditPassenger(props) {
     changeValue('birthday', digitsArray.join(''));
   }
 
+  const changePassportSeries = (value) => {
+    const newValue = value.replace(/[^\d]/g, '').slice(0, 4);
+    changeValue('passportSeries', newValue);
+  }
+
+  const changePassportNumber = (value) => {
+    const newValue = value.replace(/[^\d]/g, '').slice(0, 6);
+    changeValue('passportNumber', newValue);
+  }
+
   const setValue = (name, value) => {
     const list = [...passengerList];
 
@@ -58,11 +68,25 @@ function EditPassenger(props) {
       case 'isReady':
         break;
       default:
-        list[index].isChange = list[index].isChange || list[index][name] !== value; 
+        if (list[index][name] !== value) {
+          list[index].isChange = true;
+          list[index].isError = false;
+          list[index].isReady = false;
+        } 
     }
 
     list[index][name] = value;
     setPassengerList(list);
+  }
+
+  const setBirthSertificateNumber = (value) => {
+    const newValue = value.replace(/[^0-9IVXА-Я]/g, '').slice(0, 12).toUpperCase();
+    setValue('birthSertificateNumber', newValue);
+  }
+
+  const savePassenger = (evt) => {
+    evt.preventDefault();
+    setValue('isChange', false);
   }
 
   const deletePassenger = () => {
@@ -90,7 +114,7 @@ function EditPassenger(props) {
         }
       </div>
       {!isCollapsed &&
-        <form className="edit-passenger__form">
+        <form className="edit-passenger__form" onSubmit={savePassenger}>
           <div className="edit-passenger__ago-container">
             <input 
               className="edit-passenger__input edit-passenger__ago edit-passsenger__listbox" 
@@ -122,7 +146,7 @@ function EditPassenger(props) {
                 value={lastName} 
                 required
                 onChange={(evt) => changeValue('lastName', evt.target.value)}
-                onBlur={(evt) => setValue('lastName', evt.target.value)}
+                onBlur={(evt) => setValue('lastName', evt.target.value.trim())}
               />
             </label>
             <label className="edit-passenger__label edit-passenger__first-name">
@@ -135,7 +159,7 @@ function EditPassenger(props) {
                 value={firstName} 
                 required
                 onChange={(evt) => changeValue('firstName', evt.target.value)}
-                onBlur={(evt) => setValue('firstName', evt.target.value)}
+                onBlur={(evt) => setValue('firstName', evt.target.value.trim())}
               />
             </label>
             <label className="edit-passenger__label edit-passenger__patronymic">
@@ -148,7 +172,7 @@ function EditPassenger(props) {
                 value={patronymic} 
                 required
                 onChange={(evt) => changeValue('patronymic', evt.target.value)}
-                onBlur={(evt) => setValue('patronymic', evt.target.value)}
+                onBlur={(evt) => setValue('patronymic', evt.target.value.trim())}
               />
             </label>
           </div>
@@ -238,10 +262,10 @@ function EditPassenger(props) {
                     className="edit-passenger__input edit-passenger__input_passport-series" 
                     type="text" 
                     name="passport-series" 
-                    placeholder="0000" 
+                    placeholder=" " 
                     value={passportSeries} 
                     required
-                    onChange={(evt) => changeValue('passportSeries', evt.target.value)}
+                    onChange={(evt) => changePassportSeries(evt.target.value)}
                     onBlur={(evt) => setValue('passportSeries', evt.target.value)}
                   />
                 </label>
@@ -251,10 +275,10 @@ function EditPassenger(props) {
                     className="edit-passenger__input edit-passenger__input_passport-number" 
                     type="text" 
                     name="passport-number" 
-                    placeholder="000000" 
+                    placeholder=" " 
                     value={passportNumber} 
                     required
-                    onChange={(evt) => changeValue('passportNumber', evt.target.value)}
+                    onChange={(evt) => changePassportNumber(evt.target.value)}
                     onBlur={(evt) => setValue('passportNumber', evt.target.value)}
                   />
                 </label>
@@ -268,15 +292,15 @@ function EditPassenger(props) {
                   placeholder="12 символов " 
                   value={birthSertificateNumber} 
                   required
-                  onChange={(evt) => changeValue('birthSertificateNumber', evt.target.value)}
-                  onBlur={(evt) => setValue('birthSertificateNumber', evt.target.value)}
+                  onChange={(evt) => changeValue('birthSertificateNumber', evt.target.value.toUpperCase())}
+                  onBlur={(evt) => setBirthSertificateNumber(evt.target.value)}
                 />
               </label>
             }
           </div>
           <div className={'edit-passenger__state-section' + (isError ? ' edit-passenger__state-section_error' : '') + (isReady ? ' edit-passenger__state-section_ready' : '')}>
             {isChange &&
-              <button className="edit-passenger__button-save" type="submit" onClick={null}> 
+              <button className="edit-passenger__button-save" type="submit"> 
                 Сохранить изменения 
               </button>  
             }          
