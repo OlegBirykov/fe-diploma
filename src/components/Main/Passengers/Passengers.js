@@ -6,12 +6,13 @@ import ProgressIndicator from '../ProgressIndicator/ProgressIndicator';
 import TravelDetails from './TravelDetails/TravelDetails';
 import EditPassenger from './EditPassenger/EditPassenger';
 import AddPassenger from './AddPassenger/AddPassenger';
+import { errorBox } from 'api/gui';
 import shortid from 'shortid';
 
 function Passengers() {
   const [passengerList, setPassengerList] = useState([]);
   
-  const { setBookingStage, orderInfo, setOrderInfo } = useContext(AppContext);
+  const { setBookingStage, orderInfo, setOrderInfo, setPopup } = useContext(AppContext);
 
   useEffect(() => {
     setBookingStage('passengers');
@@ -46,6 +47,30 @@ function Passengers() {
     localStorage.setItem('orderInfo', JSON.stringify(newOrderInfo));
   }
 
+  const isNextEnabled = passengerList.length && !passengerList.find((item) => !item.isReady);
+
+  const goToNext = (evt) => {
+    if (!isNextEnabled) {
+      evt.preventDefault();
+    }
+
+    if (!passengerList.length) {
+      errorBox(setPopup, [
+        'Ошибка ввода данных',
+        'Добавьте хотя бы одного пассажира'
+      ]);
+      return;
+    } 
+
+    if (passengerList.find((item) => !item.isReady)) {
+      errorBox(setPopup, [
+        'Ошибка ввода данных',
+        'Не сохранены данные для одного или более пассажиров'
+      ]);
+      return;
+    } 
+  }
+
   return (
     <main className="passengers"> 
       <ProgressIndicator stepNumber={2} />
@@ -54,9 +79,6 @@ function Passengers() {
           <TravelDetails />
         </section>
         <section className="passengers__right">
-          <p className="development-label">
-            Страница находится в процессе разработки
-          </p>
           {passengerList.map((item, i) => 
             <div className="passengers__edit-passenger" key={shortid.generate()}>
               <EditPassenger 
@@ -72,7 +94,11 @@ function Passengers() {
               <AddPassenger add={addPassenger}/>
             </div>
           }   
-          <Link to={process.env.PUBLIC_URL + '/run/payment'} className="passengers__button passengers__button_active"> 
+          <Link 
+            to={process.env.PUBLIC_URL + '/run/payment'} 
+            className={'passengers__button' + (isNextEnabled ? ' passengers__button_active' : '')}
+            onClick={goToNext}
+          > 
             Далее
           </Link>
         </section>
