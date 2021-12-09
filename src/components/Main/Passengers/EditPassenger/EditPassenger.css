@@ -411,6 +411,7 @@
 }
 
 .edit-passenger__state-text-error_bold {
+  margin-left: 0.3em;
   font-weight: 700;
 }
 

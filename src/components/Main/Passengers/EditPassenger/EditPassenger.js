@@ -87,20 +87,13 @@ function EditPassenger(props) {
     setValue('birthSertificateNumber', newValue);
   }
 
-  let errorFlags = {};
-  //let errorText; 
-
   const savePassenger = (evt) => {
     evt.preventDefault();
-    const list = [...passengerList];
-    const verify = verifyData(passengerState);
-
-   // errorFlags = verify.errorFlags;
-   // errorText = verify.errorText;
+    const list = [...passengerList];  
 
     list[index].isChange = false;
-    list[index].isError = !verify.isReady;
-    list[index].isReady = verify.isReady;
+    list[index].isReady = verifyData(passengerState).isReady;
+    list[index].isError = !list[index].isReady;
 
     const newOrderInfo = { ...orderInfo, passengerList: list };
     setOrderInfo(newOrderInfo);
@@ -115,7 +108,16 @@ function EditPassenger(props) {
     localStorage.setItem('orderInfo', JSON.stringify(newOrderInfo));
   }
 
-  
+  let verify = {
+    errorFlags: {},
+    errorText: {}
+  };
+
+  if (isError) {
+    verify = verifyData(passengerState);
+  }
+
+  const { errorFlags, errorText } = verify;
 
   return (
     <div className="edit-passenger">
@@ -249,10 +251,11 @@ function EditPassenger(props) {
             }
           </div>
           <div className="edit-passenger__document-data-section">
-            <label className={'edit-passenger__label edit-passenger__document-type' + (isPassport ? ' edit-passenger__document-type_passport' : ' edit-passenger__document-type_sertificate')}>
+            <label 
+              className={'edit-passenger__label edit-passenger__document-type' + (isPassport ? ' edit-passenger__document-type_passport' : ' edit-passenger__document-type_sertificate')}>
               Тип документа
               <input 
-                className="edit-passenger__input edit-passsenger__listbox" 
+                className={'edit-passenger__input edit-passsenger__listbox' + (errorFlags.documentType ? ' edit-passenger__error' : '')} 
                 type="text" 
                 name="document-type" 
                 value={documentType} 
@@ -303,7 +306,7 @@ function EditPassenger(props) {
                   className={'edit-passenger__input edit-passenger__input_sertificate' + (errorFlags.birthSertificateNumber ? ' edit-passenger__error' : '')}
                   type="text" 
                   name="sertificate-number" 
-                  placeholder="12 символов " 
+                  placeholder=" " 
                   value={birthSertificateNumber}
                   onChange={(evt) => changeValue('birthSertificateNumber', evt.target.value.toUpperCase())}
                   onBlur={(evt) => setBirthSertificateNumber(evt.target.value)}
@@ -326,9 +329,21 @@ function EditPassenger(props) {
               <Fragment>
                 <img className="edit-passenger__state-icon" src={errorIcon} width="32" height="32" alt="error-icon" />
                 <div className="edit-passenger__state-text-container">
-                  <p className="edit-passenger__state-text-error">
-                    {}
-                  </p>
+                  {errorText.string1 &&
+                    <p className="edit-passenger__state-text-error">
+                      {errorText.string1}
+                    </p>
+                  }
+                  {errorText.string2 &&
+                    <p className="edit-passenger__state-text-error">
+                      {errorText.string2}
+                      {errorText.string3 &&
+                        <span className="edit-passenger__state-text-error_bold">
+                          {errorText.string3}
+                        </span>
+                      }
+                    </p>
+                  }
                 </div>
               </Fragment>
             }
