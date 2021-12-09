@@ -123,7 +123,24 @@ function Seats() {
         forward: forwardSeatList,
         backward: backwardSeatList
       },
-      passengerList: []
+      passengerList: [{
+        isCollapsed: false,
+        isAdult: true,
+        firstName: '',
+        lastName: '',
+        patronymic: '',
+        gender: true,
+        birthday: '',
+        isDisability: false,
+        includeChild: false,
+        documentType: 'Паспорт РФ',
+        passportSeries: '',
+        passportNumber: '',
+        birthSertificateNumber: '',
+        isChange: false,
+        isError: false,
+        isReady: false
+      }]
     }
 
     setOrderInfo(initOrderInfo);

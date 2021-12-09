@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Payment.css';
 import AppContext from 'AppContext';
@@ -7,30 +7,28 @@ import TravelDetails from '../Passengers/TravelDetails/TravelDetails';
 import UserData from './UserData/UserData';
 
 function Payment() {  
-  const [detailsCollapsed, setDetailsCollapsed] = useState({
-    forward: false,
-    backward: false,
-    passengers: false,
-  });
-
-  const { setBookingStage } = useContext(AppContext);
+  const { setBookingStage, orderInfo } = useContext(AppContext);
 
   useEffect(() => {
     setBookingStage('payment');
   }, [setBookingStage]);
+
+  const { 
+    user = {} 
+  } = orderInfo;
 
   return (
     <main className="payment"> 
       <ProgressIndicator stepNumber={3} />
       <div className="payment__main">
         <section className="payment__left">
-          <TravelDetails collapsed={detailsCollapsed} setCollapsed={setDetailsCollapsed} />
+          <TravelDetails />
         </section>
         <section className="payment__right">
           <p className="development-label">
             Страница находится в процессе разработки
           </p>
-          <UserData />
+          <UserData user={user} />
           <Link to={process.env.PUBLIC_URL + '/run/confirmation'} className="payment__button payment__button_active"> 
             Купить билеты
           </Link>
