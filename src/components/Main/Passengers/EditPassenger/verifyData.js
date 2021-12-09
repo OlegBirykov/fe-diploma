@@ -2,15 +2,15 @@ import moment from 'moment';
 
 export function verifyData(data) {
   const { 
-    isAdult = true,
-    firstName = '',
-    lastName = '',
-    patronymic = '',
-    birthday = '',
-    documentType = 'Паспорт РФ',
-    passportSeries = '',
-    passportNumber = '',
-    birthSertificateNumber = ''
+    isAdult,
+    firstName,
+    lastName,
+    patronymic,
+    birthday,
+    documentType,
+    passportSeries,
+    passportNumber,
+    birthSertificateNumber
   } = data;
 
   const result = {
@@ -69,16 +69,6 @@ export function verifyData(data) {
       };
     }
     result.isReady = false;
-  }
-
-  if (isAdult && documentType !== 'Паспорт РФ') {
-    result.errorFlags.documentType = true;
-    if (result.isReady) {
-      result.errorText = {
-        string1: 'Для проезда взрослого пассажира требуется паспорт'
-      };
-    }
-    result.isReady = false;    
   }
 
   if (!isAdult && documentType === 'Паспорт РФ') {

@@ -22,7 +22,25 @@ function Passengers() {
   }, [orderInfo.passengerList]);
 
   const addPassenger = () => {
-    const list = [...passengerList, {}];
+    const list = [...passengerList, {
+      isCollapsed: false,
+      isAdult: true,
+      firstName: '',
+      lastName: '',
+      patronymic: '',
+      gender: true,
+      birthday: '',
+      isDisability: false,
+      includeChild: false,
+      documentType: 'Паспорт РФ',
+      passportSeries: '',
+      passportNumber: '',
+      birthSertificateNumber: '',
+      isChange: false,
+      isError: false,
+      isReady: false
+    }];
+    
     const newOrderInfo = { ...orderInfo, passengerList: list };
     setOrderInfo(newOrderInfo);
     localStorage.setItem('orderInfo', JSON.stringify(newOrderInfo));

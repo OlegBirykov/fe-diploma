@@ -122,7 +122,8 @@ function Seats() {
       seatList: {
         forward: forwardSeatList,
         backward: backwardSeatList
-      }
+      },
+      passengerList: []
     }
 
     setOrderInfo(initOrderInfo);

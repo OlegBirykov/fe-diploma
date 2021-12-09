@@ -16,22 +16,22 @@ function EditPassenger(props) {
   const { orderInfo, setOrderInfo } = useContext(AppContext);
 
   const { 
-    isCollapsed = false,
-    isAdult = true,
-    firstName = '',
-    lastName = '',
-    patronymic = '',
-    gender = true,
-    birthday = '',
-    isDisability = false,
-    includeChild = false,
-    documentType = 'Паспорт РФ',
-    passportSeries = '',
-    passportNumber = '',
-    birthSertificateNumber = '',
-    isChange = false,
-    isError = false,
-    isReady = false
+    isCollapsed,
+    isAdult,
+    firstName,
+    lastName,
+    patronymic,
+    gender,
+    birthday,
+    isDisability,
+    includeChild,
+    documentType,
+    passportSeries,
+    passportNumber,
+    birthSertificateNumber,
+    isChange,
+    isError,
+    isReady
   } = passengerState;
 
   const isPassport = documentType === 'Паспорт РФ';

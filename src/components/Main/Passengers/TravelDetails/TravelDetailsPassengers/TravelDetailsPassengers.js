@@ -4,7 +4,7 @@ import icons from 'components/Main/icons.svg';
 import { separateThousands } from 'api/utils';
 
 function TravelDetailsPassengers(props) {
-  const { isCollapsed, setCollapsed } = props;
+  const { isCollapsed, setCollapsed, priceInfo } = props;
 
   return (
     <div className="travel-details-passengers"> 
@@ -20,28 +20,32 @@ function TravelDetailsPassengers(props) {
       </div>
       {!isCollapsed &&
         <div className="travel-details-passengers__full">
-          <div className="travel-details-passengers__item">
-            <p className="travel-details-passengers__count">
-              2 Взрослых
-            </p>
-            <p className="travel-details-passengers__price">
-              {separateThousands(0)}
-            </p>
-            <p className="travel-details-passengers__currency">
-              &#x20bd;
-            </p>
-          </div>
-          <div className="travel-details-passengers__item">
-            <p className="travel-details-passengers__count">
-              1 Ребенок
-            </p>
-            <p className="travel-details-passengers__price">
-              {separateThousands(0)}
-            </p>
-            <p className="travel-details-passengers__currency">
-              &#x20bd;
-            </p>
-          </div>
+          {!!priceInfo.adult.count &&
+            <div className="travel-details-passengers__item">
+              <p className="travel-details-passengers__count">
+                {priceInfo.adult.count}
+              </p>
+              <p className="travel-details-passengers__price">
+                {separateThousands(priceInfo.adult.price)}
+              </p>
+              <p className="travel-details-passengers__currency">
+                &#x20bd;
+              </p>
+            </div>
+          }
+          {!!priceInfo.child.count &&
+            <div className="travel-details-passengers__item">
+              <p className="travel-details-passengers__count">
+                {priceInfo.child.count}
+              </p>
+              <p className="travel-details-passengers__price">
+                {separateThousands(priceInfo.child.price)}
+              </p>
+              <p className="travel-details-passengers__currency">
+                &#x20bd;
+              </p>
+            </div>
+          }
         </div> 
       }
     </div>    
@@ -50,7 +54,8 @@ function TravelDetailsPassengers(props) {
 
 TravelDetailsPassengers.propTypes = {
   isCollapsed: PropTypes.bool.isRequired,
-  setCollapsed: PropTypes.func.isRequired
+  setCollapsed: PropTypes.func.isRequired,
+  priceInfo: PropTypes.object.isRequired
 };
 
 export default TravelDetailsPassengers;
