@@ -13,9 +13,6 @@
 }
 
 .passengers__right {
-  display: flex;
-  flex-direction: column;
-
   width: 960px;
 }
 
