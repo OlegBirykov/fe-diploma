@@ -1,12 +1,16 @@
 import { useState, useContext, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import './UserData.css';
 import AppContext from 'AppContext';
+import { errorBox } from 'api/gui';
+import { verifyPhone, verifyEmail } from 'api/utils';
 
 function UserData() {
   const [user, setUser] = useState({});
 
-  const { orderInfo } = useContext(AppContext);
+  const { orderInfo, setOrderInfo, setPopup } = useContext(AppContext);
+
+  const history = useHistory();
 
   useEffect(() => {
     setUser(orderInfo.user ? orderInfo.user : {});
@@ -40,6 +44,14 @@ function UserData() {
     setUser({ ...user, phone: value});
   }
 
+  const normalizePhone = (value) => {
+    let newValue = value.replace(/[^\d]/g, '');
+    if (newValue) {
+      newValue = '+' + newValue;
+    }
+    setUser({ ...user, phone: newValue});
+  }
+
   const changeEmail = (value) => {
     setUser({ ...user, email: value});
   }
@@ -48,7 +60,67 @@ function UserData() {
     setUser({ ...user, paymentMethod: value});
   }
 
-  const isNextEnabled = false;
+  const isNextEnabled = firstName.trim() && lastName.trim() && patronymic.trim() && phone.trim() && email.trim() && paymentMethod;
+
+  const goToNext = (evt) => {
+    evt.preventDefault();
+
+    if (!lastName) {
+      errorBox(setPopup, [
+        'Ошибка ввода данных',
+        'Поле "Фамилия" обязательно для заполнения'
+      ]);
+      return;
+    } 
+
+    if (!firstName) {
+      errorBox(setPopup, [
+        'Ошибка ввода данных',
+        'Поле "Имя" обязательно для заполнения'
+      ]);
+      return;
+    } 
+
+    if (!patronymic) {
+      errorBox(setPopup, [
+        'Ошибка ввода данных',
+        'Поле "Отчество" обязательно для заполнения'
+      ]);
+      return;
+    } 
+
+    if (!verifyPhone(phone)) {
+      errorBox(setPopup, [
+        'Ошибка ввода контактного телефона',
+        'Номер телефона должен начинаться на +7 и содержать ещё 10 цифр',
+        'Примеры: +79101234567, +7 (910) 123-45-67'
+      ]);
+      return;
+    } 
+
+    if (!verifyEmail(email)) {
+      errorBox(setPopup, [
+        'Ошибка ввода адреса электронной почты',
+        'E-mail должен иметь вид xxx@xxx.xx',
+        'Пример: qwerty111@mail.ru'
+      ]);
+      return;
+    }
+    
+    if (!paymentMethod) {
+      errorBox(setPopup, [
+        'Ошибка ввода данных',
+        'Не выбран метод оплаты'
+      ]);
+      return;
+    } 
+
+    const newOrderInfo = { ...orderInfo, user };
+    setOrderInfo(newOrderInfo);
+    localStorage.setItem('orderInfo', JSON.stringify(newOrderInfo));
+
+    history.push(process.env.PUBLIC_URL + '/run/confirmation');
+  }
 
   return (
     <div className="user-data"> 
@@ -104,6 +176,7 @@ function UserData() {
               placeholder="+7 ___ ___ __ __" 
               value={phone} 
               onChange={(evt) => changePhone(evt.target.value)}
+              onBlur={(evt) => normalizePhone(evt.target.value)}
             />
           </label>
           <label className="user-data__label user-data__email">
@@ -115,6 +188,7 @@ function UserData() {
               placeholder="inbox@gmail.ru" 
               value={email} 
               onChange={(evt) => changeEmail(evt.target.value)}
+              onBlur={(evt) => changeEmail(evt.target.value.trim())}
             />
           </label>
         </div>
@@ -160,7 +234,7 @@ function UserData() {
       <Link 
         to={process.env.PUBLIC_URL + '/run/confirmation'} 
         className={'user-data__button' + (isNextEnabled ? ' user-data__button_active' : '')}
-        onClick={null}
+        onClick={goToNext}
       > 
         Купить билеты
       </Link>
@@ -169,18 +243,3 @@ function UserData() {
 }
 
 export default UserData;
-
-
-/*
-          <div className="edit-passenger__options-section">
-            <label className={'edit-passenger__label edit-passenger__label-checkbox' + (isDisability ? ' edit-passenger__label-checkbox_checked' : '')}>
-              <input 
-                className="edit-passenger__checkbox" 
-                type="checkbox" 
-                name="disability" 
-                checked={isDisability}
-                onChange={() => setValue('isDisability', !isDisability)}
-              />
-              ограниченная подвижность
-            </label>
-*/

@@ -1,5 +1,9 @@
 import moment from 'moment';
 
+export function verifyPhone(phone) {
+  return /^\+7\d{10}$/.test(phone); 
+}
+
 export function verifyEmail(email) {
   return /^[^@]+@([^@.]+\.)+[^@.]+$/.test(email);
 }

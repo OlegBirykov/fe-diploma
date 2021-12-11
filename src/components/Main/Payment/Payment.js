@@ -20,9 +20,6 @@ function Payment() {
           <TravelDetails />
         </section>
         <section className="payment__right">
-          <p className="development-label">
-            Страница находится в процессе разработки
-          </p>
           <UserData />
         </section>
       </div>
