@@ -7,7 +7,7 @@ import TrainSeatsHeader from './TrainSeatsHeader/TrainSeatsHeader';
 import SeatsCount from './SeatsCount/SeatsCount';
 import CoachType from './CoachType/CoachType';
 import icons from 'components/Main/icons.svg';
-import { loadTrainsInfo } from 'api/http';
+import { loadTrainsInfo } from 'api/http/loadTrainsInfo';
 
 function TrainSeats(props) {
   const { trainInfo, seatsState, setSeatsState, isForward } = props;

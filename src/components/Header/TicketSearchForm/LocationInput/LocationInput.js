@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './LocationInput.css';
 import AppContext from 'AppContext';
 import { infoBox, httpErrorBox } from 'api/gui';
-import { cities } from 'api/http';
+import { loadCities } from 'api/http/loadCities';
 import buttonIcon from './location.svg';
 
 function LocationInput(props) {
@@ -15,7 +15,7 @@ function LocationInput(props) {
   const { animation, setAnimation, setPopup } = useContext(AppContext);
 
   const getCities = async (cityName) => {
-    const response = await cities(setAnimation, cityName); 
+    const response = await loadCities(setAnimation, cityName); 
     if (!response.ok) {
       httpErrorBox(setPopup, response);
     }

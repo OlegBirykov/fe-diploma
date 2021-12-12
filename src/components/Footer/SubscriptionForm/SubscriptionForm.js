@@ -3,7 +3,7 @@ import './SubscriptionForm.css';
 import AppContext from 'AppContext';
 import { infoBox, errorBox, httpErrorBox } from 'api/gui';
 import { verifyEmail } from 'api/utils';
-import { subscribe } from 'api/http';
+import { setSubscribe } from 'api/http/setSubscribe';
 
 function SubscriptionForm() { 
   const [email, setEmail] = useState('');
@@ -37,7 +37,7 @@ function SubscriptionForm() {
     }
 
     setEmail('');
-    const response = await subscribe(setAnimation, mail);
+    const response = await setSubscribe(setAnimation, mail);
     if (response.ok) {
       infoBox(setPopup, [
         `На вашу почту ${mail} отправлено письмо`,

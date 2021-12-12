@@ -5,7 +5,8 @@ import ProgressIndicator from '../ProgressIndicator/ProgressIndicator';
 import TrainsParams from './TrainsParams/TrainsParams';
 import LastRoutes from './LastRoutes/LastRoutes';
 import TrainsList from './TrainsList/TrainsList';
-import { loadTrainsInfo, loadSeatsInfo } from 'api/http';
+import { loadTrainsInfo } from 'api/http/loadTrainsInfo';
+import { loadSeatsInfo } from 'api/http/loadSeatsInfo';
 
 function Trains() {
   const { setBookingStage, setAnimation, setPopup, trainsInfo, setTrainsInfo, setSeatsInfo } = useContext(AppContext);

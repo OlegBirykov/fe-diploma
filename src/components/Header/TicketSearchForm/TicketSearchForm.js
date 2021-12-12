@@ -7,7 +7,8 @@ import LocationInput from './LocationInput/LocationInput';
 import DateInput from './DateInput/DateInput';
 import { errorBox, httpErrorBox } from 'api/gui';
 import { readDate } from 'api/utils';
-import { cities, loadTrainsInfo } from 'api/http';
+import { loadCities } from 'api/http/loadCities';
+import { loadTrainsInfo } from 'api/http/loadTrainsInfo';
 import buttonInvert from './button-invert.svg';
 
 function TicketSearchForm(props) {
@@ -51,7 +52,7 @@ function TicketSearchForm(props) {
 
   const getCityId = async (cityName, field) => {
     const name = cityName.trim();
-    const response = await cities(setAnimation, name); 
+    const response = await loadCities(setAnimation, name); 
     if (!response.ok) {
       httpErrorBox(setPopup, response);
       return null; 

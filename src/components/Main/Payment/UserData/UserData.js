@@ -110,7 +110,7 @@ function UserData() {
     if (!paymentMethod) {
       errorBox(setPopup, [
         'Ошибка ввода данных',
-        'Не выбран метод оплаты'
+        'Не выбран способ оплаты'
       ]);
       return;
     } 

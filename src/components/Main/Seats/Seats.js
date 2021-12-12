@@ -6,7 +6,7 @@ import ProgressIndicator from '../ProgressIndicator/ProgressIndicator';
 import TrainsParams from '../Trains/TrainsParams/TrainsParams';
 import LastRoutes from '../Trains/LastRoutes/LastRoutes';
 import TrainSeats from './TrainSeats/TrainSeats';
-import { loadSeatsInfo } from 'api/http';
+import { loadSeatsInfo } from 'api/http/loadSeatsInfo';
 import { errorBox } from 'api/gui';
 import { createSeatsMap, getPrice } from 'api/seats';
 
