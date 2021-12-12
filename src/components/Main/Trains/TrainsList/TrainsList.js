@@ -103,10 +103,11 @@ function TrainsList(props) {
         {!!trainsArray.length &&
           trainsArray.map((item) => 
           <TrainsListItem 
-            trainInfo={item}
+            trainInfo={item.departure}
             isForward={isForward} 
             reloadInfo={reloadInfo} 
             loadSeats={loadSeats}
+            isConfirmation={false}
             key={shortid.generate()} 
           />)
         }

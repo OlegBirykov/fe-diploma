@@ -4,12 +4,12 @@ import './Confirmation.css';
 import AppContext from 'AppContext';
 import ProgressIndicator from '../ProgressIndicator/ProgressIndicator';
 import TravelDetails from '../Passengers/TravelDetails/TravelDetails';
-import TrainsConfirmation from './TrainsConfirmation/TrainsConfirmation';
+import TrainsListItem from '../Trains/TrainsList/TrainsListItem/TrainsListItem';
 import PassengersConfirmation from './PassengersConfirmation/PassengersConfirmation';
 import PaymentConfirmation from './PaymentConfirmation/PaymentConfirmation';
 
 function Confirmation() { 
-  const { setBookingStage } = useContext(AppContext);
+  const { setBookingStage, forwardTrain, backwardTrain } = useContext(AppContext);
 
   useEffect(() => {
     setBookingStage('confirmation');
@@ -26,13 +26,28 @@ function Confirmation() {
           <p className="development-label">
             Страница находится в процессе разработки
           </p>
-          <div className="confirmation__trains">
-            <TrainsConfirmation />
+          <div className="confirmation__section">
+            <TrainsListItem 
+              trainInfo={forwardTrain}
+              isForward={true} 
+              reloadInfo={(f) => f} 
+              loadSeats={(f) => f}
+              isConfirmation={true}
+            />
           </div>
-          <div className="confirmation__passengers">
+          <div className="confirmation__section">
+            <TrainsListItem 
+              trainInfo={backwardTrain}
+              isForward={false} 
+              reloadInfo={(f) => f} 
+              loadSeats={(f) => f}
+              isConfirmation={true}
+            />
+          </div>
+          <div className="confirmation__section">
             <PassengersConfirmation />
           </div>
-          <div className="confirmation__payment">
+          <div className="confirmation__section">
             <PaymentConfirmation />
           </div>
           <Link to={process.env.PUBLIC_URL + '/run/completion'} className="confirmation__button confirmation__button_active"> 

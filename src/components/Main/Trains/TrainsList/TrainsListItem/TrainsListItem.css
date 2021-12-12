@@ -1,6 +1,4 @@
 .trains-list-item {
-  display: flex;
-
   border: 1px solid #c4c4c4;
   background-color: white;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
@@ -8,6 +6,20 @@
 
 .trains-list-item:not(:first-child) {
   margin-top: 50px;
+}
+
+.trains-list-item__title {
+  padding: 27px 30px 31px 30px;
+  border-bottom: 1px solid #928f94;
+
+  color: #292929;
+  font-size: 30px;
+  line-height: 35px;
+  font-weight: normal;
+}
+
+.trains-list-item__body {
+  display: flex;
 }
 
 .trains-list-item__left {
@@ -144,23 +156,45 @@
   display: block;
   width: 228px;
   margin-top: 19px;
-  padding: 0.3em 0 0.2em 0;
+  padding: 4px 0 5px 0;
+  border-width: 1px;
+  border-style: solid;
   border-radius: 5px;
 
-  color: white;
   font-size: 24px;
   line-height: 28px;
   font-weight: bold;
-
-  background-color: #ffa800;
 }
 
-.trains-list-item__button:hover {
+.trains-list-item__button_return {
+  border-color: #292929;
+  color: #292929;
+}
+
+.trains-list-item__button_return:hover {
+  color: #ffa800;
   filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
 }
 
-.trains-list-item__button:active {
-  border: 1px solid #ffa800;
+.trains-list-item__button_return:active {
+  border-color: #ffa800;
+  color: #292929;
+  background-color: #ffa800;
+  filter: none;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.trains-list-item__button_next {
+  border-color: #ffa800;
+  color: white;
+  background-color: #ffa800;
+}
+
+.trains-list-item__button_next:hover {
+  filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.trains-list-item__button_next:active {
   color: #ffa800;
   background-color: transparent;
   filter: none;

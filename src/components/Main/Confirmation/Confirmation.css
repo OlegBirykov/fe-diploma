@@ -16,11 +16,7 @@
   width: 960px;
 }
 
-.confirmation__passengers {
-  margin-top: 45px;
-}
-
-.confirmation__payment {
+.confirmation__section:not(:first-child) {
   margin-top: 45px;
 }
 
