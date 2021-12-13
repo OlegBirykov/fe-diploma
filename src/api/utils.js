@@ -8,6 +8,10 @@ export function verifyEmail(email) {
   return /^[^@]+@([^@.]+\.)+[^@.]+$/.test(email);
 }
 
+export function separateBirthdaySertificateNumber(number) {
+  return `${number.slice(0, -8)} ${number.slice(-8, -6)} ${number.slice(-6)}`;
+}
+
 export function readDate(date1, date2) {
   const result = { status: false };
   const format = 'DD.MM.YYYY';
@@ -183,4 +187,11 @@ export function dayInLastPosition(date) {
   } else {
     return '';
   }
+}
+
+export function totalTicketPrice(orderInfo) {
+  const { seatList, passengerList } = orderInfo; 
+  return passengerList.reduce((sum, item, i) =>
+    sum + (item.isAdult ? seatList.forward[i].fullPrice + seatList.backward[i].fullPrice : seatList.forward[i].childPrice + seatList.backward[i].childPrice)
+  , 0);
 }
