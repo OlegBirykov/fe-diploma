@@ -154,7 +154,7 @@
 
 .trains-list-item__button {
   display: block;
-  width: 228px;
+  width: 100%;
   margin-top: 19px;
   padding: 4px 0 5px 0;
   border-width: 1px;

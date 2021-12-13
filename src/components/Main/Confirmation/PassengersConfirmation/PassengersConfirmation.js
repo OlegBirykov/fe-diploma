@@ -26,7 +26,7 @@ function PassengersConfirmation() {
                     <svg className="passengers-confirmation__icon" width="68" height="68">
                       <use xlinkHref={icons + '#passenger-negative'} />
                     </svg>
-                    <p>
+                    <p className="passengers-confirmation__list-item-title-text">
                       {item.isAdult ? 'Взрослый' : 'Детский'}
                     </p>
                   </div>
@@ -41,10 +41,11 @@ function PassengersConfirmation() {
                       Дата рождения {item.birthday}
                     </p>
                     <p className="passengers-confirmation__list-item-text">
-                      {item.documentType} {item.documentType === 'Паспорт РФ' 
-                                            ? `${item.passportSeries} ${item.passportNumber}` 
-                                            : separateBirthdaySertificateNumber(item.birthSertificateNumber)
-                                          }
+                      {item.documentType}&nbsp;
+                      {item.documentType === 'Паспорт РФ' 
+                        ? `${item.passportSeries} ${item.passportNumber}` 
+                        : separateBirthdaySertificateNumber(item.birthSertificateNumber)
+                      }
                     </p>
                   </div>
                 </li>
@@ -55,7 +56,7 @@ function PassengersConfirmation() {
         <div className="passengers-confirmation__right">
           <div className="passengers-confirmation__total">
             <p className="passengers-confirmation__total-title">
-              Итог
+              Всего
             </p>
             <p className="passengers-confirmation__price">
               {separateThousands(totalTicketPrice(orderInfo))}
