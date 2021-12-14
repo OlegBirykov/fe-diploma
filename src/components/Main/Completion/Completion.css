@@ -10,30 +10,27 @@
   transform: translateX(-50%);
 
   width: 1404px;
-  height: 1230px;
-
-  background-color: white;
 }
 
-.completion__xxx {
-  display: block;
-  width: 323px;
-  margin: 0 auto;
-  padding: 16px 0;
-  border-radius: 5px;
-  text-align: center;
-          
-  font-size: 24px;
-  line-height: 28px;
+.completion__title {
+  padding-bottom: 32px;
+
+  color: white;
+  font-size: 72px;
+  line-height: 84px;
   font-weight: bold;
-          
-  text-transform: uppercase;
-  color: #292929;
-  background-color: #ffa800;
 }
 
-.development-label {
-  color: red;
-  font-size: 40px;
-  text-align: center;
+.completion__body {
+  border: 1px solid #c4c4c4;
+  background-color: white;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25); 
+}
+
+.completion__manual {
+  background-color: #f4f3f6;
+}
+
+.completion__controls {
+  background-color: rgba(255, 168, 0, 0.88);
 }
