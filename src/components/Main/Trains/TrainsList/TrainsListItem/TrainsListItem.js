@@ -7,6 +7,7 @@ import TrainClassSeatsInfo from './TrainClassSeatsInfo/TrainClassSeatsInfo';
 import OptionIcons from '../../OptionIcons/OptionIcons';
 import icons from 'components/Main/icons.svg';
 import { secToDate, secToHourMin, durationToHourMin } from 'api/utils';
+import { loadTrainsInfo } from 'api/http/loadTrainsInfo';
 
 function TrainsListItem(props) {
   const { trainInfo, isForward, reloadInfo, loadSeats, isConfirmation } = props;
@@ -26,12 +27,20 @@ function TrainsListItem(props) {
     _id
   } = trainInfo;
 
-  const { forwardTrain, setForwardTrain, backwardTrain, setBackwardTrain } = useContext(AppContext);
+  const { setAnimation, setPopup, trainsInfo, setTrainsInfo, forwardTrain, setForwardTrain, backwardTrain, setBackwardTrain } = useContext(AppContext);
 
   const history = useHistory();
 
   const returnToTrains = async () => {
+    const result = await loadTrainsInfo(setAnimation, setPopup, setTrainsInfo, {
+      ...trainsInfo.params, 
+      offset: 0,
+      direction: isForward ? 'forward' : 'backward'
+    });
 
+    if (result) {
+      history.push(process.env.PUBLIC_URL + '/run/trains');
+    }
   }
 
   const goToNextPage = async () => {

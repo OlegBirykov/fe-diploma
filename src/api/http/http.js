@@ -36,6 +36,19 @@ export async function seats (trainId, params) {
   return response;
 }
 
+export async function order (orderInfo) {
+  const url = `${process.env.REACT_APP_TRAIN_BOOKING_SERVER}/order`;
+  const opt = {  
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8'
+    },
+    body: JSON.stringify(orderInfo)
+  };
+  const response = await fetchData(url, opt);
+  return response;  
+}
+
 export async function subscribe (email) {
   const url = `${process.env.REACT_APP_TRAIN_BOOKING_SERVER}/subscribe`;
   const opt = {  

@@ -143,12 +143,12 @@ function TicketSearchForm(props) {
       return;
     }
 
+    history.push(process.env.PUBLIC_URL + '/run/trains');
     setFormState(initialFormState);
     setForwardTrain(null);
     setBackwardTrain(null);
     localStorage.setItem('forwardTrain', null);
     localStorage.setItem('backwardTrain', null);
-    history.push(process.env.PUBLIC_URL + '/run/trains');
   };
 
   return (

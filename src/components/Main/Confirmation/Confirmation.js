@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import './Confirmation.css';
 import AppContext from 'AppContext';
 import ProgressIndicator from '../ProgressIndicator/ProgressIndicator';
@@ -7,13 +7,29 @@ import TravelDetails from '../Passengers/TravelDetails/TravelDetails';
 import TrainsListItem from '../Trains/TrainsList/TrainsListItem/TrainsListItem';
 import PassengersConfirmation from './PassengersConfirmation/PassengersConfirmation';
 import PaymentConfirmation from './PaymentConfirmation/PaymentConfirmation';
+import { setOrder } from 'api/http/setOrder';
+import { httpErrorBox } from 'api/gui';
 
 function Confirmation() { 
-  const { setBookingStage, forwardTrain, backwardTrain } = useContext(AppContext);
+  const { setBookingStage, setAnimation, setPopup, forwardTrain, backwardTrain, orderInfo } = useContext(AppContext);
+
+  const history = useHistory();
 
   useEffect(() => {
     setBookingStage('confirmation');
   }, [setBookingStage]);
+
+  const goToNext = async (evt) => {
+    evt.preventDefault();
+
+    const response = await setOrder(setAnimation, orderInfo);
+
+    if (response.ok) {
+      history.push(process.env.PUBLIC_URL + '/run/completion');
+    } else {
+      httpErrorBox(setPopup, response);
+    }
+  }
 
   return (
     <main className="confirmation"> 
@@ -23,9 +39,6 @@ function Confirmation() {
           <TravelDetails />
         </section>
         <section className="confirmation__right">
-          <p className="development-label">
-            Страница находится в процессе разработки
-          </p>
           <div className="confirmation__section">
             <TrainsListItem 
               trainInfo={forwardTrain}
@@ -50,7 +63,7 @@ function Confirmation() {
           <div className="confirmation__section">
             <PaymentConfirmation />
           </div>
-          <Link to={process.env.PUBLIC_URL + '/run/completion'} className="confirmation__button confirmation__button_active"> 
+          <Link to={process.env.PUBLIC_URL + '/run/completion'} className="confirmation__button confirmation__button_active" onClick={goToNext}> 
             Подтвердить
           </Link>
         </section>
