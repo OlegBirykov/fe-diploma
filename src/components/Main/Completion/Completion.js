@@ -1,10 +1,14 @@
-import { useContext, useEffect } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Completion.css';
 import AppContext from 'AppContext';
 import { separateThousands, totalTicketPrice } from 'api/utils';
+import star from './star.svg';
+import activeStar from './active-star.svg';
 
-function Completion() {  
+function Completion() { 
+  const [stars/*, setStars*/] = useState([false, false, false, false, false]);
+  
   const { setBookingStage, orderInfo } = useContext(AppContext);
   const { user: { firstName, patronymic } } = orderInfo;
 
@@ -36,47 +40,47 @@ function Completion() {
           <div className="completion__manual">
             <div className="completion__manual-item">
               <div className="completion__manual-icon completion__manual-icon_1">
-                <p className="completion__manual-text">
-                  билеты будут
-                </p>
-                <p className="completion__manual-text">
-                  отправлены
-                </p>
-                <p className="completion__manual-text">
-                  на ваш <span className="completion__manual-text_bold">e-mail</span>
-                </p>
               </div>
+              <p className="completion__manual-text">
+                билеты будут
+              </p>
+              <p className="completion__manual-text">
+                отправлены
+              </p>
+              <p className="completion__manual-text">
+                на ваш <span className="completion__manual-text_bold">e-mail</span>
+              </p>
             </div>
             <div className="completion__manual-item">
               <div className="completion__manual-icon completion__manual-icon_2">
-                <p className="completion__manual-text completion__manual-text_bold">
-                  распечатайте
-                </p>
-                <p className="completion__manual-text">
-                  и сохраняйте билеты
-                </p>
-                <p className="completion__manual-text">
-                  до даты поездки
-                </p>
               </div>
+              <p className="completion__manual-text completion__manual-text_bold">
+                распечатайте
+              </p>
+              <p className="completion__manual-text">
+                и сохраняйте билеты
+              </p>
+              <p className="completion__manual-text">
+                до даты поездки
+              </p>
             </div>
             <div className="completion__manual-item">
               <div className="completion__manual-icon completion__manual-icon_3">
-                <p className="completion__manual-text completion__manual-text_bold">
-                  предъявите
-                </p>
-                <p className="completion__manual-text">
-                  распечатанные
-                </p>
-                <p className="completion__manual-text">
-                  билеты при посадке
-                </p>
               </div>
+              <p className="completion__manual-text completion__manual-text_bold">
+                предъявите
+              </p>
+              <p className="completion__manual-text">
+                распечатанные
+              </p>
+              <p className="completion__manual-text">
+                билеты при посадке
+              </p>
             </div>
           </div>
           <div className="completion__text-container">
             <p className="completion__text-title">
-              {firstName} {patronymic}
+              {firstName} {patronymic}!
             </p>
             <p className="completion__text-text">
               Ваш заказ успешно оформлен.
@@ -92,8 +96,13 @@ function Completion() {
             <p className="completion__controls-text">
               Оценить сервис
             </p>
+            {stars.map((item, i) => 
+              <div className="completion__star-container" key={i}>
+                <img className="completion__star" src={item ? activeStar : star} width="48" height="48" alt="star" />
+              </div>
+            )}
             <Link to={process.env.PUBLIC_URL} className="completion-button"> 
-               Вернуться на главную
+              Вернуться на главную
             </Link>  
           </div>      
         </div>
