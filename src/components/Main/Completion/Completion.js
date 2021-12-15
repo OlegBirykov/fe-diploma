@@ -7,7 +7,11 @@ import star from './star.svg';
 import activeStar from './active-star.svg';
 
 function Completion() { 
-  const [stars/*, setStars*/] = useState([false, false, false, false, false]);
+  const initStar = {
+    clicked: false,
+    moved: false
+  };
+  const [stars, setStars] = useState([initStar, initStar, initStar, initStar, initStar]);
   
   const { setBookingStage, orderInfo } = useContext(AppContext);
   const { user: { firstName, patronymic } } = orderInfo;
@@ -15,6 +19,27 @@ function Completion() {
   useEffect(() => {
     setBookingStage('completion');
   }, [setBookingStage]);
+
+  const starClick = (index) => {
+    const newStars = stars.map((item, i) => {
+      return { clicked: i <= index, moved: item.moved };
+    });
+    setStars(newStars);
+  }
+  
+  const starOver = (index) => {
+    const newStars = stars.map((item, i) => {
+      return { clicked: item.clicked, moved: i <= index };
+    });
+    setStars(newStars);  
+  }
+
+  const starsOut = () => {
+    const newStars = stars.map((item) => {
+      return { clicked: item.clicked, moved: false };
+    });
+    setStars(newStars);     
+  }
 
   return (
     <main className="completion"> 
@@ -96,11 +121,13 @@ function Completion() {
             <p className="completion__controls-text">
               Оценить сервис
             </p>
-            {stars.map((item, i) => 
-              <div className="completion__star-container" key={i}>
-                <img className="completion__star" src={item ? activeStar : star} width="48" height="48" alt="star" />
-              </div>
-            )}
+            <div className="completion__stars-container" onMouseOut={starsOut}>
+              {stars.map((item, i) => 
+                <div className="completion__star-cell" key={i} onClick={() => starClick(i)} onMouseOver={() => starOver(i)}>
+                  <img className="completion__star" src={(item.clicked || item.moved) ? activeStar : star} width="48" height="48" alt="star" />
+                </div>
+              )}
+            </div>
             <Link to={process.env.PUBLIC_URL} className="completion-button"> 
               Вернуться на главную
             </Link>  

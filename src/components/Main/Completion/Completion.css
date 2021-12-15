@@ -177,12 +177,13 @@
   font-weight: normal;
 }
 
-.completion__star-container {
-  width: 68px;
+.completion__stars-container {
+  display: flex;
+  margin-left: 23px;
 }
 
-.completion__star-container:nth-child(2) {
-  margin-left: 23px;
+.completion__star-cell {
+  width: 68px;
 }
 
 .completion__star {
