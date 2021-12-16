@@ -57,8 +57,11 @@ function LocationInput(props) {
     }
   }
 
-  const removeFocus = () => {
-    setTimeout(() => setShowList(false), 500);
+  const removeFocus = (evt) => {
+    if (evt.relatedTarget && evt.relatedTarget.className === 'location-input__list') {
+      return;
+    }
+    setShowList(false);
   }
 
   const selectCity = (city) => {
@@ -81,7 +84,7 @@ function LocationInput(props) {
         <img className="location-input__button-icon" src={buttonIcon} width="100%" alt="button-location" />
       </button>
       {showList && 
-        <ul className="location-input__list">
+        <ul className="location-input__list" tabIndex="9999">
           {citiesList.map((item) =>
             <li className="location-input__list-item" key={item._id} onClick={() => selectCity(item.name)}>
               {item.name}

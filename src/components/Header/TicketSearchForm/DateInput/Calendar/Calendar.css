@@ -1,0 +1,10 @@
+.calendar {
+  position: absolute;
+  left: 50%;
+  bottom: -8px;
+  transform: translate(-49%, 100%);
+
+  width: 352px;
+
+  background-color: white;
+}
