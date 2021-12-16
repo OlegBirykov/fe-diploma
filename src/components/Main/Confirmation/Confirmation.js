@@ -22,7 +22,7 @@ function Confirmation() {
   const goToNext = async (evt) => {
     evt.preventDefault();
 
-    const response = await setOrder(setAnimation, orderInfo);
+    const response = await setOrder(setAnimation, forwardTrain, backwardTrain, orderInfo);
 
     if (response.ok) {
       history.push(process.env.PUBLIC_URL + '/run/completion');
