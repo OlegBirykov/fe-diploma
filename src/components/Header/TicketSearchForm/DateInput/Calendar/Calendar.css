@@ -12,33 +12,118 @@
   filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
 }
 
-.calendar__month {
-  border-bottom: 1px solid #e8e8e8;
+.calendar::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, -90%);
+
+  border-bottom: 13px solid white;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
 }
 
-/*.calendar__month-dec {
+.calendar__month {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-}*/
+  border-bottom: 1px solid #e8e8e8;
+  padding: 12px 36px 12px 32px;
+}
+
+.calendar__month-page { 
+  position: relative;
+  width: 30px;
+  height: 30px;
+}
+
+.calendar__month-page::before { 
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  border: 6px solid transparent;
+}
+
+.calendar__month-page_dec::before {
+  border-right-color: #333333;
+}
+
+.calendar__month-page_dec:hover::before {
+  border-right-color: #ffa800;
+}
+
+.calendar__month-page_inc::before {
+  border-left-color: #333333;
+}
+
+.calendar__month-page_inc:hover::before {
+  border-left-color: #ffa800;
+}
 
 .calendar__month-name {
+  margin: 0 auto;
+
   color: #333333;
   font-size: 36px;
   line-height: 42px;
   font-weight: normal;
 }
 
-/*.calendar__month-inc {
-
-}*/
-
 .calendar__days-container {
   display: flex;
   flex-wrap: wrap;
+
+  padding: 8px 0 13px 18px;
 }
 
 .calendar__day {
-  color: #808080;
-  font-size: 18px;
-  line-height: 21px;
+  width: 36px;
+  height: 32px;
+  margin: 4px 4px 4px 5px;
+  padding: 2px 3px 0 0;
+  border: 2px solid transparent;
+  border-radius: 5px;
+
+  color: #353535;
+  font-size: 24px;
+  line-height: 24px;
   font-weight: normal;
+  text-align: right;
+}
+
+.calendar__day:hover {
+  border-color: #ffa800;
+  background-color: rgba(255, 168, 0, 0.31); 
+}
+
+.calendar__day_over-month {
+  color: #e8e8e8;
+}
+
+.calendar__day_over-month:hover {
+  border-color: transparent;
+  background-color: transparent;
+}
+
+.calendar__day_over-limit {
+  color: #808080;
+}
+
+.calendar__day_over-limit:hover {
+  border-color: transparent;
+  background-color: transparent;
+}
+
+.calendar__day_sunday {
+  font-weight: bold;
+}
+
+.calendar__day_selected {
+  border-color: #ffa800;
+  background-color: rgba(255, 168, 0, 0.31);
 }

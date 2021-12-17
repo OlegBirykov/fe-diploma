@@ -35,7 +35,7 @@ function DateInput(props) {
     if (isDisabled) {
       return;
     }
-    setShowCalendar(!showCalendar);
+    setShowCalendar(true);
   }
 
   const selectDate = (date) => {
