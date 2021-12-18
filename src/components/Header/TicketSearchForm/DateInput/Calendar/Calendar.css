@@ -57,12 +57,28 @@
   border-right-color: #ffa800;
 }
 
+.calendar__month-page_dec-disabled::before {
+  border-right-color: #e8e8e8;
+}
+
+.calendar__month-page_dec-disabled:hover::before {
+  border-right-color: #e8e8e8;
+}
+
 .calendar__month-page_inc::before {
   border-left-color: #333333;
 }
 
 .calendar__month-page_inc:hover::before {
   border-left-color: #ffa800;
+}
+
+.calendar__month-page_inc-disabled::before {
+  border-left-color: #e8e8e8;
+}
+
+.calendar__month-page_inc-disabled:hover::before {
+  border-left-color: #e8e8e8;
 }
 
 .calendar__month-name {
