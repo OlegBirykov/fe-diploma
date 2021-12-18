@@ -87,8 +87,13 @@ function EditPassenger(props) {
     setValue('birthSertificateNumber', newValue);
   }
 
+  const keyPress = (evt) => {
+    if (evt.key === "Enter") {
+      evt.target.blur();
+    }
+  }
+
   const savePassenger = (evt) => {
-    evt.preventDefault();
     const list = [...passengerList];  
 
     list[index].isChange = false;
@@ -136,7 +141,7 @@ function EditPassenger(props) {
         }
       </div>
       {!isCollapsed &&
-        <form className="edit-passenger__form" onSubmit={savePassenger}>
+        <form className="edit-passenger__form">
           <div className="edit-passenger__ago-container">
             <input 
               className="edit-passenger__input edit-passenger__ago edit-passsenger__listbox" 
@@ -168,6 +173,7 @@ function EditPassenger(props) {
                 value={lastName} 
                 onChange={(evt) => changeValue('lastName', evt.target.value)}
                 onBlur={(evt) => setValue('lastName', evt.target.value.trim())}
+                onKeyPress={keyPress}
               />
             </label>
             <label className="edit-passenger__label edit-passenger__first-name">
@@ -180,6 +186,7 @@ function EditPassenger(props) {
                 value={firstName} 
                 onChange={(evt) => changeValue('firstName', evt.target.value)}
                 onBlur={(evt) => setValue('firstName', evt.target.value.trim())}
+                onKeyPress={keyPress}
               />
             </label>
             <label className="edit-passenger__label edit-passenger__patronymic">
@@ -192,6 +199,7 @@ function EditPassenger(props) {
                 value={patronymic} 
                 onChange={(evt) => changeValue('patronymic', evt.target.value)}
                 onBlur={(evt) => setValue('patronymic', evt.target.value.trim())}
+                onKeyPress={keyPress}
               />
             </label>
           </div>
@@ -223,6 +231,7 @@ function EditPassenger(props) {
                 value={birthday} 
                 onChange={(evt) => changeBirthday(evt.target.value)}
                 onBlur={(evt) => setValue('birthday', evt.target.value)}
+                onKeyPress={keyPress}
               />
             </label>
           </div>
@@ -285,6 +294,7 @@ function EditPassenger(props) {
                     value={passportSeries} 
                     onChange={(evt) => changePassportSeries(evt.target.value)}
                     onBlur={(evt) => setValue('passportSeries', evt.target.value)}
+                    onKeyPress={keyPress}
                   />
                 </label>
                 <label className="edit-passenger__label edit-passenger__passport-number">
@@ -297,6 +307,7 @@ function EditPassenger(props) {
                     value={passportNumber} 
                     onChange={(evt) => changePassportNumber(evt.target.value)}
                     onBlur={(evt) => setValue('passportNumber', evt.target.value)}
+                    onKeyPress={keyPress}
                   />
                 </label>
               </Fragment> :
@@ -310,6 +321,7 @@ function EditPassenger(props) {
                   value={birthSertificateNumber}
                   onChange={(evt) => changeValue('birthSertificateNumber', evt.target.value.toUpperCase())}
                   onBlur={(evt) => setBirthSertificateNumber(evt.target.value)}
+                  onKeyPress={keyPress}
                 />
               </label>
             }
@@ -348,7 +360,7 @@ function EditPassenger(props) {
               </Fragment>
             }
             {isChange &&
-              <button className="edit-passenger__button-save" type="submit"> 
+              <button className="edit-passenger__button-save" type="button" onClick={savePassenger}> 
                 Сохранить изменения 
               </button>  
             }          

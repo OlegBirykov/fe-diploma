@@ -44,14 +44,6 @@ function AppProvider(props) {
   }
   const [seatsInfo, setSeatsInfo] = useState(storageSeatsInfo);
 
-  let storageReservedSeats;
-  try {
-    storageReservedSeats = JSON.parse(localStorage.getItem('reservedSeats'));
-  } catch {
-    storageReservedSeats = {};
-  }
-  const [reservedSeats, setReservedSeats] = useState(storageReservedSeats);
-
   let storageOrderInfo;
   try {
     storageOrderInfo = JSON.parse(localStorage.getItem('orderInfo'));
@@ -76,7 +68,6 @@ function AppProvider(props) {
         forwardTrain, setForwardTrain,
         backwardTrain, setBackwardTrain,
         seatsInfo, setSeatsInfo,
-        reservedSeats, setReservedSeats,
         orderInfo, setOrderInfo,
         travelDetailsCollapsed, setTravelDetailsCollapsed
       }}>
