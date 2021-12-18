@@ -1,0 +1,43 @@
+{
+  "files": {
+    "main.css": "/fe-diploma/static/css/main.50e771cb.chunk.css",
+    "main.js": "/fe-diploma/static/js/main.76d7c017.chunk.js",
+    "main.js.map": "/fe-diploma/static/js/main.76d7c017.chunk.js.map",
+    "runtime-main.js": "/fe-diploma/static/js/runtime-main.da570927.js",
+    "runtime-main.js.map": "/fe-diploma/static/js/runtime-main.da570927.js.map",
+    "static/js/2.fcaba5e1.chunk.js": "/fe-diploma/static/js/2.fcaba5e1.chunk.js",
+    "static/js/2.fcaba5e1.chunk.js.map": "/fe-diploma/static/js/2.fcaba5e1.chunk.js.map",
+    "index.html": "/fe-diploma/index.html",
+    "static/css/main.50e771cb.chunk.css.map": "/fe-diploma/static/css/main.50e771cb.chunk.css.map",
+    "static/js/2.fcaba5e1.chunk.js.LICENSE.txt": "/fe-diploma/static/js/2.fcaba5e1.chunk.js.LICENSE.txt",
+    "static/media/active-star.d1fd1c72.svg": "/fe-diploma/static/media/active-star.d1fd1c72.svg",
+    "static/media/button-invert.5fca6600.svg": "/fe-diploma/static/media/button-invert.5fca6600.svg",
+    "static/media/cat.e05877d1.png": "/fe-diploma/static/media/cat.e05877d1.png",
+    "static/media/UserData.css": "/fe-diploma/static/media/check-mark.bded2f1f.svg",
+    "static/media/CoachProperties.css": "/fe-diploma/static/media/class4.54e898f3.png",
+    "static/media/dark-triangle.8b813f45.svg": "/fe-diploma/static/media/dark-triangle.8b813f45.svg",
+    "static/media/EditPassenger.css": "/fe-diploma/static/media/triangle.7deddb57.svg",
+    "static/media/date.f3bd0495.svg": "/fe-diploma/static/media/date.f3bd0495.svg",
+    "static/media/Description.css": "/fe-diploma/static/media/icon3.82e89c9d.svg",
+    "static/media/error.f0e873e6.svg": "/fe-diploma/static/media/error.f0e873e6.svg",
+    "static/media/eugene.65a6aedf.png": "/fe-diploma/static/media/eugene.65a6aedf.png",
+    "static/media/Header.css": "/fe-diploma/static/media/header_run.befa8608.png",
+    "static/media/icon-error.f617ffc6.svg": "/fe-diploma/static/media/icon-error.f617ffc6.svg",
+    "static/media/icon-info.8160a758.svg": "/fe-diploma/static/media/icon-info.8160a758.svg",
+    "static/media/Completion.css": "/fe-diploma/static/media/icon3.03998593.svg",
+    "static/media/icons.03963612.svg": "/fe-diploma/static/media/icons.03963612.svg",
+    "static/media/icons.659298fb.svg": "/fe-diploma/static/media/icons.659298fb.svg",
+    "static/media/icons.e4b19f5e.svg": "/fe-diploma/static/media/icons.e4b19f5e.svg",
+    "static/media/light-triangle.5ca8bc48.svg": "/fe-diploma/static/media/light-triangle.5ca8bc48.svg",
+    "static/media/loading-animation.4e2e699c.gif": "/fe-diploma/static/media/loading-animation.4e2e699c.gif",
+    "static/media/location.08fbb43a.svg": "/fe-diploma/static/media/location.08fbb43a.svg",
+    "static/media/ready.e0b774b9.svg": "/fe-diploma/static/media/ready.e0b774b9.svg",
+    "static/media/star.d4eb37de.svg": "/fe-diploma/static/media/star.d4eb37de.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.da570927.js",
+    "static/js/2.fcaba5e1.chunk.js",
+    "static/css/main.50e771cb.chunk.css",
+    "static/js/main.76d7c017.chunk.js"
+  ]
+}
