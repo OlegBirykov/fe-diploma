@@ -110,6 +110,8 @@
   line-height: 24px;
   font-weight: normal;
   text-align: right;
+
+  cursor: inherit;
 }
 
 .calendar__day:hover {
@@ -126,11 +128,11 @@
   background-color: transparent;
 }
 
-.calendar__day_over-limit {
+.calendar__day_over-range {
   color: #808080;
 }
 
-.calendar__day_over-limit:hover {
+.calendar__day_over-range:hover {
   border-color: transparent;
   background-color: transparent;
 }
